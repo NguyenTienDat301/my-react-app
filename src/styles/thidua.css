@@ -359,3 +359,22 @@ body {
 .summary-item span{
     color:#555;
 }
+.comment-action{
+    margin-top:15px;
+    text-align:right;
+}
+
+.save-btn{
+    background:#0f5b8d;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    background:#0b4770;
+}
