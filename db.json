@@ -1,0 +1,54 @@
+{
+  "scores": [
+    {
+      "id": "1",
+      "unit": "Trung đội 1",
+      "quanSo": 10,
+      "hocTap": 22,
+      "tacPhong": 14.5,
+      "kyLuat": 15,
+      "noiVu": 13.5,
+      "tangGia": 14,
+      "vkTrangBi": 9.5
+    },
+    {
+      "id": "2",
+      "unit": "Trung đội 2",
+      "quanSo": 9.5,
+      "hocTap": 22,
+      "tacPhong": 12,
+      "kyLuat": 10.5,
+      "noiVu": 8.5,
+      "tangGia": 11.5,
+      "vkTrangBi": 9
+    },
+    {
+      "unit": "C1",
+      "quanSo": 22,
+      "hocTap": 15,
+      "tacPhong": 15,
+      "kyLuat": 15,
+      "noiVu": 15,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "id": "iRx7_Df5NjE"
+    },
+    {
+      "id": "Psjs-8d5fVs",
+      "unit": "C2",
+      "quanSo": 15,
+      "hocTap": 15,
+      "tacPhong": 15,
+      "kyLuat": 15,
+      "noiVu": 15,
+      "tangGia": 10,
+      "vkTrangBi": 10
+    }
+  ],
+  "comment": [
+    {
+      "id": "cvDEXLQLks4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
