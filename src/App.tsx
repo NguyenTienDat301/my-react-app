@@ -1,9 +1,8 @@
-
-import './App.css'
-import Home from './Home/Home';
+import ThiDua from "./pages/ThiDua";
+import "./styles/thidua.css";
 
 function App() {
-return <Home/>;
+    return <ThiDua />;
 }
 
-export default App
+export default App;

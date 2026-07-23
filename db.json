@@ -1,54 +1,89 @@
 {
   "scores": [
     {
-      "id": "1",
+      "id": 1,
       "unit": "Trung đội 1",
-      "quanSo": 10,
-      "hocTap": 22,
-      "tacPhong": 14.5,
-      "kyLuat": 15,
-      "noiVu": 13.5,
-      "tangGia": 14,
-      "vkTrangBi": 9.5
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.9,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
     },
     {
-      "id": "2",
+      "id": 2,
       "unit": "Trung đội 2",
-      "quanSo": 9.5,
-      "hocTap": 22,
-      "tacPhong": 12,
-      "kyLuat": 10.5,
-      "noiVu": 8.5,
-      "tangGia": 11.5,
-      "vkTrangBi": 9
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.8,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
     },
     {
-      "unit": "C1",
-      "quanSo": 22,
-      "hocTap": 15,
-      "tacPhong": 15,
-      "kyLuat": 15,
-      "noiVu": 15,
-      "tangGia": 10,
-      "vkTrangBi": 10,
-      "id": "iRx7_Df5NjE"
+      "id": 3,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    }
+  ],
+
+  "strongRemarks": [
+    {
+      "id": 1,
+      "content": "Duy trì quân số bảo đảm tốt."
     },
     {
-      "id": "Psjs-8d5fVs",
-      "unit": "C2",
-      "quanSo": 15,
-      "hocTap": 15,
-      "tacPhong": 15,
-      "kyLuat": 15,
-      "noiVu": 15,
-      "tangGia": 10,
-      "vkTrangBi": 10
-    }
-  ],
-  "comment": [
+      "id": 2,
+      "content": "Tổ chức kiểm tra bảo đảm."
+    },
     {
-      "id": "cvDEXLQLks4"
+      "id": 3,
+      "content": "Sổ sách cập nhật đầy đủ."
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+
+  "weakRemarks": [
+    {
+      "id": 1,
+      "content": "Khu vực vệ sinh chưa bảo đảm."
+    },
+    {
+      "id": 2,
+      "content": "Một số chiến sĩ còn vi phạm nền nếp."
+    },
+    {
+      "id": 3,
+      "content": "Tác phong làm việc chưa đồng đều."
+    }
+  ],
+
+  "flowers": {
+    "tapThe": [
+      "Đại đội bộ",
+      "Khẩu đội 2",
+      "Khẩu đội 4"
+    ],
+    "caNhan": [
+      "Nguyễn Văn Khải",
+      "Trần Thế Nam",
+      "Hoàng Ngọc Tuấn Anh",
+      "Nguyễn Xuân Độ",
+      "Đỗ Đình Nam"
+    ]
+  },
+
+  "board": {
+    "title": "CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16",
+    "slogan": "QUYẾT TÂM THỰC HIỆN THẮNG LỢI PHONG TRÀO THI ĐUA QUYẾT THẮNG NĂM 2026",
+    "date": "24/07/2026",
+    "signer": "Lê Văn Hưng"
+  }
 }
