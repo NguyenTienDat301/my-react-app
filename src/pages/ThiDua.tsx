@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import LeftPanel from "../components/LeftPanel";
 import ScoreTable from "../components/ScoreTable";
+import CommentTable from "../components/CommentTable";
 import RightPanel from "../components/RightPanel";
 import CommentBox from "../components/CommentBox";
 import Footer from "../components/Footer";
@@ -19,21 +20,21 @@ const ThiDua: React.FC = () => {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const response = await fetch("http://localhost:3001/scores");
+        const res = await fetch("http://localhost:3001/scores");
 
-        if (!response.ok) {
+        if (!res.ok) {
           throw new Error("Không lấy được dữ liệu");
         }
 
-        const data: Score[] = await response.json();
+        const data: Score[] = await res.json();
 
         setScores(data);
 
         if (data.length > 0) {
           setSelectedId(data[0].id);
         }
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -43,28 +44,64 @@ const ThiDua: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <h2>Đang tải dữ liệu...</h2>;
+    return <h2 className="loading">Đang tải dữ liệu...</h2>;
   }
 
   return (
     <div className="page">
+
       <Header />
 
-      <div className="main">
-        <LeftPanel />
+      <main className="main">
 
-        <ScoreTable
-          scores={scores}
-          selectedId={selectedId}
-          setSelectedId={setSelectedId}
-        />
+        {/* ================= CỘT TRÁI ================= */}
 
-        <RightPanel />
-      </div>
+        <aside className="left-panel">
+
+          <LeftPanel />
+
+        </aside>
+
+        {/* ================= CỘT GIỮA ================= */}
+
+        <section className="center-panel">
+
+          <div className="box">
+
+            {/* <h3>THEO DÕI THI ĐUA</h3> */}
+
+            <ScoreTable
+              scores={scores}
+              selectedId={selectedId}
+              setSelectedId={setSelectedId}
+            />
+
+          </div>
+
+          <div className="box">
+
+            {/* <h3>NHẬN XÉT</h3> */}
+
+            <CommentTable scores={scores} />
+
+          </div>
+
+        </section>
+
+        {/* ================= CỘT PHẢI ================= */}
+
+        <aside className="right-panel">
+
+          <RightPanel />
+
+        </aside>
+
+      </main>
 
       <CommentBox />
 
       <Footer />
+
     </div>
   );
 };

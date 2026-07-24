@@ -1,6 +1,6 @@
-/* =========================
+/* ===========================
    RESET
-========================= */
+=========================== */
 
 * {
   margin: 0;
@@ -9,43 +9,40 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Times New Roman", serif;
   background: #edf2f7;
+  color: #222;
 }
-
-/* =========================
-   PAGE
-========================= */
 
 .page {
   width: 100%;
   min-height: 100vh;
 }
 
-/* =========================
+/* ===========================
    HEADER
-========================= */
+=========================== */
 
 .header {
   background: #b40000;
-  color: white;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 25px;
-  padding: 20px;
-  border-bottom: 5px solid gold;
+  padding: 18px;
+  border-bottom: 4px solid gold;
 }
 
 .logo {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
+  width: 75px;
+  height: 75px;
   background: gold;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 45px;
+  font-size: 36px;
 }
 
 .title {
@@ -53,58 +50,77 @@ body {
 }
 
 .title h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: 34px;
+  margin-bottom: 6px;
+  font-weight: bold;
 }
 
 .title h1 {
-  font-size: 22px;
-  line-height: 34px;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 
-/* =========================
+/* ===========================
    MAIN
-========================= */
+=========================== */
 
 .main {
+  width: 100%;
+  max-width: 1700px;
+  margin: 15px auto;
+
   display: grid;
-  grid-template-columns: 25% 50% 25%;
-  gap: 15px;
-  padding: 15px;
+
+  grid-template-columns:
+    320px
+    minmax(0, 1fr)
+    320px;
+
+  gap: 20px;
+
   align-items: start;
 }
 
-.left-panel,
-.center-panel,
-.right-panel {
-  display: flex;
-  flex-direction: column;
+.left-panel{
+    width:320px;
+    flex-shrink:0;
+}
+.center-panel{
+    width:100%;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+.right-panel{
+    width:320px;
+    flex-shrink:0;
 }
 
-/* =========================
+/* ===========================
    BOX
-========================= */
+=========================== */
 
 .box {
-  background: white;
-  border: 3px solid #0f5b8d;
-  border-radius: 8px;
+  width: 100%;
+  background: #fff;
+  border: 2px solid #0f5b8d;
+  border-radius: 4px;
   padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .box h3 {
-  color: #b40000;
   text-align: center;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 8px;
+  color: #b40000;
+  font-size: 28px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #cfcfcf;
+  padding-bottom: 6px;
 }
 
-/* =========================
-   LEFT
-========================= */
+/* ===========================
+   NỘI DUNG
+=========================== */
 
 .rule-list {
   margin-left: 20px;
@@ -112,28 +128,32 @@ body {
 
 .rule-list li {
   margin-bottom: 10px;
-  line-height: 26px;
+  line-height: 30px;
+  font-size: 20px;
 }
 
 .box p {
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 30px;
 }
 
 .box hr {
   margin: 10px 0;
 }
 
-/* =========================
+/* ===========================
    TABLE
-========================= */
+=========================== */
 
-.table-wrapper {
-  overflow-x: auto;
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
 }
 
-.score-table {
-  width: 100%;
-  border-collapse: collapse;
+.score-table{
+    width:100%;
+    min-width:1050px;
+    border-collapse:collapse;
 }
 
 .score-table thead {
@@ -141,68 +161,74 @@ body {
   color: white;
 }
 
-.score-table th,
+.score-table th {
+  border: 1px solid #555;
+  padding: 8px;
+  white-space: nowrap;
+}
+
 .score-table td {
   border: 1px solid #777;
   padding: 8px;
   text-align: center;
-  white-space: nowrap;
 }
 
 .score-table tbody tr:hover {
-  background: #fff7cc;
+  background: #eef7ff;
   cursor: pointer;
+}
+.score-table th,
+.score-table td {
+  white-space: nowrap;
 }
 
 .active-row {
-  background: #d7ecff !important;
+  background: #d9edff !important;
   font-weight: bold;
 }
 
-/* =========================
-   BADGE
-========================= */
+/* ===========================
+   XẾP LOẠI
+=========================== */
 
 .badge-success {
-  background: #28a745;
+  background: #2e9f43;
   color: white;
-  padding: 5px 10px;
   border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-block;
 }
 
 .badge-warning {
   background: #ffc107;
-  color: black;
-  padding: 5px 10px;
+  color: #222;
   border-radius: 20px;
-}
-
-.badge-info {
-  background: #17a2b8;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-block;
 }
 
 .badge-danger {
   background: #dc3545;
   color: white;
-  padding: 5px 10px;
   border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-block;
 }
-
-/* =========================
-   FLOWER
-========================= */
+/* ===========================
+   NHỮNG BÔNG HOA ĐẸP
+=========================== */
 
 .flower-section {
   margin-bottom: 20px;
 }
 
 .flower-section h4 {
-  color: #0f5b8d;
-  margin-bottom: 10px;
   text-align: center;
+  color: #0f5b8d;
+  font-size: 22px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
 }
 
 .flower-section ul {
@@ -210,43 +236,117 @@ body {
 }
 
 .flower-section li {
-  padding: 8px;
-  margin-bottom: 8px;
-  background: #fff8d7;
+  background: #fff8dc;
   border-left: 5px solid gold;
-  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  transition: 0.2s;
 }
 
-/* =========================
-   NOTICE
-========================= */
+.flower-section li:hover {
+  background: #fff2b8;
+}
+
+/* ===========================
+   THÔNG BÁO
+=========================== */
 
 .notice-list {
   list-style: none;
 }
 
 .notice-list li {
-  margin-bottom: 10px;
-  padding: 10px;
   background: #eef7ff;
   border-left: 5px solid #0f5b8d;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 28px;
 }
 
-/* =========================
-   COMMENT
-========================= */
+/* ===========================
+   ĐƠN VỊ DẪN ĐẦU
+=========================== */
+
+.leader-card {
+  background: #fff8dc;
+  border: 2px solid gold;
+  border-radius: 6px;
+  text-align: center;
+  padding: 20px;
+}
+
+.leader-card h2 {
+  color: #b40000;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+.leader-card p {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.leader-card strong {
+  color: #0f5b8d;
+}
+
+/* ===========================
+   BẢNG NHẬN XÉT
+=========================== */
+
+.comment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.comment-table thead {
+  background: #0f5b8d;
+  color: white;
+}
+
+.comment-table th {
+  border: 1px solid #666;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.comment-table td {
+  border: 1px solid #888;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.comment-table textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  border: 1px solid #bbb;
+  padding: 8px;
+  font-size: 17px;
+  font-family: "Times New Roman", serif;
+  outline: none;
+}
+
+.comment-table textarea:focus {
+  border-color: #0f5b8d;
+}
+
+/* ===========================
+   NHẬN XÉT TUẦN
+=========================== */
 
 .comment-box {
-  margin: 15px;
-  background: white;
-  border: 3px solid #0f5b8d;
-  border-radius: 8px;
-  padding: 15px;
+  width: 1900px;
+  margin: 20px auto;
 }
 
 .comment-box h3 {
   text-align: center;
   color: #b40000;
+  font-size: 26px;
   margin-bottom: 15px;
 }
 
@@ -254,42 +354,188 @@ body {
   width: 100%;
   min-height: 180px;
   resize: vertical;
+  border: 1px solid #999;
   padding: 10px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
+  font-size: 18px;
+  font-family: "Times New Roman", serif;
 }
 
-/* =========================
+/* ===========================
+   BUTTON
+=========================== */
+
+.comment-action {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.save-btn {
+  background: #0f5b8d;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.save-btn:hover {
+  background: #0b476e;
+}
+
+/* ===========================
    FOOTER
-========================= */
+=========================== */
 
 .footer {
-  margin: 15px;
-  background: white;
-  border: 2px dashed #999;
-  border-radius: 8px;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
+  width: 1900px;
+  margin: 0 auto 20px;
+}
+
+.footer div {
+  font-size: 18px;
 }
 
 .signature {
   text-align: center;
+  line-height: 32px;
+}
+/* ===========================
+   LOADING
+=========================== */
+
+.loading {
+  text-align: center;
+  margin-top: 60px;
+  color: #0f5b8d;
+  font-size: 32px;
+  font-weight: bold;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* ===========================
+   SCROLL TABLE
+=========================== */
 
-@media (max-width: 1200px) {
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #0f5b8d;
+  border-radius: 10px;
+}
+
+.score-table {
+  min-width: 980px;
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ececec;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f5b8d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #093d61;
+}
+
+/* ===========================
+   HOVER BOX
+=========================== */
+
+.box {
+  transition: 0.25s;
+}
+
+.box:hover {
+  border-color: #0c7ac0;
+}
+
+/* ===========================
+   INPUT
+=========================== */
+
+textarea {
+  outline: none;
+}
+
+textarea:focus {
+  border: 1px solid #0f5b8d;
+  box-shadow: 0 0 5px rgba(15, 91, 141, 0.25);
+}
+
+/* ===========================
+   PRINT
+=========================== */
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .header {
+    background: #b40000 !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .box,
+  .comment-box {
+    break-inside: avoid;
+  }
+
+  .footer {
+    border: none;
+  }
+
+  .save-btn {
+    display: none;
+  }
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 1400px) {
   .main {
-    grid-template-columns: 1fr;
+    grid-template-columns: 280px 1fr 300px;
   }
 }
 
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
+
+    text-align: center;
+  }
+
+  .logo {
+    width: 65px;
+    height: 65px;
+    font-size: 30px;
   }
 
   .title h2 {
@@ -297,84 +543,29 @@ body {
   }
 
   .title h1 {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .box {
+    padding: 10px;
   }
 
   .score-table {
-    font-size: 12px;
+    font-size: 13px;
+  }
+
+  .comment-table {
+    font-size: 13px;
   }
 
   .footer {
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
     text-align: center;
   }
-}
-.leader-board {
-  margin-top: 20px;
-}
 
-.leader-card {
-  text-align: center;
-  background: #fff7d6;
-  border: 3px solid gold;
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.leader-card h2 {
-  color: #b40000;
-  margin-bottom: 15px;
-}
-
-.leader-card p {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.leader-card strong {
-  color: #0f5b8d;
-  margin-left: 8px;
-}
-.summary{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin:15px;
-}
-
-.summary-item{
-    background:white;
-    border:2px solid #0f5b8d;
-    border-radius:8px;
-    padding:20px;
-    text-align:center;
-}
-
-.summary-item h2{
-    color:#b40000;
-    font-size:32px;
-}
-
-.summary-item span{
-    color:#555;
-}
-.comment-action{
-    margin-top:15px;
-    text-align:right;
-}
-
-.save-btn{
-    background:#0f5b8d;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:15px;
-    transition:.3s;
-}
-
-.save-btn:hover{
-    background:#0b4770;
+  .signature {
+    width: 100%;
+  }
 }

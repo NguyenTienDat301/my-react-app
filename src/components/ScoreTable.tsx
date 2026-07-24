@@ -28,28 +28,23 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
     return (totalPoint(item) / 7).toFixed(2);
   };
 
-  const rank = (item: Score): string => {
-    const avg = totalPoint(item) / 7;
+  const rank = (item: Score) => {
+    const total = totalPoint(item);
 
-    if (avg >= 8.5) return "Xuất sắc";
-    if (avg >= 8) return "Khá";
-    if (avg >= 6.5) return "Đạt";
+    if (total >= 58) return "I";
+    if (total >= 52) return "II";
 
-    return "Yếu";
+    return "III";
   };
 
   return (
     <section className="center-panel">
       <div className="box">
-
         <h3>THEO DÕI THI ĐUA</h3>
 
         <div className="table-wrapper">
-
           <table className="score-table">
-
             <thead>
-
               <tr>
                 <th>TT</th>
                 <th>Đơn vị</th>
@@ -64,13 +59,10 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
                 <th>TB</th>
                 <th>Xếp loại</th>
               </tr>
-
             </thead>
 
             <tbody>
-
               {scores.map((item, index) => (
-
                 <tr
                   key={item.id}
                   className={selectedId === item.id ? "active-row" : ""}
@@ -101,33 +93,23 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
                   <td>{averagePoint(item)}</td>
 
                   <td>
-
                     <span
                       className={
-                        rank(item) === "Xuất sắc"
+                        rank(item) === "I"
                           ? "badge-success"
-                          : rank(item) === "Khá"
-                          ? "badge-warning"
-                          : rank(item) === "Đạt"
-                          ? "badge-info"
-                          : "badge-danger"
+                          : rank(item) === "II"
+                            ? "badge-warning"
+                            : "badge-danger"
                       }
                     >
                       {rank(item)}
                     </span>
-
                   </td>
-
                 </tr>
-
               ))}
-
             </tbody>
-
           </table>
-
         </div>
-
       </div>
     </section>
   );
