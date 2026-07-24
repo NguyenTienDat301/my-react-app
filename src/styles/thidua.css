@@ -593,4 +593,11 @@ textarea:focus {
   .signature {
     width: 100%;
   }
+  .week-title {
+    text-align: center;
+    color: #b40000;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
 }

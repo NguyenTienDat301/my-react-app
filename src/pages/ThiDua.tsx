@@ -7,52 +7,72 @@ import CommentTable from "../components/CommentTable";
 import RightPanel from "../components/RightPanel";
 import CommentBox from "../components/CommentBox";
 import Footer from "../components/Footer";
-
+import type { CommentItem, Score, Week } from "../types/interface";
 import "../styles/thidua.css";
-
-import type { CommentItem, Score } from "../types/interface";
 
 const ThiDua: React.FC = () => {
   const [scores, setScores] = useState<Score[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [comments, setComments] = useState<CommentItem[]>([]);
- 
+  const [currentWeek, setCurrentWeek] = useState<Week | null>(null);
 
   useEffect(() => {
-     const fetchComments = async () => {
-    try {
-      const res = await fetch("http://localhost:3001/comments");  
-      const data = await res.json();
-      setComments(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-    
-    const fetchScores = async () => {
+    const fetchCurrentWeek = async () => {
       try {
-        const res = await fetch("http://localhost:3001/scores");
+        // Lấy danh sách tuần
+        const weekRes = await fetch("http://localhost:3001/weeks");
 
-        if (!res.ok) {
-          throw new Error("Không lấy được dữ liệu");
+        if (!weekRes.ok) {
+          throw new Error("Không lấy được tuần");
         }
 
-        const data: Score[] = await res.json();
+        const weeks: Week[] = await weekRes.json();
 
-        setScores(data);
+        if (weeks.length === 0) return;
 
-        if (data.length > 0) {
-          setSelectedId(data[0].id);
+        // Tuần mới nhất
+        const latestWeek = [...weeks].sort((a, b) => b.id - a.id)[0];
+
+        setCurrentWeek(latestWeek);
+
+        // Lấy điểm
+        const scoreRes = await fetch(
+          `http://localhost:3001/scores?weekId=${latestWeek.id}`,
+        );
+
+        if (!scoreRes.ok) {
+          throw new Error("Không lấy được điểm");
         }
-      } catch (err) {
-        console.error(err);
+
+        const scoreData: Score[] = await scoreRes.json();
+
+        setScores(scoreData);
+
+        if (scoreData.length > 0) {
+          setSelectedId(scoreData[0].id);
+        }
+
+        // Lấy nhận xét
+        const commentRes = await fetch(
+          `http://localhost:3001/comments?weekId=${latestWeek.id}`,
+        );
+
+        if (!commentRes.ok) {
+          throw new Error("Không lấy được nhận xét");
+        }
+
+        const commentData: CommentItem[] = await commentRes.json();
+
+        setComments(commentData);
+      } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
     };
-    fetchComments();
-    fetchScores();
+
+    fetchCurrentWeek();
   }, []);
 
   if (loading) {
@@ -61,25 +81,24 @@ const ThiDua: React.FC = () => {
 
   return (
     <div className="page">
-
       <Header />
 
       <main className="main">
-
         {/* ================= CỘT TRÁI ================= */}
 
         <aside className="left-panel">
-
           <LeftPanel />
-
         </aside>
 
         {/* ================= CỘT GIỮA ================= */}
 
         <section className="center-panel">
-
           <div className="box">
-
+            {currentWeek && (
+              <h3 className="week-title">
+                {currentWeek.title} - {currentWeek.date}
+              </h3>
+            )}
             {/* <h3>THEO DÕI THI ĐUA</h3> */}
 
             <ScoreTable
@@ -87,33 +106,29 @@ const ThiDua: React.FC = () => {
               selectedId={selectedId}
               setSelectedId={setSelectedId}
             />
-
           </div>
 
           <div className="box">
-
             {/* <h3>NHẬN XÉT</h3> */}
 
             <CommentTable comments={comments} />
-
           </div>
-
         </section>
 
         {/* ================= CỘT PHẢI ================= */}
 
         <aside className="right-panel">
-
           <RightPanel />
-
         </aside>
-
       </main>
 
       <CommentBox />
-
+      {currentWeek && (
+        <div className="week-title">
+          {currentWeek.title} - {currentWeek.date}
+        </div>
+      )}
       <Footer />
-
     </div>
   );
 };
