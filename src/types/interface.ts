@@ -13,7 +13,9 @@ export interface Score {
 
 export interface CommentItem {
   id: number;
+  weekId: number;
   unit: string;
+
   strong: string[];
   weak: string[];
 }
