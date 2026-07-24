@@ -1,60 +1,49 @@
-import React from "react";
-import type { Score } from "../types/interface";
+import type { CommentItem } from "../types/interface";
 
-interface Props {
-  scores: Score[];
+interface Props{
+    comments: CommentItem[];
 }
 
-const CommentTable: React.FC<Props> = ({ scores }) => {
-  return (
-    <div className="box">
+const CommentTable = ({ comments }: Props) => {
+    return (
+        <div className="box">
+            <h3>NHẬN XÉT</h3>
 
-      <h3>NHẬN XÉT</h3>
+            <table className="comment-table">
+                <thead>
+                    <tr>
+                        <th>Đơn vị</th>
+                        <th>Điểm mạnh</th>
+                        <th>Điểm yếu</th>
+                    </tr>
+                </thead>
 
-      <table className="comment-table">
+                <tbody>
+                    {comments.map((item) => (
+                        <tr key={item.id}>
+                            <td>{item.unit}</td>
 
-        <thead>
-          <tr>
-            <th style={{ width: "18%" }}>Đơn vị</th>
-            <th>Điểm mạnh</th>
-            <th>Điểm yếu</th>
-          </tr>
-        </thead>
+                            <td>
+                                <ul>
+                                    {item.strong.map((text, index) => (
+                                        <li key={index}>{text}</li>
+                                    ))}
+                                </ul>
+                            </td>
 
-        <tbody>
-
-          {scores.map((item) => (
-
-            <tr key={item.id}>
-
-              <td>
-                <strong>{item.unit}</strong>
-              </td>
-
-              <td>
-                <textarea
-                  placeholder="Nhập điểm mạnh..."
-                  rows={3}
-                />
-              </td>
-
-              <td>
-                <textarea
-                  placeholder="Nhập điểm yếu..."
-                  rows={3}
-                />
-              </td>
-
-            </tr>
-
-          ))}
-
-        </tbody>
-
-      </table>
-
-    </div>
-  );
+                            <td>
+                                <ul>
+                                    {item.weak.map((text, index) => (
+                                        <li key={index}>{text}</li>
+                                    ))}
+                                </ul>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 };
 
 export default CommentTable;

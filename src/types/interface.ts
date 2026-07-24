@@ -10,9 +10,10 @@ export interface Score {
   tangGia: number;
   vkTrangBi: number;
 }
-export interface Comment {
+
+export interface CommentItem {
   id: number;
   unit: string;
-  strengths: string[];
-  weaknesses: string[];
+  strong: string[];
+  weak: string[];
 }

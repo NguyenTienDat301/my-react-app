@@ -10,14 +10,26 @@ import Footer from "../components/Footer";
 
 import "../styles/thidua.css";
 
-import type { Score } from "../types/interface";
+import type { CommentItem, Score } from "../types/interface";
 
 const ThiDua: React.FC = () => {
   const [scores, setScores] = useState<Score[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [comments, setComments] = useState<CommentItem[]>([]);
+ 
 
   useEffect(() => {
+     const fetchComments = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/comments");  
+      const data = await res.json();
+      setComments(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+    
     const fetchScores = async () => {
       try {
         const res = await fetch("http://localhost:3001/scores");
@@ -39,7 +51,7 @@ const ThiDua: React.FC = () => {
         setLoading(false);
       }
     };
-
+    fetchComments();
     fetchScores();
   }, []);
 
@@ -82,7 +94,7 @@ const ThiDua: React.FC = () => {
 
             {/* <h3>NHẬN XÉT</h3> */}
 
-            <CommentTable scores={scores} />
+            <CommentTable comments={comments} />
 
           </div>
 

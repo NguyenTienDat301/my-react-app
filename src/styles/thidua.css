@@ -81,20 +81,20 @@ body {
   align-items: start;
 }
 
-.left-panel{
-    width:320px;
-    flex-shrink:0;
+.left-panel {
+  width: 320px;
+  flex-shrink: 0;
 }
-.center-panel{
-    width:100%;
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+.center-panel {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.right-panel{
-    width:320px;
-    flex-shrink:0;
+.right-panel {
+  width: 320px;
+  flex-shrink: 0;
 }
 
 /* ===========================
@@ -145,15 +145,15 @@ body {
    TABLE
 =========================== */
 
-.table-wrapper{
-    width:100%;
-    overflow-x:auto;
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
 
-.score-table{
-    width:100%;
-    min-width:1050px;
-    border-collapse:collapse;
+.score-table {
+  width: 100%;
+  min-width: 1050px;
+  border-collapse: collapse;
 }
 
 .score-table thead {
@@ -269,7 +269,7 @@ body {
    ĐƠN VỊ DẪN ĐẦU
 =========================== */
 
-.leader-card {
+/* .leader-card {
   background: #fff8dc;
   border: 2px solid gold;
   border-radius: 6px;
@@ -290,7 +290,7 @@ body {
 
 .leader-card strong {
   color: #0f5b8d;
-}
+} */
 
 /* ===========================
    BẢNG NHẬN XÉT
@@ -308,14 +308,28 @@ body {
 }
 
 .comment-table th {
+  background: #0f5b8d;
+  color: #fff;
   border: 1px solid #666;
   padding: 10px;
+  text-align: center;
   font-size: 18px;
 }
 
+.comment-table ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.comment-table li {
+  margin-bottom: 6px;
+  text-align: left;
+  line-height: 24px;
+}
+
 .comment-table td {
-  border: 1px solid #888;
-  padding: 10px;
+  border: 1px solid #999;
+  padding: 12px;
   vertical-align: top;
 }
 
@@ -328,6 +342,17 @@ body {
   font-size: 17px;
   font-family: "Times New Roman", serif;
   outline: none;
+}
+.comment-table td:first-child {
+  width: 160px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.comment-table td:nth-child(2),
+.comment-table td:nth-child(3) {
+  width: calc((100% - 160px) / 2);
 }
 
 .comment-table textarea:focus {

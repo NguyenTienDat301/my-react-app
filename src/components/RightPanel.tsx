@@ -44,7 +44,7 @@ const RightPanel: React.FC = () => {
       </div>
 
       {/* Đơn vị dẫn đầu */}
-      <div className="box">
+      {/* <div className="box">
         <h3>🏆 ĐƠN VỊ DẪN ĐẦU</h3>
 
         <div className="leader-card">
@@ -52,7 +52,7 @@ const RightPanel: React.FC = () => {
 
           <p>Hoàn thành xuất sắc nhiệm vụ tuần.</p>
         </div>
-      </div>
+      </div> */}
     </aside>
   );
 };

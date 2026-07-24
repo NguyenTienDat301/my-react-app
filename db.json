@@ -35,42 +35,9 @@
     }
   ],
 
-  "strongRemarks": [
-    {
-      "id": 1,
-      "content": "Duy trì quân số bảo đảm tốt."
-    },
-    {
-      "id": 2,
-      "content": "Tổ chức kiểm tra bảo đảm."
-    },
-    {
-      "id": 3,
-      "content": "Sổ sách cập nhật đầy đủ."
-    }
-  ],
-
-  "weakRemarks": [
-    {
-      "id": 1,
-      "content": "Khu vực vệ sinh chưa bảo đảm."
-    },
-    {
-      "id": 2,
-      "content": "Một số chiến sĩ còn vi phạm nền nếp."
-    },
-    {
-      "id": 3,
-      "content": "Tác phong làm việc chưa đồng đều."
-    }
-  ],
 
   "flowers": {
-    "tapThe": [
-      "Đại đội bộ",
-      "Khẩu đội 2",
-      "Khẩu đội 4"
-    ],
+    "tapThe": ["Đại đội bộ", "Khẩu đội 2", "Khẩu đội 4"],
     "caNhan": [
       "Nguyễn Văn Khải",
       "Trần Thế Nam",
@@ -85,5 +52,32 @@
     "slogan": "QUYẾT TÂM THỰC HIỆN THẮNG LỢI PHONG TRÀO THI ĐUA QUYẾT THẮNG NĂM 2026",
     "date": "24/07/2026",
     "signer": "Lê Văn Hưng"
-  }
+  },
+  "comments": [
+    {
+      "id": 1,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Duy trì nghiêm điều lệnh.",
+        "Vệ sinh doanh trại sạch sẽ.",
+        "Tham gia huấn luyện đầy đủ."
+      ],
+      "weak": [
+        "Còn chậm tập hợp đội hình.",
+        "Một số chiến sĩ chưa đúng tác phong."
+      ]
+    },
+    {
+      "id": 2,
+      "unit": "Trung đội 2",
+      "strong": ["Huấn luyện bắn súng tốt.", "Không có vi phạm kỷ luật."],
+      "weak": ["Khu tăng gia còn chưa gọn.", "Thiếu dụng cụ vệ sinh."]
+    },
+    {
+      "id": 3,
+      "unit": "Đại đội bộ",
+      "strong": ["Bảo đảm hậu cần tốt.", "Quản lý VKTB đúng quy định."],
+      "weak": ["Một số hồ sơ còn thiếu.", "Cần cải thiện cảnh quan."]
+    }
+  ]
 }
