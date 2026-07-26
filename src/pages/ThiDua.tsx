@@ -16,6 +16,47 @@ const ThiDua: React.FC = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [currentWeek, setCurrentWeek] = useState<Week | null>(null);
+  const [weeks, setWeeks] = useState<Week[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string>("");
+
+  const fetchWeekData = async (week: Week) => {
+    try {
+      setLoading(true);
+      setCurrentWeek(week);
+
+      // Lấy điểm
+      const scoreRes = await fetch(
+        `http://localhost:3001/scores?weekId=${week.id}`,
+      );
+
+      if (!scoreRes.ok) {
+        throw new Error("Không lấy được điểm");
+      }
+
+      const scoreData: Score[] = await scoreRes.json();
+      setScores(scoreData);
+
+      if (scoreData.length > 0) {
+        setSelectedId(scoreData[0].id);
+      }
+
+      // Lấy nhận xét
+      const commentRes = await fetch(
+        `http://localhost:3001/comments?weekId=${week.id}`,
+      );
+
+      if (!commentRes.ok) {
+        throw new Error("Không lấy được nhận xét");
+      }
+
+      const commentData: CommentItem[] = await commentRes.json();
+      setComments(commentData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchCurrentWeek = async () => {
@@ -27,53 +68,33 @@ const ThiDua: React.FC = () => {
           throw new Error("Không lấy được tuần");
         }
 
-        const weeks: Week[] = await weekRes.json();
+        const weekList: Week[] = await weekRes.json();
+        setWeeks(weekList);
 
-        if (weeks.length === 0) return;
+        if (weekList.length === 0) return;
 
         // Tuần mới nhất
-        const latestWeek = [...weeks].sort((a, b) => b.id - a.id)[0];
+        const latestWeek = [...weekList].sort((a, b) => b.id - a.id)[0];
 
-        setCurrentWeek(latestWeek);
-
-        // Lấy điểm
-        const scoreRes = await fetch(
-          `http://localhost:3001/scores?weekId=${latestWeek.id}`,
-        );
-
-        if (!scoreRes.ok) {
-          throw new Error("Không lấy được điểm");
-        }
-
-        const scoreData: Score[] = await scoreRes.json();
-
-        setScores(scoreData);
-
-        if (scoreData.length > 0) {
-          setSelectedId(scoreData[0].id);
-        }
-
-        // Lấy nhận xét
-        const commentRes = await fetch(
-          `http://localhost:3001/comments?weekId=${latestWeek.id}`,
-        );
-
-        if (!commentRes.ok) {
-          throw new Error("Không lấy được nhận xét");
-        }
-
-        const commentData: CommentItem[] = await commentRes.json();
-
-        setComments(commentData);
+        await fetchWeekData(latestWeek);
       } catch (error) {
         console.error(error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchCurrentWeek();
   }, []);
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDateStr = e.target.value;
+    setSelectedDate(selectedDateStr);
+
+    // Tìm tuần chứa ngày được chọn
+    const selectedWeek = weeks.find((week) => week.date === selectedDateStr);
+    if (selectedWeek) {
+      fetchWeekData(selectedWeek);
+    }
+  };
 
   if (loading) {
     return <h2 className="loading">Đang tải dữ liệu...</h2>;

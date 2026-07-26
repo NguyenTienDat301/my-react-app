@@ -1,5 +1,6 @@
 import React from "react";
 import type { Score } from "../types/interface";
+import { useNavigate } from "react-router-dom";
 
 interface ScoreTableProps {
   scores: Score[];
@@ -36,6 +37,7 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
 
     return "III";
   };
+  const navigate = useNavigate();
 
   return (
     <section className="center-panel">
@@ -66,7 +68,10 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
                 <tr
                   key={item.id}
                   className={selectedId === item.id ? "active-row" : ""}
-                  onClick={() => setSelectedId(item.id)}
+                  onClick={() => {
+                    setSelectedId(item.id);
+                    navigate(`/weeks/${item.weekId}/unit/${item.id}`);
+                  }}
                 >
                   <td>{index + 1}</td>
 

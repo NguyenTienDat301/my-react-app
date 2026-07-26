@@ -1,7 +1,8 @@
 export interface Score {
   id: number;
+  weekId: number;
   unit: string;
-
+  
   quanSo: number;
   hocTap: number;
   tacPhong: number;
