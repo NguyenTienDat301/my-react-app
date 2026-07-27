@@ -23,7 +23,7 @@ const ThiDua: React.FC = () => {
 
   // State cho 3 trung đội
   const unitNames = ["Đại đội bộ", "Trung đội 1", "Trung đội 2"];
-  
+
   const defaultScoreData = {
     quanSo: 0,
     hocTap: 0,
@@ -135,7 +135,29 @@ const ThiDua: React.FC = () => {
       alert("Không tìm thấy dữ liệu cho ngày này!");
     }
   };
+  const getNextScoreId = async () => {
+    const res = await fetch("http://localhost:3001/scores");
+    const data = await res.json();
 
+    const maxId = data.reduce(
+      (max: number, item: any) => Math.max(max, Number(item.id)),
+      0,
+    );
+
+    return maxId + 1;
+  };
+
+  const getNextCommentId = async () => {
+    const res = await fetch("http://localhost:3001/comments");
+    const data = await res.json();
+
+    const maxId = data.reduce(
+      (max: number, item: any) => Math.max(max, Number(item.id)),
+      0,
+    );
+
+    return maxId + 1;
+  };
   const handleAddScore = async () => {
     if (!newWeekDate) {
       alert("Vui lòng chọn ngày tạo!");
@@ -162,11 +184,17 @@ const ThiDua: React.FC = () => {
     }
 
     try {
+      let nextScoreId = await getNextScoreId();
+      let nextCommentId = await getNextCommentId();
       let targetWeek = weeks.find((w) => w.date === newWeekDate);
 
       // Nếu tuần chưa tồn tại, tạo tuần mới
       if (!targetWeek) {
-        const maxWeekId = Math.max(...weeks.map((w) => w.id), 0);
+        const maxWeekId = Math.max(
+          ...weeks.map((w) => Number(w.id)).filter((id) => !isNaN(id)),
+          0,
+        );
+        // const maxWeekId = Math.max(...weeks.map((w) => w.id), 0);
         const newWeekId = maxWeekId + 1;
 
         const newWeekToAdd = {
@@ -207,20 +235,26 @@ const ThiDua: React.FC = () => {
         }
 
         // Tạo ID mới cho score
-        const numericIds = scores
-          .map((s) => {
-            const id = typeof s.id === "string" ? parseInt(s.id) : s.id;
-            return isNaN(id) ? 0 : id;
-          });
-        const maxScoreId = numericIds.length > 0 ? Math.max(...numericIds) : 0;
-        const newScoreId = maxScoreId + 1;
-
+        // const numericIds = scores
+        //   .map((s) => {
+        //     const id = typeof s.id === "string" ? parseInt(s.id) : s.id;
+        //     return isNaN(id) ? 0 : id;
+        //   });
+        // const maxScoreId = numericIds.length > 0 ? Math.max(...numericIds) : 0;
+        // const newScoreId = maxScoreId + 1;
         const scoreToAdd = {
-          id: newScoreId,
-          weekId: targetWeek.id,
-          unit: unit,
+          id: nextScoreId++,
+          weekId: Number(targetWeek.id),
+          unit,
           ...unitData.scores,
         };
+
+        // const scoreToAdd = {
+        //   id: newScoreId,
+        //   weekId: targetWeek.id,
+        //   unit: unit,
+        //   ...unitData.scores,
+        // };
 
         // POST điểm
         const scoreRes = await fetch("http://localhost:3001/scores", {
@@ -245,22 +279,21 @@ const ThiDua: React.FC = () => {
             .filter((s) => s);
 
           // Tạo ID mới cho comment
-          const commentNumericIds = comments
-            .map((c) => {
-              const id = typeof c.id === "string" ? parseInt(c.id) : c.id;
-              return isNaN(id) ? 0 : id;
-            });
-          const maxCommentId =
-            commentNumericIds.length > 0 ? Math.max(...commentNumericIds) : 0;
-          const newCommentId = maxCommentId + 1;
-
           const commentToAdd = {
-            id: newCommentId,
-            weekId: targetWeek.id,
-            unit: unit,
+            id: nextCommentId++,
+            weekId: Number(targetWeek.id),
+            unit,
             strong: strongList,
             weak: weakList,
           };
+
+          // const commentToAdd = {
+          //   id: newCommentId,
+          //   weekId: targetWeek.id,
+          //   unit: unit,
+          //   strong: strongList,
+          //   weak: weakList,
+          // };
 
           const commentRes = await fetch("http://localhost:3001/comments", {
             method: "POST",
@@ -276,9 +309,18 @@ const ThiDua: React.FC = () => {
 
       // Reset form
       setNewScoresData({
-        "Đại đội bộ": { scores: defaultScoreData, comments: defaultCommentData },
-        "Trung đội 1": { scores: defaultScoreData, comments: defaultCommentData },
-        "Trung đội 2": { scores: defaultScoreData, comments: defaultCommentData },
+        "Đại đội bộ": {
+          scores: defaultScoreData,
+          comments: defaultCommentData,
+        },
+        "Trung đội 1": {
+          scores: defaultScoreData,
+          comments: defaultCommentData,
+        },
+        "Trung đội 2": {
+          scores: defaultScoreData,
+          comments: defaultCommentData,
+        },
       });
       setNewWeekDate("");
       setShowAddModal(false);
@@ -323,7 +365,10 @@ const ThiDua: React.FC = () => {
               <button onClick={handleViewClick} className="view-btn">
                 Xem
               </button>
-              <button onClick={() => setShowAddModal(true)} className="add-btn btn-primary">
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="add-btn btn-primary"
+              >
                 + Thêm
               </button>
             </div>

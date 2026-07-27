@@ -1,8 +1,14 @@
+export interface Week {
+  id: number;
+  date: string;
+  title: string;
+}
+
 export interface Score {
   id: number;
   weekId: number;
   unit: string;
-  
+
   quanSo: number;
   hocTap: number;
   tacPhong: number;
@@ -19,9 +25,4 @@ export interface CommentItem {
 
   strong: string[];
   weak: string[];
-}
-export interface Week {
-  id: number;
-  date: string;
-  title: string;
 }

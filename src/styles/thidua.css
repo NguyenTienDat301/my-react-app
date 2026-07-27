@@ -1008,3 +1008,30 @@ textarea:focus {
     padding: 6px 10px;
   }
 }
+/* ===========================
+   LỜI BÁC HỒ DẠY
+=========================== */
+
+/* .bac-box{
+    text-align:center;
+    background:#fffdf2;
+    border:2px solid #c79a00;
+    border-radius:6px;
+    padding:20px;
+    font-size:22px;
+    line-height:42px;
+    color:#8b0000;
+    font-style:italic;
+}
+
+.bac-box strong{
+    font-weight:bold;
+}
+
+.author{
+    margin-top:15px;
+    color:#0f5b8d;
+    font-size:20px;
+    font-style:normal;
+    font-weight:bold;
+} */

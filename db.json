@@ -24,6 +24,21 @@
       "id": "5",
       "date": "2026-07-26",
       "title": "Thi đua tuần hiện tại"
+    },
+    {
+      "id": "6",
+      "date": "2026-07-29",
+      "title": "Thi đua tuần 6"
+    },
+    {
+      "id": "RaP2xq1GCV4",
+      "date": "2026-10-30",
+      "title": "Thi đua tuần 7"
+    },
+    {
+      "id": 7,
+      "date": "2026-08-30",
+      "title": "Thi đua tuần 7"
     }
   ],
   "scores": [
@@ -172,64 +187,64 @@
       "vkTrangBi": 8.8
     },
     {
-      "id": "nBH0LiOJUxY",
-      "weekId": "4",
+      "id": "D_NO7Bb0g_M",
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "quanSo": 123,
+      "hocTap": 123,
+      "tacPhong": 123,
+      "kyLuat": 123,
+      "noiVu": 123,
+      "tangGia": 123,
+      "vkTrangBi": 123
+    },
+    {
+      "id": "Vgm-mDvBhkA",
+      "weekId": 6,
       "unit": "Trung đội 1",
-      "quanSo": 11,
-      "hocTap": 11,
-      "tacPhong": 11,
-      "kyLuat": 11,
-      "noiVu": 11,
-      "tangGia": 11,
-      "vkTrangBi": 11
+      "quanSo": 123,
+      "hocTap": 123,
+      "tacPhong": 123,
+      "kyLuat": 123,
+      "noiVu": 123,
+      "tangGia": 123,
+      "vkTrangBi": 123
     },
     {
-      "id": "RRZmcIMwZuE",
-      "weekId": "5",
-      "unit": "Đại đội bộ",
-      "quanSo": 22,
-      "hocTap": 22,
-      "tacPhong": 22,
-      "kyLuat": 2222,
-      "noiVu": 2222,
-      "tangGia": 22,
-      "vkTrangBi": 2222
+      "id": "SRTL7xHuPlA",
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "quanSo": 123,
+      "hocTap": 123,
+      "tacPhong": 123,
+      "kyLuat": 123,
+      "noiVu": 123,
+      "tangGia": 123,
+      "vkTrangBi": 123
     },
     {
-      "id": "Gk9-cM2xLY4",
-      "weekId": "5",
+      "id": "XEpDduvjJq8",
+      "weekId": 7,
       "unit": "Đại đội bộ",
-      "quanSo": 2.5,
-      "hocTap": 22,
+      "quanSo": 2,
+      "hocTap": 2,
       "tacPhong": 2,
       "kyLuat": 2,
       "noiVu": 2,
       "tangGia": 2,
-      "vkTrangBi": 1
+      "vkTrangBi": 2
     },
     {
-      "id": "2sm3zpgMiB8",
-      "weekId": "5",
-      "unit": "Trung đội 1",
-      "quanSo": 22,
-      "hocTap": 44,
-      "tacPhong": 44,
-      "kyLuat": 44,
-      "noiVu": 44,
-      "tangGia": 44,
-      "vkTrangBi": 43.8
-    },
-    {
-      "id": "khO63CdNXEE",
-      "weekId": "5",
-      "unit": "Trung đội 2",
-      "quanSo": 214,
-      "hocTap": 412,
-      "tacPhong": 124,
-      "kyLuat": 421,
-      "noiVu": 124,
-      "tangGia": 124,
-      "vkTrangBi": 124
+      "id": "fWsWHUd",
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "quanSo": 2,
+      "hocTap": 2,
+      "tacPhong": 2,
+      "kyLuat": 2,
+      "noiVu": 2,
+      "tangGia": 2,
+      "vkTrangBi": 2
     }
   ],
   "comments": [
@@ -382,47 +397,58 @@
       ]
     },
     {
-      "id": "n7C2xUuCMH8",
-      "weekId": "4",
-      "unit": "Trung đội 1",
-      "strong": [
-        "11"
-      ],
-      "weak": [
-        "11"
-      ]
-    },
-    {
-      "id": "XRXEexIf72c",
-      "weekId": "5",
+      "id": "nDCp64EZcxQ",
+      "weekId": 6,
       "unit": "Đại đội bộ",
       "strong": [
-        "2222"
+        "123"
       ],
       "weak": [
-        "222"
+        "123"
       ]
     },
     {
-      "id": "A5oSCGtsWvw",
-      "weekId": "5",
+      "id": "wgL5eSWjVHw",
+      "weekId": 6,
       "unit": "Trung đội 1",
       "strong": [
-        "q"
+        "123"
       ],
       "weak": [
-        "42q"
+        "123"
       ]
     },
     {
-      "id": "dgIKdf3Clkk",
-      "weekId": "5",
+      "id": "Touh2V_WTK0",
+      "weekId": 6,
       "unit": "Trung đội 2",
       "strong": [
-        "124"
+        "123"
       ],
       "weak": [
-        "124"
+        "123"
+      ]
+    },
+    {
+      "id": "pWSl2Mp4tZg",
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "2"
+      ],
+      "weak": [
+        "2"
+      ]
+    },
+    {
+      "id": "38JL8AY",
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "2"
+      ],
+      "weak": [
+        "2"
       ]
     }
   ],
