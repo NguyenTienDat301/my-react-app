@@ -9,6 +9,9 @@ import CommentBox from "../components/Teaching";
 import Footer from "../components/Footer";
 import type { CommentItem, Score, Week } from "../types/interface";
 import "../styles/thidua.css";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+import { Document, Packer, Paragraph, Table, TableCell, TableRow } from "docx";
 
 const ThiDua: React.FC = () => {
   const [scores, setScores] = useState<Score[]>([]);
@@ -67,7 +70,129 @@ const ThiDua: React.FC = () => {
     "Trung đội 1": { scores: defaultScoreData, comments: defaultCommentData },
     "Trung đội 2": { scores: defaultScoreData, comments: defaultCommentData },
   });
+  const exportExcel = () => {
+    const data = scores.map((item) => ({
+      Đơn_vị: item.unit,
 
+      Quân_số: item.quanSo,
+
+      Học_tập: item.hocTap,
+
+      Tác_phong: item.tacPhong,
+
+      Kỷ_luật: item.kyLuat,
+
+      Nội_vụ: item.noiVu,
+
+      Tăng_gia: item.tangGia,
+
+      VKTB: item.vkTrangBi,
+
+      Tổng:
+        item.quanSo +
+        item.hocTap +
+        item.tacPhong +
+        item.kyLuat +
+        item.noiVu +
+        item.tangGia +
+        item.vkTrangBi,
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(data);
+
+    const wb = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(wb, ws, "Thi Dua");
+
+    const buffer = XLSX.write(wb, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    saveAs(new Blob([buffer]), `ThiDua_${currentWeek?.date}.xlsx`);
+  };
+  const exportWord = async () => {
+    const table = new Table({
+      rows: [
+        new TableRow({
+          children: [
+            new TableCell({ children: [new Paragraph("Đơn vị")] }),
+
+            new TableCell({ children: [new Paragraph("Quân số")] }),
+
+            new TableCell({ children: [new Paragraph("Học tập")] }),
+
+            new TableCell({ children: [new Paragraph("Tác phong")] }),
+
+            new TableCell({ children: [new Paragraph("Kỷ luật")] }),
+
+            new TableCell({ children: [new Paragraph("Nội vụ")] }),
+
+            new TableCell({ children: [new Paragraph("Tăng gia")] }),
+
+            new TableCell({ children: [new Paragraph("VKTB")] }),
+          ],
+        }),
+
+        ...scores.map(
+          (item) =>
+            new TableRow({
+              children: [
+                new TableCell({ children: [new Paragraph(item.unit)] }),
+
+                new TableCell({
+                  children: [new Paragraph(item.quanSo.toString())],
+                }),
+
+                new TableCell({
+                  children: [new Paragraph(item.hocTap.toString())],
+                }),
+
+                new TableCell({
+                  children: [new Paragraph(item.tacPhong.toString())],
+                }),
+
+                new TableCell({
+                  children: [new Paragraph(item.kyLuat.toString())],
+                }),
+
+                new TableCell({
+                  children: [new Paragraph(item.noiVu.toString())],
+                }),
+
+                new TableCell({
+                  children: [new Paragraph(item.tangGia.toString())],
+                }),
+
+                new TableCell({
+                  children: [new Paragraph(item.vkTrangBi.toString())],
+                }),
+              ],
+            }),
+        ),
+      ],
+    });
+
+    const doc = new Document({
+      sections: [
+        {
+          children: [
+            new Paragraph({
+              text: `BẢNG THI ĐUA ${currentWeek?.title}`,
+
+              heading: "Heading1",
+            }),
+
+            table,
+          ],
+        },
+      ],
+    });
+
+    const blob = await Packer.toBlob(doc);
+
+    saveAs(blob, `ThiDua_${currentWeek?.date}.docx`);
+  };
   const fetchWeekData = async (week: Week) => {
     try {
       setLoading(true);
@@ -430,6 +555,9 @@ const ThiDua: React.FC = () => {
     strong: item.strong.slice(0, 2),
     weak: item.weak.slice(0, 2),
   }));
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
     <div className="page">
@@ -446,7 +574,7 @@ const ThiDua: React.FC = () => {
 
         <section className="center-panel">
           <div className="box">
-            <div className="date-picker-container">
+            {/* <div className="date-picker-container">
               <label htmlFor="date-picker">Chọn ngày:</label>
               <input
                 id="date-picker"
@@ -470,6 +598,64 @@ const ThiDua: React.FC = () => {
               >
                 + Thêm Đơn Vị
               </button>
+              <button className="print-btn" onClick={handlePrint}>
+              🖨 In
+            </button>
+
+            <button className="word-btn" onClick={exportWord}>
+              📄 Word
+            </button>
+
+            <button className="excel-btn"  onClick={exportExcel}>
+              📊 Excel
+            </button>
+            </div> */}
+            <div className="toolbar">
+              {/* Hàng trên */}
+              <div className="toolbar-top">
+                <label htmlFor="date-picker">Chọn ngày:</label>
+
+                <input
+                  id="date-picker"
+                  type="date"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  className="date-picker"
+                />
+
+                <button onClick={handleViewClick} className="view-btn">
+                  Xem
+                </button>
+
+                <button
+                  onClick={() => setShowAddModal(true)}
+                  className="btn-primary"
+                >
+                  ➕ Thêm toàn bộ
+                </button>
+
+                <button
+                  onClick={() => setShowAddSingleModal(true)}
+                  className="btn-success"
+                >
+                  ➕ Thêm đơn vị
+                </button>
+              </div>
+
+              {/* Hàng dưới */}
+              <div className="toolbar-bottom">
+                <button className="print-btn" onClick={handlePrint}>
+                  🖨 In
+                </button>
+
+                <button className="word-btn" onClick={exportWord}>
+                  📄 Word
+                </button>
+
+                <button className="excel-btn" onClick={exportExcel}>
+                  📊 Excel
+                </button>
+              </div>
             </div>
             {currentWeek && (
               <h3 className="week-title">
@@ -783,10 +969,10 @@ const ThiDua: React.FC = () => {
                   <option>Trung đội 1</option>
                   <option>Trung đội 2</option>
                   <option>Trung đội 3</option>
-                  <option>Khẩu đội 1</option>
+                  {/* <option>Khẩu đội 1</option>
                   <option>Khẩu đội 2</option>
                   <option>Khẩu đội 3</option>
-                  <option>Khẩu đội 4</option>
+                  <option>Khẩu đội 4</option> */}
                 </select>
               </div>
 
