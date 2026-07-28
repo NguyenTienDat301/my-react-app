@@ -401,12 +401,12 @@ const ThiDua: React.FC = () => {
       </main>
 
       <CommentBox />
-      {currentWeek && (
+      {/* {currentWeek && (
         <div className="week-title">
           {currentWeek.title} - {currentWeek.date}
         </div>
-      )}
-      <Footer />
+      )} */}
+      <Footer currentWeek={currentWeek} />
 
       {/* Modal Thêm Điểm */}
       {showAddModal && (

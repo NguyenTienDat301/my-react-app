@@ -444,6 +444,40 @@
       "content": "Thi đua là đoàn kết, đoàn kết để thi đua."
     }
   ],
+  "questions": [
+    {
+      "id": 1,
+      "content": "Theo Luật Nghĩa vụ quân sự, công dân đủ bao nhiêu tuổi phải đăng ký nghĩa vụ quân sự lần đầu?"
+    },
+    {
+      "id": 2,
+      "content": "Theo Luật Nghĩa vụ quân sự, thời hạn phục vụ tại ngũ trong thời bình là bao nhiêu tháng?"
+    },
+    {
+      "id": 3,
+      "content": "Theo Điều lệnh Quản lý bộ đội, quân nhân phải thực hiện mấy chế độ trong ngày?"
+    },
+    {
+      "id": 4,
+      "content": "Theo Luật Quốc phòng, bảo vệ Tổ quốc là nghĩa vụ của ai?"
+    },
+    {
+      "id": 5,
+      "content": "Ngày thành lập Quân đội nhân dân Việt Nam là ngày nào?"
+    },
+    {
+      "id": 6,
+      "content": "Ngày truyền thống Dân quân tự vệ là ngày nào?"
+    },
+    {
+      "id": 7,
+      "content": "Khẩu hiệu 'Đâu cần thanh niên có, đâu khó có thanh niên' gắn với lực lượng nào?"
+    },
+    {
+      "id": 8,
+      "content": "Theo Luật Nghĩa vụ quân sự, độ tuổi gọi nhập ngũ thông thường là từ bao nhiêu đến bao nhiêu tuổi?"
+    }
+  ],
 
   "$schema": "./node_modules/json-server/schema.json"
 }

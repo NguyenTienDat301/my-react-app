@@ -1,10 +1,25 @@
 import React from "react";
+import type { Week } from "../types/interface";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  currentWeek: Week | null;
+}
+
+const Footer: React.FC<FooterProps> = ({ currentWeek }) => {
+  const formatDate = (date: string) => {
+    const d = new Date(date);
+
+    return `Ngày ${d.getDate()} tháng ${d.getMonth() + 1} năm ${d.getFullYear()}`;
+  };
+
   return (
     <footer className="footer">
       <div className="footer-left">
-        <p>Ngày ...... tháng ...... năm 2026</p>
+        <p>
+          {currentWeek
+            ? formatDate(currentWeek.date)
+            : "Ngày ...... tháng ...... năm ......"}
+        </p>
       </div>
 
       <div className="signature">
