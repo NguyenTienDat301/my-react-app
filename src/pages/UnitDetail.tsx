@@ -67,7 +67,36 @@ const UnitDetail: React.FC = () => {
 
     fetchData();
   }, [scoreId]);
+  const handleDelete = async () => {
+    if (!score) return;
 
+    const confirmDelete = window.confirm(
+      `Bạn có chắc muốn xóa "${score.unit}" không?`,
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      // Xóa điểm
+      await fetch(`http://localhost:3001/scores/${score.id}`, {
+        method: "DELETE",
+      });
+
+      // Nếu có nhận xét thì xóa luôn
+      if (comment) {
+        await fetch(`http://localhost:3001/comments/${comment.id}`, {
+          method: "DELETE",
+        });
+      }
+
+      alert("Đã xóa đơn vị!");
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Xóa thất bại!");
+    }
+  };
   const handleSave = async () => {
     if (!editScore || !editComment) return;
 
@@ -237,8 +266,10 @@ const UnitDetail: React.FC = () => {
                 ❌ Hủy
               </button>
             </>
-          )}
-
+          )}{" "}
+          <button className="delete-btn" onClick={handleDelete}>
+            🗑️ Xóa
+          </button>
           <button className="back-btn" onClick={() => navigate("/")}>
             Quay lại
           </button>

@@ -21,6 +21,24 @@ const ThiDua: React.FC = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [newWeekDate, setNewWeekDate] = useState<string>("");
 
+  const [showAddSingleModal, setShowAddSingleModal] = useState(false);
+
+  const [singleUnit, setSingleUnit] = useState("Đại đội bộ");
+
+  const [singleScore, setSingleScore] = useState({
+    quanSo: 0,
+    hocTap: 0,
+    tacPhong: 0,
+    kyLuat: 0,
+    noiVu: 0,
+    tangGia: 0,
+    vkTrangBi: 0,
+  });
+
+  const [singleComment, setSingleComment] = useState({
+    strong: "",
+    weak: "",
+  });
   // State cho 3 trung đội
   const unitNames = ["Đại đội bộ", "Trung đội 1", "Trung đội 2"];
 
@@ -140,7 +158,7 @@ const ThiDua: React.FC = () => {
     const data = await res.json();
 
     const maxId = data.reduce(
-      (max: number, item: any) => Math.max(max, Number(item.id)),
+      (max: number, item: Score) => Math.max(max, Number(item.id)),
       0,
     );
 
@@ -152,7 +170,7 @@ const ThiDua: React.FC = () => {
     const data = await res.json();
 
     const maxId = data.reduce(
-      (max: number, item: any) => Math.max(max, Number(item.id)),
+      (max: number, item: CommentItem) => Math.max(max, Number(item.id)),
       0,
     );
 
@@ -333,6 +351,76 @@ const ThiDua: React.FC = () => {
       alert("Có lỗi xảy ra khi thêm dữ liệu!");
     }
   };
+  const handleAddSingleUnit = async () => {
+    try {
+      if (!currentWeek) {
+        alert("Chưa chọn tuần.");
+        return;
+      }
+
+      const nextScoreId = await getNextScoreId();
+      const nextCommentId = await getNextCommentId();
+
+      const scoreData = {
+        id: nextScoreId,
+        weekId: Number(currentWeek.id),
+        unit: singleUnit,
+        ...singleScore,
+      };
+
+      const scoreRes = await fetch("http://localhost:3001/scores", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(scoreData),
+      });
+
+      if (!scoreRes.ok) {
+        throw new Error("Không thêm được điểm");
+      }
+
+      const commentData = {
+        id: nextCommentId,
+        weekId: Number(currentWeek.id),
+        unit: singleUnit,
+        strong: singleComment.strong.split("\n").filter((x) => x.trim() !== ""),
+        weak: singleComment.weak.split("\n").filter((x) => x.trim() !== ""),
+      };
+
+      await fetch("http://localhost:3001/comments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentData),
+      });
+
+      alert("Đã thêm đơn vị.");
+      setSingleScore({
+        quanSo: 0,
+        hocTap: 0,
+        tacPhong: 0,
+        kyLuat: 0,
+        noiVu: 0,
+        tangGia: 0,
+        vkTrangBi: 0,
+      });
+
+      setSingleComment({
+        strong: "",
+        weak: "",
+      });
+
+      setSingleUnit("Đại đội bộ");
+
+      setShowAddSingleModal(false);
+
+      fetchWeekData(currentWeek);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   if (loading) {
     return <h2 className="loading">Đang tải dữ liệu...</h2>;
@@ -369,7 +457,13 @@ const ThiDua: React.FC = () => {
                 onClick={() => setShowAddModal(true)}
                 className="add-btn btn-primary"
               >
-                + Thêm
+                + Thêm Toàn Bộ
+              </button>
+              <button
+                onClick={() => setShowAddSingleModal(true)}
+                className="add-btn btn-success"
+              >
+                + Thêm Đơn Vị
               </button>
             </div>
             {currentWeek && (
@@ -648,6 +742,208 @@ const ThiDua: React.FC = () => {
               </button>
               <button className="btn-submit" onClick={handleAddScore}>
                 Thêm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* ================= Modal Thêm 1 Đơn Vị ================= */}
+      {showAddSingleModal && (
+        <div
+          className="modal-overlay"
+          onClick={() => setShowAddSingleModal(false)}
+        >
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Thêm Đơn Vị</h2>
+
+              <button
+                className="close-btn"
+                onClick={() => setShowAddSingleModal(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <div className="form-group">
+                <label>Đơn vị</label>
+
+                <select
+                  className="form-input"
+                  value={singleUnit}
+                  onChange={(e) => setSingleUnit(e.target.value)}
+                >
+                  <option>Đại đội bộ</option>
+                  <option>Trung đội 1</option>
+                  <option>Trung đội 2</option>
+                  <option>Trung đội 3</option>
+                  <option>Khẩu đội 1</option>
+                  <option>Khẩu đội 2</option>
+                  <option>Khẩu đội 3</option>
+                  <option>Khẩu đội 4</option>
+                </select>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Quân số</label>
+
+                  <input
+                    type="number"
+                    className="form-input"
+                    value={singleScore.quanSo}
+                    onChange={(e) =>
+                      setSingleScore({
+                        ...singleScore,
+                        quanSo: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Học tập</label>
+
+                  <input
+                    type="number"
+                    className="form-input"
+                    value={singleScore.hocTap}
+                    onChange={(e) =>
+                      setSingleScore({
+                        ...singleScore,
+                        hocTap: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Tác phong</label>
+
+                  <input
+                    type="number"
+                    className="form-input"
+                    value={singleScore.tacPhong}
+                    onChange={(e) =>
+                      setSingleScore({
+                        ...singleScore,
+                        tacPhong: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Kỷ luật</label>
+
+                  <input
+                    type="number"
+                    className="form-input"
+                    value={singleScore.kyLuat}
+                    onChange={(e) =>
+                      setSingleScore({
+                        ...singleScore,
+                        kyLuat: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Nội vụ</label>
+
+                  <input
+                    type="number"
+                    className="form-input"
+                    value={singleScore.noiVu}
+                    onChange={(e) =>
+                      setSingleScore({
+                        ...singleScore,
+                        noiVu: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Tăng gia</label>
+
+                  <input
+                    type="number"
+                    className="form-input"
+                    value={singleScore.tangGia}
+                    onChange={(e) =>
+                      setSingleScore({
+                        ...singleScore,
+                        tangGia: Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>VKTB</label>
+
+                <input
+                  type="number"
+                  className="form-input"
+                  value={singleScore.vkTrangBi}
+                  onChange={(e) =>
+                    setSingleScore({
+                      ...singleScore,
+                      vkTrangBi: Number(e.target.value),
+                    })
+                  }
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Điểm mạnh</label>
+
+                <textarea
+                  rows={3}
+                  className="form-textarea"
+                  value={singleComment.strong}
+                  onChange={(e) =>
+                    setSingleComment({
+                      ...singleComment,
+                      strong: e.target.value,
+                    })
+                  }
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Điểm yếu</label>
+
+                <textarea
+                  rows={3}
+                  className="form-textarea"
+                  value={singleComment.weak}
+                  onChange={(e) =>
+                    setSingleComment({
+                      ...singleComment,
+                      weak: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button
+                className="btn-cancel"
+                onClick={() => setShowAddSingleModal(false)}
+              >
+                Hủy
+              </button>
+
+              <button className="btn-submit" onClick={handleAddSingleUnit}>
+                Thêm đơn vị
               </button>
             </div>
           </div>

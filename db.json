@@ -223,7 +223,7 @@
       "vkTrangBi": 123
     },
     {
-      "id": "XEpDduvjJq8",
+      "id": "fWsWHUd",
       "weekId": 7,
       "unit": "Đại đội bộ",
       "quanSo": 2,
@@ -235,15 +235,27 @@
       "vkTrangBi": 2
     },
     {
-      "id": "fWsWHUd",
+      "id": "M7dPGlX",
       "weekId": 7,
-      "unit": "Đại đội bộ",
+      "unit": "Trung đội 1",
       "quanSo": 2,
       "hocTap": 2,
       "tacPhong": 2,
       "kyLuat": 2,
       "noiVu": 2,
       "tangGia": 2,
+      "vkTrangBi": 2
+    },
+    {
+      "id": "xA556Sg",
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "quanSo": 23,
+      "hocTap": 23,
+      "tacPhong": 23,
+      "kyLuat": 23,
+      "noiVu": 23,
+      "tangGia": 23,
       "vkTrangBi": 2
     }
   ],
@@ -257,21 +269,33 @@
         "Huấn luyện đạt kết quả cao",
         "Đoàn kết nội bộ tốt"
       ],
-      "weak": ["Còn chậm tập hợp", "Nội vụ chưa đồng đều"]
+      "weak": [
+        "Còn chậm tập hợp",
+        "Nội vụ chưa đồng đều"
+      ]
     },
     {
       "id": "2",
       "weekId": 1,
       "unit": "Trung đội 1",
-      "strong": ["Huấn luyện tốt", "Kỷ luật nghiêm"],
-      "weak": ["Tăng gia chưa tốt"]
+      "strong": [
+        "Huấn luyện tốt",
+        "Kỷ luật nghiêm"
+      ],
+      "weak": [
+        "Tăng gia chưa tốt"
+      ]
     },
     {
       "id": "3",
       "weekId": 1,
       "unit": "Trung đội 2",
-      "strong": ["Bảo quản VKTB tốt"],
-      "weak": ["Vệ sinh doanh trại còn hạn chế"]
+      "strong": [
+        "Bảo quản VKTB tốt"
+      ],
+      "weak": [
+        "Vệ sinh doanh trại còn hạn chế"
+      ]
     },
     {
       "id": "4",
@@ -282,21 +306,33 @@
         "Huấn luyện nâng cao",
         "Quản lý nội bộ tốt"
       ],
-      "weak": ["Tăng gia chưa ổn định"]
+      "weak": [
+        "Tăng gia chưa ổn định"
+      ]
     },
     {
       "id": "5",
       "weekId": 2,
       "unit": "Trung đội 1",
-      "strong": ["Huấn luyện xuất sắc", "Kỷ luật tốt"],
-      "weak": ["Nội vụ còn yếu"]
+      "strong": [
+        "Huấn luyện xuất sắc",
+        "Kỷ luật tốt"
+      ],
+      "weak": [
+        "Nội vụ còn yếu"
+      ]
     },
     {
       "id": "6",
       "weekId": 2,
       "unit": "Trung đội 2",
-      "strong": ["Bảo quản VKTB tốt hơn", "Vệ sinh cải thiện"],
-      "weak": ["Học tập cần cố gắng hơn"]
+      "strong": [
+        "Bảo quản VKTB tốt hơn",
+        "Vệ sinh cải thiện"
+      ],
+      "weak": [
+        "Học tập cần cố gắng hơn"
+      ]
     },
     {
       "id": "7",
@@ -308,21 +344,33 @@
         "Đoàn kết xuất sắc",
         "Tác phong chuyên nghiệp"
       ],
-      "weak": ["Chưa có"]
+      "weak": [
+        "Chưa có"
+      ]
     },
     {
       "id": "8",
       "weekId": 3,
       "unit": "Trung đội 1",
-      "strong": ["Huấn luyện tiến bộ", "Kỷ luật nghiêm"],
-      "weak": ["Tăng gia cần cải thiện"]
+      "strong": [
+        "Huấn luyện tiến bộ",
+        "Kỷ luật nghiêm"
+      ],
+      "weak": [
+        "Tăng gia cần cải thiện"
+      ]
     },
     {
       "id": "9",
       "weekId": 3,
       "unit": "Trung đội 2",
-      "strong": ["Bảo quản VKTB xuất sắc", "Vệ sinh doanh trại tốt"],
-      "weak": ["Học tập còn hạn chế"]
+      "strong": [
+        "Bảo quản VKTB xuất sắc",
+        "Vệ sinh doanh trại tốt"
+      ],
+      "weak": [
+        "Học tập còn hạn chế"
+      ]
     },
     {
       "id": "10",
@@ -340,54 +388,99 @@
       "id": "11",
       "weekId": 4,
       "unit": "Trung đội 1",
-      "strong": ["Huấn luyện xuất sắc", "Kỷ luật tốt"],
-      "weak": ["Tăng gia cần tăng cường"]
+      "strong": [
+        "Huấn luyện xuất sắc",
+        "Kỷ luật tốt"
+      ],
+      "weak": [
+        "Tăng gia cần tăng cường"
+      ]
     },
     {
       "id": "12",
       "weekId": 4,
       "unit": "Trung đội 2",
-      "strong": ["Bảo quản VKTB tốt", "Vệ sinh doanh trại đặc biệt"],
-      "weak": ["Chưa có"]
+      "strong": [
+        "Bảo quản VKTB tốt",
+        "Vệ sinh doanh trại đặc biệt"
+      ],
+      "weak": [
+        "Chưa có"
+      ]
     },
     {
       "id": "nDCp64EZcxQ",
       "weekId": 6,
       "unit": "Đại đội bộ",
-      "strong": ["123"],
-      "weak": ["123"]
+      "strong": [
+        "123"
+      ],
+      "weak": [
+        "123"
+      ]
     },
     {
       "id": "wgL5eSWjVHw",
       "weekId": 6,
       "unit": "Trung đội 1",
-      "strong": ["123"],
-      "weak": ["123"]
+      "strong": [
+        "123"
+      ],
+      "weak": [
+        "123"
+      ]
     },
     {
       "id": "Touh2V_WTK0",
       "weekId": 6,
       "unit": "Trung đội 2",
-      "strong": ["123"],
-      "weak": ["123"]
+      "strong": [
+        "123"
+      ],
+      "weak": [
+        "123"
+      ]
     },
     {
-      "id": "pWSl2Mp4tZg",
+      "id": "IT3WEZA",
       "weekId": 7,
-      "unit": "Đại đội bộ",
-      "strong": ["23"],
-      "weak": ["2"]
+      "unit": "Trung đội 1",
+      "strong": [
+        "2"
+      ],
+      "weak": [
+        "2"
+      ]
     },
     {
-      "id": "38JL8AY",
+      "id": "wPmtohl",
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "strong": [
+        "2"
+      ],
+      "weak": [
+        "2"
+      ]
+    },
+    {
+      "id": "ah10ipN",
       "weekId": 7,
       "unit": "Đại đội bộ",
-      "strong": ["2"],
-      "weak": ["2"]
+      "strong": [
+        "123"
+      ],
+      "weak": [
+        "123"
+      ]
     }
   ],
   "flowers": {
-    "tapThe": ["Đại đội bộ", "Khẩu đội 2", "Khẩu đội 4"],
+    "tapThe": [
+      "Đại đội bộ",
+      "Khẩu đội 2",
+      "Khẩu đội 4"
+    ],
     "caNhan": [
       "Nguyễn Văn Khải",
       "Trần Thế Nam",
@@ -478,6 +571,5 @@
       "content": "Theo Luật Nghĩa vụ quân sự, độ tuổi gọi nhập ngũ thông thường là từ bao nhiêu đến bao nhiêu tuổi?"
     }
   ],
-
   "$schema": "./node_modules/json-server/schema.json"
 }
