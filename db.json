@@ -257,33 +257,21 @@
         "Huấn luyện đạt kết quả cao",
         "Đoàn kết nội bộ tốt"
       ],
-      "weak": [
-        "Còn chậm tập hợp",
-        "Nội vụ chưa đồng đều"
-      ]
+      "weak": ["Còn chậm tập hợp", "Nội vụ chưa đồng đều"]
     },
     {
       "id": "2",
       "weekId": 1,
       "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện tốt",
-        "Kỷ luật nghiêm"
-      ],
-      "weak": [
-        "Tăng gia chưa tốt"
-      ]
+      "strong": ["Huấn luyện tốt", "Kỷ luật nghiêm"],
+      "weak": ["Tăng gia chưa tốt"]
     },
     {
       "id": "3",
       "weekId": 1,
       "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB tốt"
-      ],
-      "weak": [
-        "Vệ sinh doanh trại còn hạn chế"
-      ]
+      "strong": ["Bảo quản VKTB tốt"],
+      "weak": ["Vệ sinh doanh trại còn hạn chế"]
     },
     {
       "id": "4",
@@ -294,33 +282,21 @@
         "Huấn luyện nâng cao",
         "Quản lý nội bộ tốt"
       ],
-      "weak": [
-        "Tăng gia chưa ổn định"
-      ]
+      "weak": ["Tăng gia chưa ổn định"]
     },
     {
       "id": "5",
       "weekId": 2,
       "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện xuất sắc",
-        "Kỷ luật tốt"
-      ],
-      "weak": [
-        "Nội vụ còn yếu"
-      ]
+      "strong": ["Huấn luyện xuất sắc", "Kỷ luật tốt"],
+      "weak": ["Nội vụ còn yếu"]
     },
     {
       "id": "6",
       "weekId": 2,
       "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB tốt hơn",
-        "Vệ sinh cải thiện"
-      ],
-      "weak": [
-        "Học tập cần cố gắng hơn"
-      ]
+      "strong": ["Bảo quản VKTB tốt hơn", "Vệ sinh cải thiện"],
+      "weak": ["Học tập cần cố gắng hơn"]
     },
     {
       "id": "7",
@@ -332,33 +308,21 @@
         "Đoàn kết xuất sắc",
         "Tác phong chuyên nghiệp"
       ],
-      "weak": [
-        "Chưa có"
-      ]
+      "weak": ["Chưa có"]
     },
     {
       "id": "8",
       "weekId": 3,
       "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện tiến bộ",
-        "Kỷ luật nghiêm"
-      ],
-      "weak": [
-        "Tăng gia cần cải thiện"
-      ]
+      "strong": ["Huấn luyện tiến bộ", "Kỷ luật nghiêm"],
+      "weak": ["Tăng gia cần cải thiện"]
     },
     {
       "id": "9",
       "weekId": 3,
       "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB xuất sắc",
-        "Vệ sinh doanh trại tốt"
-      ],
-      "weak": [
-        "Học tập còn hạn chế"
-      ]
+      "strong": ["Bảo quản VKTB xuất sắc", "Vệ sinh doanh trại tốt"],
+      "weak": ["Học tập còn hạn chế"]
     },
     {
       "id": "10",
@@ -376,88 +340,54 @@
       "id": "11",
       "weekId": 4,
       "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện xuất sắc",
-        "Kỷ luật tốt"
-      ],
-      "weak": [
-        "Tăng gia cần tăng cường"
-      ]
+      "strong": ["Huấn luyện xuất sắc", "Kỷ luật tốt"],
+      "weak": ["Tăng gia cần tăng cường"]
     },
     {
       "id": "12",
       "weekId": 4,
       "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB tốt",
-        "Vệ sinh doanh trại đặc biệt"
-      ],
-      "weak": [
-        "Chưa có"
-      ]
+      "strong": ["Bảo quản VKTB tốt", "Vệ sinh doanh trại đặc biệt"],
+      "weak": ["Chưa có"]
     },
     {
       "id": "nDCp64EZcxQ",
       "weekId": 6,
       "unit": "Đại đội bộ",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
+      "strong": ["123"],
+      "weak": ["123"]
     },
     {
       "id": "wgL5eSWjVHw",
       "weekId": 6,
       "unit": "Trung đội 1",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
+      "strong": ["123"],
+      "weak": ["123"]
     },
     {
       "id": "Touh2V_WTK0",
       "weekId": 6,
       "unit": "Trung đội 2",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
+      "strong": ["123"],
+      "weak": ["123"]
     },
     {
       "id": "pWSl2Mp4tZg",
       "weekId": 7,
       "unit": "Đại đội bộ",
-      "strong": [
-        "23"
-      ],
-      "weak": [
-        "2"
-      ]
+      "strong": ["23"],
+      "weak": ["2"]
     },
     {
       "id": "38JL8AY",
       "weekId": 7,
       "unit": "Đại đội bộ",
-      "strong": [
-        "2"
-      ],
-      "weak": [
-        "2"
-      ]
+      "strong": ["2"],
+      "weak": ["2"]
     }
   ],
   "flowers": {
-    "tapThe": [
-      "Đại đội bộ",
-      "Khẩu đội 2",
-      "Khẩu đội 4"
-    ],
+    "tapThe": ["Đại đội bộ", "Khẩu đội 2", "Khẩu đội 4"],
     "caNhan": [
       "Nguyễn Văn Khải",
       "Trần Thế Nam",
@@ -472,5 +402,48 @@
     "date": "24/07/2026",
     "signer": "Lê Văn Hưng"
   },
+  "teachings": [
+    {
+      "id": 1,
+      "content": "Nhiệm vụ nào cũng hoàn thành, khó khăn nào cũng vượt qua, kẻ thù nào cũng đánh thắng."
+    },
+    {
+      "id": 2,
+      "content": "Trung với nước, hiếu với dân."
+    },
+    {
+      "id": 3,
+      "content": "Đoàn kết, đoàn kết, đại đoàn kết."
+    },
+    {
+      "id": 4,
+      "content": "Thi đua là yêu nước, yêu nước thì phải thi đua."
+    },
+    {
+      "id": 5,
+      "content": "Cần, kiệm, liêm, chính, chí công vô tư."
+    },
+    {
+      "id": 6,
+      "content": "Dễ trăm lần không dân cũng chịu, khó vạn lần dân liệu cũng xong."
+    },
+    {
+      "id": 7,
+      "content": "Học để làm việc, làm người, làm cán bộ."
+    },
+    {
+      "id": 8,
+      "content": "Không có việc gì khó, chỉ sợ lòng không bền."
+    },
+    {
+      "id": 9,
+      "content": "Đâu cần thanh niên có, đâu khó có thanh niên."
+    },
+    {
+      "id": 10,
+      "content": "Thi đua là đoàn kết, đoàn kết để thi đua."
+    }
+  ],
+
   "$schema": "./node_modules/json-server/schema.json"
 }

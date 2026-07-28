@@ -5,6 +5,8 @@ require("dotenv").config();
 const Week = require("./model/Week");
 const Score = require("./model/Score");
 const Comment = require("./model/Comment");
+const Teaching = require("./model/Teaching");
+const TodayTeaching = require("./model/TodayTeaching");
 const app = express();
 
 app.use(cors());
@@ -18,6 +20,7 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Server is running...");
 });
+//Week
 app.get("/weeks", async (req, res) => {
   const weeks = await Week.find().sort({ id: 1 });
   res.json(weeks);
@@ -26,6 +29,7 @@ app.post("/weeks", async (req, res) => {
   const week = await Week.create(req.body);
   res.json(week);
 });
+//Score
 app.get("/scores", async (req, res) => {
   const { weekId } = req.query;
 
@@ -127,7 +131,7 @@ app.put("/comments/:id", async (req, res) => {
     const comment = await Comment.findOneAndUpdate(
       { id: Number(req.params.id) },
       req.body,
-      { new: true }
+      { new: true },
     );
 
     res.json(comment);
@@ -146,6 +150,44 @@ app.delete("/comments/:id", async (req, res) => {
     res.json({
       message: "Đã xóa",
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+app.get("/teaching/today", async (req, res) => {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+
+    // Kiểm tra hôm nay đã có chưa
+    let todayTeaching = await TodayTeaching.findOne({
+      date: today,
+    });
+
+    if (!todayTeaching) {
+      // Lấy toàn bộ lời dạy
+      const teachings = await Teaching.find();
+
+      if (teachings.length === 0) {
+        return res.status(404).json({
+          message: "Chưa có dữ liệu lời dạy",
+        });
+      }
+
+      // Random
+      const random = teachings[Math.floor(Math.random() * teachings.length)];
+
+      // Lưu vào Mongo
+      todayTeaching = await TodayTeaching.create({
+        date: today,
+        teachingId: random._id,
+      });
+    }
+
+    const result = await TodayTeaching.findById(todayTeaching._id).populate(
+      "teachingId",
+    );
+
+    res.json(result.teachingId);
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1008,30 +1008,47 @@ textarea:focus {
     padding: 6px 10px;
   }
 }
-/* ===========================
-   LỜI BÁC HỒ DẠY
-=========================== */
-
-/* .bac-box{
-    text-align:center;
-    background:#fffdf2;
-    border:2px solid #c79a00;
-    border-radius:6px;
-    padding:20px;
-    font-size:22px;
-    line-height:42px;
-    color:#8b0000;
-    font-style:italic;
+.comment-box {
+  margin: 20px auto;
+  background: #fff;
+  border: 2px solid #0b5fa5;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.bac-box strong{
-    font-weight:bold;
+.comment-box h3 {
+  margin: 0;
+  padding: 14px;
+  text-align: center;
+  color: #b40000;
+  font-size: 34px;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
 }
 
-.author{
-    margin-top:15px;
-    color:#0f5b8d;
-    font-size:20px;
-    font-style:normal;
-    font-weight:bold;
-} */
+.bac-box {
+  padding: 30px;
+  text-align: center;
+  background: linear-gradient(to bottom, #fffdf5, #fff7df);
+}
+
+.quote-mark {
+  font-size: 70px;
+  color: #d4af37;
+  line-height: 1;
+}
+
+.bac-text {
+  font-size: 30px;
+  color: #b40000;
+  font-weight: bold;
+  line-height: 1.8;
+  margin: 10px 0 20px;
+}
+
+.bac-author {
+  font-size: 20px;
+  color: #003366;
+  font-style: italic;
+  font-weight: bold;
+} 
