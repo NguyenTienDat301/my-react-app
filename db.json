@@ -39,6 +39,11 @@
       "id": 7,
       "date": "2026-08-30",
       "title": "Thi đua tuần 7"
+    },
+    {
+      "id": 8,
+      "date": "2026-07-30",
+      "title": "Thi đua tuần 8"
     }
   ],
   "scores": [
@@ -257,6 +262,78 @@
       "noiVu": 23,
       "tangGia": 23,
       "vkTrangBi": 2
+    },
+    {
+      "id": "IPoKFo-",
+      "weekId": null,
+      "unit": "Đại đội bộ",
+      "quanSo": 123,
+      "hocTap": 123,
+      "tacPhong": 123,
+      "kyLuat": 123,
+      "noiVu": 123,
+      "tangGia": 123,
+      "vkTrangBi": 123
+    },
+    {
+      "id": "ZPsQpEc",
+      "weekId": null,
+      "unit": "Trung đội 1",
+      "quanSo": 13124,
+      "hocTap": 124,
+      "tacPhong": 123,
+      "kyLuat": 124,
+      "noiVu": 123,
+      "tangGia": 312,
+      "vkTrangBi": 2123
+    },
+    {
+      "id": "-o85nWH",
+      "weekId": null,
+      "unit": "Trung đội 2",
+      "quanSo": 412,
+      "hocTap": 421,
+      "tacPhong": 12,
+      "kyLuat": 324,
+      "noiVu": 342,
+      "tangGia": 32,
+      "vkTrangBi": 342
+    },
+    {
+      "id": "68VgWao",
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "quanSo": 12412,
+      "hocTap": 412,
+      "tacPhong": 421,
+      "kyLuat": 324,
+      "noiVu": 324,
+      "tangGia": 324,
+      "vkTrangBi": 234
+    },
+    {
+      "id": "tk72xaO",
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "quanSo": 122,
+      "hocTap": 235,
+      "tacPhong": 23523,
+      "kyLuat": 523,
+      "noiVu": 523,
+      "tangGia": 523,
+      "vkTrangBi": 31
+    },
+    {
+      "id": "ufP2d3F",
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "quanSo": 124,
+      "hocTap": 215678,
+      "tacPhong": 90,
+      "kyLuat": 867,
+      "noiVu": 867,
+      "tangGia": 89,
+      "vkTrangBi": 67
     }
   ],
   "comments": [
@@ -472,6 +549,146 @@
       ],
       "weak": [
         "123"
+      ]
+    },
+    {
+      "id": "2NR_Zq9",
+      "weekId": null,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ],
+      "weak": []
+    },
+    {
+      "id": "gAatY7c",
+      "weekId": null,
+      "unit": "Trung đội 1",
+      "strong": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ],
+      "weak": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ]
+    },
+    {
+      "id": "PdCA-jV",
+      "weekId": null,
+      "unit": "Trung đội 2",
+      "strong": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasvFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ],
+      "weak": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ]
+    },
+    {
+      "id": "fXDNuzx",
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ],
+      "weak": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ]
+    },
+    {
+      "id": "ZKZ22pY",
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "strong": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ],
+      "weak": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ]
+    },
+    {
+      "id": "I9RrFoa",
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "strong": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
+      ],
+      "weak": [
+        "FAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfasFAFafa",
+        "fafad",
+        "fafawfa",
+        "âfFaf",
+        "fafawfas"
       ]
     }
   ],

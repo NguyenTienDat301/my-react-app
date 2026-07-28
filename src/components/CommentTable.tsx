@@ -25,17 +25,21 @@ const CommentTable = ({ comments }: Props) => {
 
               <td>
                 <ul>
-                  {item.strong.map((text, index) => (
+                  {item.strong.slice(0, 2).map((text, index) => (
                     <li key={index}>{text}</li>
                   ))}
+
+                  {item.strong.length > 2 && <li>...</li>}
                 </ul>
               </td>
 
               <td>
                 <ul>
-                  {item.weak.map((text, index) => (
+                  {item.weak.slice(0, 2).map((text, index) => (
                     <li key={index}>{text}</li>
                   ))}
+
+                  {item.weak.length > 2 && <li>...</li>}
                 </ul>
               </td>
             </tr>

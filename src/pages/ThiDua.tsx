@@ -425,6 +425,11 @@ const ThiDua: React.FC = () => {
   if (loading) {
     return <h2 className="loading">Đang tải dữ liệu...</h2>;
   }
+  const previewComments = comments.map((item) => ({
+    ...item,
+    strong: item.strong.slice(0, 2),
+    weak: item.weak.slice(0, 2),
+  }));
 
   return (
     <div className="page">
@@ -483,7 +488,7 @@ const ThiDua: React.FC = () => {
           <div className="box">
             {/* <h3>NHẬN XÉT</h3> */}
 
-            <CommentTable comments={comments} />
+            <CommentTable comments={previewComments} />
           </div>
         </section>
 
