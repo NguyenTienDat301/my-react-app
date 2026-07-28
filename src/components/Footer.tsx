@@ -23,10 +23,12 @@ const Footer: React.FC<FooterProps> = ({ currentWeek }) => {
       </div>
 
       <div className="signature">
-        <strong>ĐẠI ĐỘI TRƯỞNG</strong>
+        <strong>T/M TỔ Thi Đua</strong>
 
         <br />
+        Thông
         <br />
+        Hoàng Cao Thông
         <br />
         <br />
 

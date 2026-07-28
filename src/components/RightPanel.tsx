@@ -1,6 +1,26 @@
 import React from "react";
+import type { Score } from "../types/interface";
 
-const RightPanel: React.FC = () => {
+interface RightPanelProps {
+  scores: Score[];
+}
+
+const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
+  // Tính tổng điểm
+  const ranking = [...scores]
+    .map((item) => ({
+      ...item,
+      total:
+        item.quanSo +
+        item.hocTap +
+        item.tacPhong +
+        item.kyLuat +
+        item.noiVu +
+        item.tangGia +
+        item.vkTrangBi,
+    }))
+    .sort((a, b) => b.total - a.total);
+
   return (
     <aside className="right-panel">
       {/* Những bông hoa đẹp */}
@@ -11,9 +31,19 @@ const RightPanel: React.FC = () => {
           <h4>TẬP THỂ</h4>
 
           <ul>
-            <li>🌼 Đại đội bộ</li>
-            <li>🌼 Trung đội 1</li>
-            <li>🌼 Trung đội 2</li>
+            {ranking.length > 0 ? (
+              ranking.map((item, index) => (
+                <li key={item.id}>
+                  {index === 0 && "🥇"}
+                  {index === 1 && "🥈"}
+                  {index === 2 && "🥉"}
+                  {index > 2 && "🌼"}{" "}
+                  <strong>{item.unit}</strong> 
+                </li>
+              ))
+            ) : (
+              <li>Chưa có dữ liệu</li>
+            )}
           </ul>
         </div>
 
@@ -30,7 +60,7 @@ const RightPanel: React.FC = () => {
         </div>
       </div>
 
-      {/* Thông báo */}
+      {/* Thông báo
       <div className="box">
         <h3>📢 THÔNG BÁO</h3>
 
@@ -41,17 +71,6 @@ const RightPanel: React.FC = () => {
           <li>✔ Huấn luyện bắn súng tuần tới.</li>
           <li>✔ Kiểm tra điều lệnh cuối tuần.</li>
         </ul>
-      </div>
-
-      {/* Đơn vị dẫn đầu */}
-      {/* <div className="box">
-        <h3>🏆 ĐƠN VỊ DẪN ĐẦU</h3>
-
-        <div className="leader-card">
-          <h2>Trung đội 1</h2>
-
-          <p>Hoàn thành xuất sắc nhiệm vụ tuần.</p>
-        </div>
       </div> */}
     </aside>
   );

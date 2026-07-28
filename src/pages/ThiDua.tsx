@@ -490,7 +490,7 @@ const ThiDua: React.FC = () => {
         {/* ================= CỘT PHẢI ================= */}
 
         <aside className="right-panel">
-          <RightPanel />
+          <RightPanel scores={scores} />
         </aside>
       </main>
 
