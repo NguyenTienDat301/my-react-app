@@ -29,8 +29,7 @@ import {
 import "../styles/detail.css";
 
 const UnitDetail: React.FC = () => {
-  const { weekId, id } = useParams();
-
+const { weekId, scoreId: scoreIdParam } = useParams();
   const navigate = useNavigate();
 
   // ======================
@@ -79,12 +78,12 @@ const UnitDetail: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (!id) {
+        if (!scoreIdParam) {
           setError("Không tìm thấy ID đơn vị");
           return;
         }
 
-        const scoreId = Number(id);
+        const scoreId = Number(scoreIdParam);
 
         if (Number.isNaN(scoreId)) {
           setError("ID đơn vị không hợp lệ");
@@ -123,7 +122,7 @@ const UnitDetail: React.FC = () => {
     };
 
     fetchData();
-  }, [id]);
+  }, [scoreIdParam]);
   // ======================
   // Lưu điểm đại đội
   // ======================

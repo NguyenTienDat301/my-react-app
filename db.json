@@ -1,4 +1,12 @@
 {
+  "unit": [
+    {
+      "id": 1,
+      "name": "Đại đội bộ"
+    },
+    { "id": 2, "name": "Trung đội 1" },
+    { "id": 3, "name": "Trung đội 2" }
+  ],
   "weeks": [
     {
       "id": 1,
@@ -71,15 +79,28 @@
       "id": 1,
       "weekId": 1,
       "unit": "Đại đội bộ",
-      "strong": [
-        "Duy trì nghiêm điều lệnh",
-        "Huấn luyện đạt kết quả cao"
-      ],
-      "weak": [
-        "Nội vụ chưa đồng đều"
-      ]
+      "strong": ["Duy trì nghiêm điều lệnh", "Huấn luyện đạt kết quả cao"],
+      "weak": ["Nội vụ chưa đồng đều"]
     }
   ],
+  "soldiers": [
+  {
+    "id": 1,
+    "weekId": 1,
+    "unit": "Trung đội 1",
+    "name": "Nguyễn Văn A",
+    "rank": "Binh nhất",
+    "position": "Chiến sĩ"
+  },
+  {
+    "id": 2,
+    "weekId": 1,
+    "unit": "Trung đội 1",
+    "name": "Trần Văn B",
+    "rank": "Binh nhì",
+    "position": "Chiến sĩ"
+  }
+],
   "teachings": [
     {
       "id": 1,
@@ -121,14 +142,8 @@
     }
   ],
   "flowers": {
-    "tapThe": [
-      "Đại đội bộ",
-      "Khẩu đội 2"
-    ],
-    "caNhan": [
-      "Nguyễn Văn Khải",
-      "Trần Thế Nam"
-    ]
+    "tapThe": ["Đại đội bộ", "Khẩu đội 2"],
+    "caNhan": ["Nguyễn Văn Khải", "Trần Thế Nam"]
   },
   "board": {
     "title": "CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16",
