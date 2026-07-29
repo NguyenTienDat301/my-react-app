@@ -1,54 +1,24 @@
 {
   "weeks": [
     {
-      "id": "1",
+      "id": 1,
       "date": "2026-07-24",
       "title": "Thi đua tuần 30"
     },
     {
-      "id": "2",
+      "id": 2,
       "date": "2026-07-31",
       "title": "Thi đua tuần 31"
     },
     {
-      "id": "3",
-      "date": "2026-08-07",
-      "title": "Thi đua tuần 32"
-    },
-    {
-      "id": "4",
-      "date": "2026-08-14",
-      "title": "Thi đua tuần 33"
-    },
-    {
-      "id": "5",
-      "date": "2026-07-26",
-      "title": "Thi đua tuần hiện tại"
-    },
-    {
-      "id": "6",
-      "date": "2026-07-29",
-      "title": "Thi đua tuần 6"
-    },
-    {
-      "id": "RaP2xq1GCV4",
-      "date": "2026-10-30",
-      "title": "Thi đua tuần 7"
-    },
-    {
-      "id": 7,
-      "date": "2026-08-30",
-      "title": "Thi đua tuần 7"
-    },
-    {
-      "id": 8,
+      "id": 3,
       "date": "2026-07-30",
-      "title": "Thi đua tuần 8"
+      "title": "Thi đua tuần 3"
     }
   ],
   "scores": [
     {
-      "id": "1",
+      "id": 1,
       "weekId": 1,
       "unit": "Đại đội bộ",
       "quanSo": 8.5,
@@ -60,7 +30,7 @@
       "vkTrangBi": 8.8
     },
     {
-      "id": "2",
+      "id": 2,
       "weekId": 1,
       "unit": "Trung đội 1",
       "quanSo": 8.4,
@@ -72,7 +42,7 @@
       "vkTrangBi": 8.6
     },
     {
-      "id": "3",
+      "id": 3,
       "weekId": 1,
       "unit": "Trung đội 2",
       "quanSo": 8.6,
@@ -84,152 +54,8 @@
       "vkTrangBi": 8.5
     },
     {
-      "id": "4",
-      "weekId": 2,
-      "unit": "Đại đội bộ",
-      "quanSo": 8.7,
-      "hocTap": 8.9,
-      "tacPhong": 8.5,
-      "kyLuat": 9,
-      "noiVu": 8.4,
-      "tangGia": 8.7,
-      "vkTrangBi": 8.9
-    },
-    {
-      "id": "5",
-      "weekId": 2,
-      "unit": "Trung đội 1",
-      "quanSo": 8.5,
-      "hocTap": 8.6,
-      "tacPhong": 8.7,
-      "kyLuat": 8.8,
-      "noiVu": 8.3,
-      "tangGia": 8.5,
-      "vkTrangBi": 8.7
-    },
-    {
-      "id": "6",
-      "weekId": 2,
-      "unit": "Trung đội 2",
-      "quanSo": 8.7,
-      "hocTap": 8.4,
-      "tacPhong": 8.5,
-      "kyLuat": 8.6,
-      "noiVu": 8.5,
-      "tangGia": 8.8,
-      "vkTrangBi": 8.6
-    },
-    {
-      "id": "7",
+      "id": 4,
       "weekId": 3,
-      "unit": "Đại đội bộ",
-      "quanSo": 8.8,
-      "hocTap": 9,
-      "tacPhong": 8.6,
-      "kyLuat": 9.1,
-      "noiVu": 8.5,
-      "tangGia": 8.8,
-      "vkTrangBi": 9
-    },
-    {
-      "id": "8",
-      "weekId": 3,
-      "unit": "Trung đội 1",
-      "quanSo": 8.6,
-      "hocTap": 8.7,
-      "tacPhong": 8.8,
-      "kyLuat": 8.9,
-      "noiVu": 8.4,
-      "tangGia": 8.6,
-      "vkTrangBi": 8.8
-    },
-    {
-      "id": "9",
-      "weekId": 3,
-      "unit": "Trung đội 2",
-      "quanSo": 8.8,
-      "hocTap": 8.5,
-      "tacPhong": 8.6,
-      "kyLuat": 8.7,
-      "noiVu": 8.6,
-      "tangGia": 8.9,
-      "vkTrangBi": 8.7
-    },
-    {
-      "id": "10",
-      "weekId": 4,
-      "unit": "Đại đội bộ",
-      "quanSo": 8.9,
-      "hocTap": 9.1,
-      "tacPhong": 8.7,
-      "kyLuat": 9.2,
-      "noiVu": 8.6,
-      "tangGia": 8.9,
-      "vkTrangBi": 9.1
-    },
-    {
-      "id": "11",
-      "weekId": 4,
-      "unit": "Trung đội 1",
-      "quanSo": 8.7,
-      "hocTap": 8.8,
-      "tacPhong": 8.9,
-      "kyLuat": 9,
-      "noiVu": 8.5,
-      "tangGia": 8.7,
-      "vkTrangBi": 8.9
-    },
-    {
-      "id": "12",
-      "weekId": 4,
-      "unit": "Trung đội 2",
-      "quanSo": 8.9,
-      "hocTap": 8.6,
-      "tacPhong": 8.7,
-      "kyLuat": 8.8,
-      "noiVu": 8.7,
-      "tangGia": 9,
-      "vkTrangBi": 8.8
-    },
-    {
-      "id": "D_NO7Bb0g_M",
-      "weekId": 6,
-      "unit": "Đại đội bộ",
-      "quanSo": 123,
-      "hocTap": 123,
-      "tacPhong": 123,
-      "kyLuat": 123,
-      "noiVu": 123,
-      "tangGia": 123,
-      "vkTrangBi": 123
-    },
-    {
-      "id": "Vgm-mDvBhkA",
-      "weekId": 6,
-      "unit": "Trung đội 1",
-      "quanSo": 123,
-      "hocTap": 123,
-      "tacPhong": 123,
-      "kyLuat": 123,
-      "noiVu": 123,
-      "tangGia": 123,
-      "vkTrangBi": 123
-    },
-    {
-      "id": "SRTL7xHuPlA",
-      "weekId": 6,
-      "unit": "Trung đội 2",
-      "quanSo": 123,
-      "hocTap": 123,
-      "tacPhong": 123,
-      "kyLuat": 123,
-      "noiVu": 123,
-      "tangGia": 123,
-      "vkTrangBi": 123
-    },
-    {
-      "id": "fWsWHUd",
-      "weekId": 7,
       "unit": "Đại đội bộ",
       "quanSo": 2,
       "hocTap": 2,
@@ -238,480 +64,22 @@
       "noiVu": 2,
       "tangGia": 2,
       "vkTrangBi": 2
-    },
-    {
-      "id": "M7dPGlX",
-      "weekId": 7,
-      "unit": "Trung đội 1",
-      "quanSo": 2,
-      "hocTap": 2,
-      "tacPhong": 2,
-      "kyLuat": 2,
-      "noiVu": 2,
-      "tangGia": 2,
-      "vkTrangBi": 2
-    },
-    {
-      "id": "xA556Sg",
-      "weekId": 7,
-      "unit": "Trung đội 2",
-      "quanSo": 23,
-      "hocTap": 23,
-      "tacPhong": 23,
-      "kyLuat": 23,
-      "noiVu": 23,
-      "tangGia": 23,
-      "vkTrangBi": 2
-    },
-    {
-      "id": "IPoKFo-",
-      "weekId": null,
-      "unit": "Đại đội bộ",
-      "quanSo": 123,
-      "hocTap": 123,
-      "tacPhong": 123,
-      "kyLuat": 123,
-      "noiVu": 123,
-      "tangGia": 123,
-      "vkTrangBi": 123
-    },
-    {
-      "id": "ZPsQpEc",
-      "weekId": null,
-      "unit": "Trung đội 1",
-      "quanSo": 13124,
-      "hocTap": 124,
-      "tacPhong": 123,
-      "kyLuat": 124,
-      "noiVu": 123,
-      "tangGia": 312,
-      "vkTrangBi": 2123
-    },
-    {
-      "id": "-o85nWH",
-      "weekId": null,
-      "unit": "Trung đội 2",
-      "quanSo": 412,
-      "hocTap": 421,
-      "tacPhong": 12,
-      "kyLuat": 324,
-      "noiVu": 342,
-      "tangGia": 32,
-      "vkTrangBi": 342
-    },
-    {
-      "id": "68VgWao",
-      "weekId": 8,
-      "unit": "Đại đội bộ",
-      "quanSo": 12412,
-      "hocTap": 412,
-      "tacPhong": 421,
-      "kyLuat": 324,
-      "noiVu": 324,
-      "tangGia": 324,
-      "vkTrangBi": 234
-    },
-    {
-      "id": "tk72xaO",
-      "weekId": 8,
-      "unit": "Trung đội 1",
-      "quanSo": 122,
-      "hocTap": 235,
-      "tacPhong": 23523,
-      "kyLuat": 523,
-      "noiVu": 523,
-      "tangGia": 523,
-      "vkTrangBi": 31
-    },
-    {
-      "id": "ufP2d3F",
-      "weekId": 8,
-      "unit": "Trung đội 2",
-      "quanSo": 124,
-      "hocTap": 215678,
-      "tacPhong": 90,
-      "kyLuat": 867,
-      "noiVu": 867,
-      "tangGia": 89,
-      "vkTrangBi": 67
     }
   ],
   "comments": [
     {
-      "id": "1",
+      "id": 1,
       "weekId": 1,
       "unit": "Đại đội bộ",
       "strong": [
         "Duy trì nghiêm điều lệnh",
-        "Huấn luyện đạt kết quả cao",
-        "Đoàn kết nội bộ tốt"
+        "Huấn luyện đạt kết quả cao"
       ],
       "weak": [
-        "Còn chậm tập hợp",
         "Nội vụ chưa đồng đều"
-      ]
-    },
-    {
-      "id": "2",
-      "weekId": 1,
-      "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện tốt",
-        "Kỷ luật nghiêm"
-      ],
-      "weak": [
-        "Tăng gia chưa tốt"
-      ]
-    },
-    {
-      "id": "3",
-      "weekId": 1,
-      "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB tốt"
-      ],
-      "weak": [
-        "Vệ sinh doanh trại còn hạn chế"
-      ]
-    },
-    {
-      "id": "4",
-      "weekId": 2,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "Tăng cường kỷ luật",
-        "Huấn luyện nâng cao",
-        "Quản lý nội bộ tốt"
-      ],
-      "weak": [
-        "Tăng gia chưa ổn định"
-      ]
-    },
-    {
-      "id": "5",
-      "weekId": 2,
-      "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện xuất sắc",
-        "Kỷ luật tốt"
-      ],
-      "weak": [
-        "Nội vụ còn yếu"
-      ]
-    },
-    {
-      "id": "6",
-      "weekId": 2,
-      "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB tốt hơn",
-        "Vệ sinh cải thiện"
-      ],
-      "weak": [
-        "Học tập cần cố gắng hơn"
-      ]
-    },
-    {
-      "id": "7",
-      "weekId": 3,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "Xuất sắc trong huấn luyện",
-        "Kỷ luật rất tốt",
-        "Đoàn kết xuất sắc",
-        "Tác phong chuyên nghiệp"
-      ],
-      "weak": [
-        "Chưa có"
-      ]
-    },
-    {
-      "id": "8",
-      "weekId": 3,
-      "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện tiến bộ",
-        "Kỷ luật nghiêm"
-      ],
-      "weak": [
-        "Tăng gia cần cải thiện"
-      ]
-    },
-    {
-      "id": "9",
-      "weekId": 3,
-      "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB xuất sắc",
-        "Vệ sinh doanh trại tốt"
-      ],
-      "weak": [
-        "Học tập còn hạn chế"
-      ]
-    },
-    {
-      "id": "10",
-      "weekId": 4,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "Xuất sắc toàn diện",
-        "Kỷ luật tuyệt vời",
-        "Huấn luyện nâng cao",
-        "Đoàn kết mạnh mẽ"
-      ],
-      "weak": []
-    },
-    {
-      "id": "11",
-      "weekId": 4,
-      "unit": "Trung đội 1",
-      "strong": [
-        "Huấn luyện xuất sắc",
-        "Kỷ luật tốt"
-      ],
-      "weak": [
-        "Tăng gia cần tăng cường"
-      ]
-    },
-    {
-      "id": "12",
-      "weekId": 4,
-      "unit": "Trung đội 2",
-      "strong": [
-        "Bảo quản VKTB tốt",
-        "Vệ sinh doanh trại đặc biệt"
-      ],
-      "weak": [
-        "Chưa có"
-      ]
-    },
-    {
-      "id": "nDCp64EZcxQ",
-      "weekId": 6,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
-    },
-    {
-      "id": "wgL5eSWjVHw",
-      "weekId": 6,
-      "unit": "Trung đội 1",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
-    },
-    {
-      "id": "Touh2V_WTK0",
-      "weekId": 6,
-      "unit": "Trung đội 2",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
-    },
-    {
-      "id": "IT3WEZA",
-      "weekId": 7,
-      "unit": "Trung đội 1",
-      "strong": [
-        "2"
-      ],
-      "weak": [
-        "2"
-      ]
-    },
-    {
-      "id": "wPmtohl",
-      "weekId": 7,
-      "unit": "Trung đội 2",
-      "strong": [
-        "2"
-      ],
-      "weak": [
-        "2"
-      ]
-    },
-    {
-      "id": "ah10ipN",
-      "weekId": 7,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "123"
-      ],
-      "weak": [
-        "123"
-      ]
-    },
-    {
-      "id": "2NR_Zq9",
-      "weekId": null,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ],
-      "weak": []
-    },
-    {
-      "id": "gAatY7c",
-      "weekId": null,
-      "unit": "Trung đội 1",
-      "strong": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ],
-      "weak": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ]
-    },
-    {
-      "id": "PdCA-jV",
-      "weekId": null,
-      "unit": "Trung đội 2",
-      "strong": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasvFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ],
-      "weak": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ]
-    },
-    {
-      "id": "fXDNuzx",
-      "weekId": 8,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ],
-      "weak": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ]
-    },
-    {
-      "id": "ZKZ22pY",
-      "weekId": 8,
-      "unit": "Trung đội 1",
-      "strong": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ],
-      "weak": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ]
-    },
-    {
-      "id": "I9RrFoa",
-      "weekId": 8,
-      "unit": "Trung đội 2",
-      "strong": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
-      ],
-      "weak": [
-        "FAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfasFAFafa",
-        "fafad",
-        "fafawfa",
-        "âfFaf",
-        "fafawfas"
       ]
     }
   ],
-  "flowers": {
-    "tapThe": [
-      "Đại đội bộ",
-      "Khẩu đội 2",
-      "Khẩu đội 4"
-    ],
-    "caNhan": [
-      "Nguyễn Văn Khải",
-      "Trần Thế Nam",
-      "Hoàng Ngọc Tuấn Anh",
-      "Nguyễn Xuân Độ",
-      "Đỗ Đình Nam"
-    ]
-  },
-  "board": {
-    "title": "CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16",
-    "slogan": "QUYẾT TÂM THỰC HIỆN THẮNG LỢI PHONG TRÀO THI ĐUA QUYẾT THẮNG NĂM 2026",
-    "date": "24/07/2026",
-    "signer": "Lê Văn Hưng"
-  },
   "teachings": [
     {
       "id": 1,
@@ -732,26 +100,6 @@
     {
       "id": 5,
       "content": "Cần, kiệm, liêm, chính, chí công vô tư."
-    },
-    {
-      "id": 6,
-      "content": "Dễ trăm lần không dân cũng chịu, khó vạn lần dân liệu cũng xong."
-    },
-    {
-      "id": 7,
-      "content": "Học để làm việc, làm người, làm cán bộ."
-    },
-    {
-      "id": 8,
-      "content": "Không có việc gì khó, chỉ sợ lòng không bền."
-    },
-    {
-      "id": 9,
-      "content": "Đâu cần thanh niên có, đâu khó có thanh niên."
-    },
-    {
-      "id": 10,
-      "content": "Thi đua là đoàn kết, đoàn kết để thi đua."
     }
   ],
   "questions": [
@@ -769,24 +117,23 @@
     },
     {
       "id": 4,
-      "content": "Theo Luật Quốc phòng, bảo vệ Tổ quốc là nghĩa vụ của ai?"
-    },
-    {
-      "id": 5,
       "content": "Ngày thành lập Quân đội nhân dân Việt Nam là ngày nào?"
-    },
-    {
-      "id": 6,
-      "content": "Ngày truyền thống Dân quân tự vệ là ngày nào?"
-    },
-    {
-      "id": 7,
-      "content": "Khẩu hiệu 'Đâu cần thanh niên có, đâu khó có thanh niên' gắn với lực lượng nào?"
-    },
-    {
-      "id": 8,
-      "content": "Theo Luật Nghĩa vụ quân sự, độ tuổi gọi nhập ngũ thông thường là từ bao nhiêu đến bao nhiêu tuổi?"
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+  "flowers": {
+    "tapThe": [
+      "Đại đội bộ",
+      "Khẩu đội 2"
+    ],
+    "caNhan": [
+      "Nguyễn Văn Khải",
+      "Trần Thế Nam"
+    ]
+  },
+  "board": {
+    "title": "CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16",
+    "slogan": "QUYẾT TÂM THỰC HIỆN THẮNG LỢI PHONG TRÀO THI ĐUA QUYẾT THẮNG NĂM 2026",
+    "date": "24/07/2026",
+    "signer": "Lê Văn Hưng"
+  }
 }

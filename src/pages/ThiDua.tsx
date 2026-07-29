@@ -558,7 +558,24 @@ const ThiDua: React.FC = () => {
   const handlePrint = () => {
     window.print();
   };
+const handleEdit = (score: Score) => {
+  console.log("Edit:", score);
 
+  // sau này mở modal sửa
+};
+
+
+const handleDelete = (id: number) => {
+  const confirmDelete = window.confirm(
+    "Bạn có chắc muốn xóa?"
+  );
+
+  if (!confirmDelete) return;
+
+  setScores((prev) =>
+    prev.filter((item) => item.id !== id)
+  );
+};
   return (
     <div className="page">
       <Header />
@@ -668,6 +685,8 @@ const ThiDua: React.FC = () => {
               scores={scores}
               selectedId={selectedId}
               setSelectedId={setSelectedId}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
             />
           </div>
 

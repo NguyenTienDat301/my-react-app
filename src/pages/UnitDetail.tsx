@@ -2,58 +2,115 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Header from "../components/Header";
-import type { Score, CommentItem } from "../types/interface";
+import SoldierModal from "../components/SoldierModal";
+import SoldierTable from "../components/SoldierTable";
+
+import type { Score, CommentItem, Soldier } from "../types/interface";
+
+import {
+  getScoreById,
+  updateScore,
+  deleteScore,
+} from "../services/scoreService";
+
+import {
+  getComment,
+  updateComment,
+  deleteComment,
+} from "../services/commentService";
+
+import {
+  getSoldiers,
+  addSoldier,
+  updateSoldier,
+  deleteSoldier,
+} from "../services/soldierService";
 
 import "../styles/detail.css";
 
 const UnitDetail: React.FC = () => {
-  const { weekId, scoreId } = useParams();
+  const { weekId, id } = useParams();
+
   const navigate = useNavigate();
 
+  // ======================
+  // Đại đội
+  // ======================
+
   const [score, setScore] = useState<Score | null>(null);
-  const [comment, setComment] = useState<CommentItem | null>(null);
 
   const [editScore, setEditScore] = useState<Score | null>(null);
+
+  // ======================
+  // Nhận xét
+  // ======================
+
+  const [comment, setComment] = useState<CommentItem | null>(null);
+
   const [editComment, setEditComment] = useState<CommentItem | null>(null);
 
-  const [isEditing, setIsEditing] = useState(false);
+  // ======================
+  // Danh sách chiến sĩ
+  // ======================
+
+  const [soldiers, setSoldiers] = useState<Soldier[]>([]);
+
+  // ======================
+  // Modal
+  // ======================
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const [editingSoldier, setEditingSoldier] = useState<Soldier | null>(null);
+
+  // ======================
+  // Trạng thái
+  // ======================
 
   const [loading, setLoading] = useState(true);
+
   const [error, setError] = useState("");
+
+  const [isEditing, setIsEditing] = useState(false);
+  // ======================
+  // Load dữ liệu
+  // ======================
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const scoreRes = await fetch(`http://localhost:3001/scores/${scoreId}`);
-
-        if (!scoreRes.ok) {
-          throw new Error("Không lấy được điểm.");
+        if (!id) {
+          setError("Không tìm thấy ID đơn vị");
+          return;
         }
 
-        const scoreData: Score = await scoreRes.json();
+        const scoreId = Number(id);
+
+        if (Number.isNaN(scoreId)) {
+          setError("ID đơn vị không hợp lệ");
+          return;
+        }
+
+        setLoading(true);
+
+        // lấy điểm đại đội bằng service
+        const scoreData = await getScoreById(scoreId);
 
         setScore(scoreData);
+
         setEditScore(scoreData);
 
-        const commentRes = await fetch(
-          `http://localhost:3001/comments?weekId=${scoreData.weekId}&unit=${encodeURIComponent(
-            scoreData.unit,
-          )}`,
-        );
+        // lấy nhận xét bằng service
+        const commentData = await getComment(scoreData.weekId, scoreData.unit);
 
-        if (!commentRes.ok) {
-          throw new Error("Không lấy được nhận xét.");
-        }
+        setComment(commentData);
 
-        const commentData: CommentItem[] = await commentRes.json();
+        setEditComment(commentData);
 
-        const cmt =
-          Array.isArray(commentData) && commentData.length > 0
-            ? commentData[0]
-            : null;
+        // lấy chiến sĩ bằng service
+        const soldierData = await getSoldiers(scoreData.weekId, scoreData.unit);
 
-        setComment(cmt);
-        setEditComment(cmt);
+        setSoldiers(soldierData);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -66,56 +123,18 @@ const UnitDetail: React.FC = () => {
     };
 
     fetchData();
-  }, [scoreId]);
-  const handleDelete = async () => {
-    if (!score) return;
+  }, [id]);
+  // ======================
+  // Lưu điểm đại đội
+  // ======================
 
-    const confirmDelete = window.confirm(
-      `Bạn có chắc muốn xóa "${score.unit}" không?`,
-    );
-
-    if (!confirmDelete) return;
-
-    try {
-      // Xóa điểm
-      await fetch(`http://localhost:3001/scores/${score.id}`, {
-        method: "DELETE",
-      });
-
-      // Nếu có nhận xét thì xóa luôn
-      if (comment) {
-        await fetch(`http://localhost:3001/comments/${comment.id}`, {
-          method: "DELETE",
-        });
-      }
-
-      alert("Đã xóa đơn vị!");
-
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      alert("Xóa thất bại!");
-    }
-  };
   const handleSave = async () => {
     if (!editScore || !editComment) return;
 
     try {
-      await fetch(`http://localhost:3001/scores/${editScore.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editScore),
-      });
+      await updateScore(editScore);
 
-      await fetch(`http://localhost:3001/comments/${editComment.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editComment),
-      });
+      await updateComment(editComment);
 
       setScore(editScore);
       setComment(editComment);
@@ -123,19 +142,115 @@ const UnitDetail: React.FC = () => {
       setIsEditing(false);
 
       alert("Cập nhật thành công!");
-    } catch {
+    } catch (error) {
+      console.error(error);
+
       alert("Không thể cập nhật dữ liệu!");
     }
   };
 
+  // ======================
+  // Xóa đại đội
+  // ======================
+
+  const handleDelete = async () => {
+    if (!score) return;
+
+    if (!window.confirm(`Bạn có chắc muốn xóa "${score.unit}" không?`)) {
+      return;
+    }
+
+    try {
+      await deleteScore(score.id);
+
+      if (comment) {
+        await deleteComment(comment.id);
+      }
+
+      alert("Đã xóa đơn vị!");
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+
+      alert("Xóa thất bại!");
+    }
+  };
+
+  // ======================
+  // Thêm chiến sĩ
+  // ======================
+
+  const handleAddSoldier = () => {
+    setEditingSoldier(null);
+
+    setOpenModal(true);
+  };
+
+  // ======================
+  // Sửa chiến sĩ
+  // ======================
+
+  const handleEditSoldier = (soldier: Soldier) => {
+    setEditingSoldier(soldier);
+
+    setOpenModal(true);
+  };
+
+  // ======================
+  // Xóa chiến sĩ
+  // ======================
+
+  const handleDeleteSoldier = async (id: number) => {
+    if (!window.confirm("Bạn có chắc muốn xóa chiến sĩ này?")) return;
+
+    try {
+      await deleteSoldier(id);
+
+      setSoldiers((prev) => prev.filter((item) => item.id !== id));
+
+      alert("Đã xóa chiến sĩ!");
+    } catch (error) {
+      console.error(error);
+
+      alert("Không thể xóa chiến sĩ!");
+    }
+  };
+
+  // ======================
+  // Lưu chiến sĩ
+  // ======================
+
+  const handleSaveSoldier = async (soldier: Soldier | Omit<Soldier, "id">) => {
+    try {
+      if ("id" in soldier) {
+        const updated = await updateSoldier(soldier);
+
+        setSoldiers((prev) =>
+          prev.map((item) => (item.id === updated.id ? updated : item)),
+        );
+      } else {
+        const created = await addSoldier(soldier);
+
+        setSoldiers((prev) => [...prev, created]);
+      }
+
+      setEditingSoldier(null);
+
+      setOpenModal(false);
+    } catch (error) {
+      console.error(error);
+
+      alert("Không thể lưu chiến sĩ!");
+    }
+  };
   if (loading) {
-    return <h2 className="loading">Đang tải...</h2>;
+    return <h2>Đang tải...</h2>;
   }
 
   if (error) {
     return <h2>{error}</h2>;
   }
-
   return (
     <>
       <Header />
@@ -146,6 +261,8 @@ const UnitDetail: React.FC = () => {
         <h3>
           Tuần {weekId} - {score?.unit}
         </h3>
+
+        {/* ================= Điểm đại đội ================= */}
 
         <table className="detail-table">
           <tbody>
@@ -183,6 +300,8 @@ const UnitDetail: React.FC = () => {
           </tbody>
         </table>
 
+        {/* ================= Nhận xét ================= */}
+
         <div className="comment-section">
           <div className="comment-card">
             <h3>Điểm mạnh</h3>
@@ -190,7 +309,6 @@ const UnitDetail: React.FC = () => {
             {isEditing ? (
               <textarea
                 rows={6}
-                style={{ width: "100%" }}
                 value={editComment?.strong.join("\n") ?? ""}
                 onChange={(e) =>
                   setEditComment({
@@ -216,7 +334,6 @@ const UnitDetail: React.FC = () => {
             {isEditing ? (
               <textarea
                 rows={6}
-                style={{ width: "100%" }}
                 value={editComment?.weak.join("\n") ?? ""}
                 onChange={(e) =>
                   setEditComment({
@@ -237,14 +354,9 @@ const UnitDetail: React.FC = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 10,
-            marginTop: 20,
-          }}
-        >
+        {/* ================= Button ================= */}
+
+        <div className="action-group">
           {!isEditing ? (
             <button className="edit-btn" onClick={() => setIsEditing(true)}>
               ✏️ Sửa
@@ -266,17 +378,46 @@ const UnitDetail: React.FC = () => {
                 ❌ Hủy
               </button>
             </>
-          )}{" "}
+          )}
+
           <button className="delete-btn" onClick={handleDelete}>
             🗑️ Xóa
           </button>
+
           <button className="back-btn" onClick={() => navigate("/")}>
             Quay lại
           </button>
         </div>
+
+        {/* ================= Danh sách chiến sĩ ================= */}
+
+        <div className="soldier-header">
+          <h2>Danh sách chiến sĩ</h2>
+
+          <button className="add-btn" onClick={handleAddSoldier}>
+            + Thêm chiến sĩ
+          </button>
+        </div>
+
+        <SoldierTable
+          soldiers={soldiers}
+          onEdit={handleEditSoldier}
+          onDelete={handleDeleteSoldier}
+        />
+
+        <SoldierModal
+          open={openModal}
+          onClose={() => {
+            setOpenModal(false);
+            setEditingSoldier(null);
+          }}
+          onSave={handleSaveSoldier}
+          soldier={editingSoldier}
+          weekId={score?.weekId ?? 0}
+          unit={score?.unit ?? ""}
+        />
       </div>
     </>
   );
 };
-
 export default UnitDetail;
