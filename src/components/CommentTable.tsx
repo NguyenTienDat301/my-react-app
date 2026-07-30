@@ -9,48 +9,44 @@ const CommentTable = ({ comments }: Props) => {
   const strong = comments.flatMap((item) => item.strong);
   const weak = comments.flatMap((item) => item.weak);
 
- 
+  const renderLines = (data: string[], key: string) => (
+    <>
+      {data.map((text, index) => (
+        <div className="comment-line" key={`${key}-${index}`}>
+          {text}
+        </div>
+      ))}
+
+      {Array.from({ length: Math.max(0, 5 - data.length) }).map(
+        (_, index) => (
+          <div className="comment-line" key={`${key}-empty-${index}`}>
+            &nbsp;
+          </div>
+        )
+      )}
+    </>
+  );
 
   return (
     <div className="comment-board">
       <h2 className="comment-title">NHẬN XÉT</h2>
 
-      {/* MẠNH */}
-      <div className="comment-section">
-        <span className="label strong">ĐIỂM MẠNH</span>
+      <div className="comment-row">
+        <div className="label strong">ĐIỂM MẠNH</div>
 
         <div className="comment-lines">
-          {strong.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-
-          {Array.from({ length: Math.max(0, 5 - strong.length) }).map(
-            (_, index) => (
-              <p key={`s-${index}`}>&nbsp;</p>
-            )
-          )}
-        </div>
-      </div>
-
-      {/* YẾU */}
-      <div className="comment-section">
-        <span className="label weak">ĐIỂM YẾU</span>
-
-        <div className="comment-lines">
-          {weak.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
-
-          {Array.from({ length: Math.max(0, 5 - weak.length) }).map(
-            (_, index) => (
-              <p key={`w-${index}`}>&nbsp;</p>
-            )
-          )}
+          {renderLines(strong, "strong")}
         </div>
       </div>
 
 
+      <div className="comment-row">
+        <div className="label weak">ĐIỂM YẾU</div>
 
+        <div className="comment-lines">
+          {renderLines(weak, "weak")}
+        </div>
+      </div>
 
     </div>
   );
