@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "../styles/teaching.css"
 interface Loiday {
   id: number;
   content: string;
@@ -30,19 +30,17 @@ const Teaching: React.FC = () => {
 
   return (
     <div className="comment-box">
-      <h3>LỜI BÁC DẠY NĂM XƯA</h3>
+
+      <h3>LỜI BÁC HỒ DẠY NGÀY NÀY NĂM XƯA</h3>
 
       <div className="bac-box">
-        <div className="quote-mark">❝</div>
 
         <p className="bac-text">
           {teaching}
         </p>
 
-        <p className="bac-author">
-          — Chủ tịch Hồ Chí Minh —
-        </p>
       </div>
+
     </div>
   );
 };

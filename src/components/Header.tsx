@@ -1,24 +1,20 @@
-import React from "react";
+// import "./Header.css";
+import "../styles/header.css";
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <header className="header">
-      <div className="logo">
-        ⭐
-      </div>
+  <img src="img/logo2.png" className="logo" alt="logo" />
 
-      <div className="title">
-        <h2>CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16</h2>
+  <div className="title">
+    <h1>CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16</h1>
 
-        <h1>
-          QUYẾT TÂM THỰC HIỆN THẮNG LỢI
-       
-          PHONG TRÀO THI ĐUA QUYẾT THẮNG
-       
-          NĂM 2026
-        </h1>
-      </div>
-    </header>
+    <h2>
+      QUYẾT TÂM THỰC HIỆN THẮNG LỢI PHONG TRÀO THI ĐUA QUYẾT THẮNG NĂM
+      2026
+    </h2>
+  </div>
+</header>
   );
 };
 

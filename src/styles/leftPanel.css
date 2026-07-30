@@ -1,0 +1,44 @@
+.left-panel {
+  width: 320px;
+  background: #fff8b8;
+  border: 3px solid #d8a000;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-title {
+  padding: 18px;
+  text-align: center;
+}
+
+.left-title p {
+  margin: 6px 0;
+  font-size: 22px;
+  font-weight: bold;
+  color: #243a9b;
+}
+
+.left-body {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.left-line {
+  height: 32px;
+  border-bottom: 1px dotted #d8b44d;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #444;
+}
+
+.left-line.empty {
+  color: transparent;
+}
+
+.left-footer {
+  text-align: center;
+  font-size: 40px;
+  color: red;
+  padding: 10px;
+}

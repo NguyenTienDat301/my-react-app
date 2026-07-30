@@ -1,62 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import "../styles/leftPanel.css";
 
-interface Question {
-  id: number;
-  content: string;
+interface LeftPanelProps {
+  title?: string;
+  contents?: string[];
 }
 
-const LeftPanel: React.FC = () => {
-  const [question, setQuestion] = useState("");
-
-  useEffect(() => {
-    const fetchQuestion = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/questions");
-        const data: Question[] = await res.json();
-
-        if (data.length > 0) {
-          const random =
-            data[Math.floor(Math.random() * data.length)];
-
-          setQuestion(random.content);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchQuestion();
-  }, []);
-
+const LeftPanel: React.FC<LeftPanelProps> = ({
+  title = "NỘI DUNG PHONG TRÀO THI ĐUA",
+  contents=[],
+}) => {
   return (
-    <aside className="left-panel">
-      {/* Nội dung phong trào */}
-      <div className="box">
-        <h3>NỘI DUNG PHONG TRÀO THI ĐUA</h3>
-
-        <ol className="rule-list">
-          <li>Chấp hành nghiêm điều lệnh, điều lệ Quân đội.</li>
-          <li>Duy trì nghiêm nền nếp chính quy.</li>
-          <li>Không có cán bộ, chiến sĩ vi phạm kỷ luật.</li>
-          <li>Hoàn thành tốt nhiệm vụ huấn luyện và SSCĐ.</li>
-          <li>Thực hiện tốt công tác nội vụ vệ sinh.</li>
-          <li>Quản lý tốt vũ khí trang bị kỹ thuật.</li>
-          <li>Tăng gia sản xuất, xây dựng doanh trại xanh - sạch - đẹp.</li>
-          <li>Đoàn kết nội bộ, giúp đỡ đồng chí đồng đội.</li>
-        </ol>
+    <div className="left-panel">
+      <div className="left-title">
+        {title.split("\n").map((line, index) => (
+          <p key={index}>{line}</p>
+        ))}
       </div>
 
-      {/* Câu hỏi pháp luật */}
-      <div className="box">
-        <h3>MỖI NGÀY MỘT CÂU HỎI PHÁP LUẬT</h3>
-
-        <p>
-          <strong>Câu hỏi:</strong>
-        </p>
-
-        <p>{question}</p>
+      <div className="left-body">
+        {contents.length > 0 ? (
+          contents.map((item, index) => (
+            <div className="left-line" key={index}>
+              {item}
+            </div>
+          ))
+        ) : (
+          Array.from({ length: 20 }).map((_, index) => (
+            <div className="left-line empty" key={index}></div>
+          ))
+        )}
       </div>
-    </aside>
+
+      <div className="left-footer">
+        🌺
+      </div>
+    </div>
   );
 };
 

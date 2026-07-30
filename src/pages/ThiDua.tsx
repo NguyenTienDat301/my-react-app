@@ -14,6 +14,7 @@ import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, Table, TableCell, TableRow } from "docx";
 
 const ThiDua: React.FC = () => {
+  const [showToolbar, setShowToolbar] = useState(false);
   const [scores, setScores] = useState<Score[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -558,24 +559,19 @@ const ThiDua: React.FC = () => {
   const handlePrint = () => {
     window.print();
   };
-const handleEdit = (score: Score) => {
-  console.log("Edit:", score);
+  const handleEdit = (score: Score) => {
+    console.log("Edit:", score);
 
-  // sau này mở modal sửa
-};
+    // sau này mở modal sửa
+  };
 
+  const handleDelete = (id: number) => {
+    const confirmDelete = window.confirm("Bạn có chắc muốn xóa?");
 
-const handleDelete = (id: number) => {
-  const confirmDelete = window.confirm(
-    "Bạn có chắc muốn xóa?"
-  );
+    if (!confirmDelete) return;
 
-  if (!confirmDelete) return;
-
-  setScores((prev) =>
-    prev.filter((item) => item.id !== id)
-  );
-};
+    setScores((prev) => prev.filter((item) => item.id !== id));
+  };
   return (
     <div className="page">
       <Header />
@@ -591,42 +587,16 @@ const handleDelete = (id: number) => {
 
         <section className="center-panel">
           <div className="box">
-            {/* <div className="date-picker-container">
-              <label htmlFor="date-picker">Chọn ngày:</label>
-              <input
-                id="date-picker"
-                type="date"
-                value={selectedDate}
-                onChange={handleDateChange}
-                className="date-picker"
-              />
-              <button onClick={handleViewClick} className="view-btn">
-                Xem
-              </button>
-              <button
-                onClick={() => setShowAddModal(true)}
-                className="add-btn btn-primary"
-              >
-                + Thêm Toàn Bộ
-              </button>
-              <button
-                onClick={() => setShowAddSingleModal(true)}
-                className="add-btn btn-success"
-              >
-                + Thêm Đơn Vị
-              </button>
-              <button className="print-btn" onClick={handlePrint}>
-              🖨 In
-            </button>
+            <>
+  <button
+    className="setting-btn"
+    onClick={() => setShowToolbar(!showToolbar)}
+  >
+    ⚙
+  </button>
 
-            <button className="word-btn" onClick={exportWord}>
-              📄 Word
-            </button>
-
-            <button className="excel-btn"  onClick={exportExcel}>
-              📊 Excel
-            </button>
-            </div> */}
+  {showToolbar && (
+    <div className="toolbar">
             <div className="toolbar">
               {/* Hàng trên */}
               <div className="toolbar-top">
@@ -660,25 +630,25 @@ const handleDelete = (id: number) => {
               </div>
 
               {/* Hàng dưới */}
-              <div className="toolbar-bottom">
-                <button className="print-btn" onClick={handlePrint}>
-                  🖨 In
-                </button>
+                   <div className="toolbar-bottom">
+        <button className="print-btn" onClick={handlePrint}>
+          🖨 In
+        </button>
 
-                <button className="word-btn" onClick={exportWord}>
-                  📄 Word
-                </button>
+        <button className="word-btn" onClick={exportWord}>
+          📄 Word
+        </button>
 
-                <button className="excel-btn" onClick={exportExcel}>
-                  📊 Excel
-                </button>
-              </div>
-            </div>
-            {currentWeek && (
-              <h3 className="week-title">
-                {currentWeek.title} - {currentWeek.date}
-              </h3>
-            )}
+        <button className="excel-btn" onClick={exportExcel}>
+          📊 Excel
+        </button>
+      </div>
+
+    </div>
+  </div>
+  )}
+</>
+
             {/* <h3>THEO DÕI THI ĐUA</h3> */}
 
             <ScoreTable

@@ -1,266 +1,101 @@
 import React from "react";
 import type { Score } from "../types/interface";
-import { useNavigate } from "react-router-dom";
-
+import "../styles/scoreTable.css";
 interface ScoreTableProps {
   scores: Score[];
 
   selectedId: number | null;
 
-  setSelectedId: React.Dispatch<
-    React.SetStateAction<number | null>
-  >;
+  setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
 
   onEdit: (score: Score) => void;
 
   onDelete: (id: number) => void;
 }
 
-const ScoreTable: React.FC<ScoreTableProps> = ({
-  scores,
-  selectedId,
-  setSelectedId,
-  onEdit,
-  onDelete,
-}) => {
-  const navigate = useNavigate();
+const ScoreTable: React.FC<ScoreTableProps> = ({ scores }) => {
+  const total = (s: Score) =>
+    s.quanSo +
+    s.hocTap +
+    s.tacPhong +
+    s.kyLuat +
+    s.noiVu +
+    s.tangGia +
+    s.vkTrangBi;
 
-  // Tổng điểm
-  const totalPoint = (item: Score): number => {
-    return (
-      item.quanSo +
-      item.hocTap +
-      item.tacPhong +
-      item.kyLuat +
-      item.noiVu +
-      item.tangGia +
-      item.vkTrangBi
-    );
-  };
+  const average = (s: Score) => (total(s) / 7).toFixed(2);
 
+  const rank = (s: Score) => {
+    const t = total(s);
 
-  // Điểm trung bình
-  const averagePoint = (item: Score): string => {
-    return (totalPoint(item) / 7).toFixed(2);
-  };
-
-
-  // Xếp loại
-  const rank = (item: Score): string => {
-    const total = totalPoint(item);
-
-    if (total >= 58) return "I";
-
-    if (total >= 52) return "II";
-
+    if (t >= 58) return "I";
+    if (t >= 52) return "II";
     return "III";
   };
 
-
   return (
-    <section className="center-panel">
-      <div className="box">
+    <div className="score-board">
+      <h2 className="score-title">THEO DÕI THI ĐUA</h2>
 
-        <h3>THEO DÕI THI ĐUA</h3>
+      <table className="military-table">
+        <thead>
+          <tr>
+            <th rowSpan={2}>TT</th>
 
+            <th rowSpan={2}>ĐƠN VỊ</th>
 
-        <div className="table-wrapper">
+            <th colSpan={7}>NỘI DUNG</th>
 
-          <table className="score-table">
+            <th rowSpan={2}>TỔNG</th>
 
-            <thead>
-              <tr>
-                <th>TT</th>
+            <th rowSpan={2}>TB</th>
 
-                <th>Đơn vị</th>
+            <th rowSpan={2}>XL</th>
+          </tr>
 
-                <th>QS</th>
+          <tr>
+            <th>QS</th>
+            <th>HT</th>
+            <th>TP</th>
+            <th>KL</th>
+            <th>NV</th>
+            <th>TG</th>
+            <th>VKTB</th>
+          </tr>
+        </thead>
 
-                <th>HT</th>
+        <tbody>
+          {scores.map((item, index) => (
+            <tr key={item.id}>
+              <td>{index + 1}</td>
 
-                <th>TP</th>
+              <td className="unit-name">{item.unit}</td>
 
-                <th>KL</th>
+              <td>{item.quanSo}</td>
 
-                <th>NVVS</th>
+              <td>{item.hocTap}</td>
 
-                <th>TGSX</th>
+              <td>{item.tacPhong}</td>
 
-                <th>VKTB</th>
+              <td>{item.kyLuat}</td>
 
-                <th>Tổng</th>
+              <td>{item.noiVu}</td>
 
-                <th>TB</th>
+              <td>{item.tangGia}</td>
 
-                <th>Xếp loại</th>
+              <td>{item.vkTrangBi}</td>
 
-                <th>Thao tác</th>
-              </tr>
-            </thead>
+              <td>{total(item)}</td>
 
+              <td>{average(item)}</td>
 
-            <tbody>
-
-              {scores.length === 0 ? (
-
-                <tr>
-                  <td colSpan={13}>
-                    Chưa có dữ liệu thi đua
-                  </td>
-                </tr>
-
-              ) : (
-
-                scores.map((item, index) => (
-
-                  <tr
-                    key={item.id}
-
-                    className={
-                      selectedId === item.id
-                        ? "active-row"
-                        : ""
-                    }
-
-                    onClick={() => {
-
-                      setSelectedId(item.id);
-
-                      navigate(
-                        `/weeks/${item.weekId}/unit/${item.id}`
-                      );
-
-                    }}
-                  >
-
-                    <td>
-                      {index + 1}
-                    </td>
-
-
-                    <td>
-                      {item.unit}
-                    </td>
-
-
-                    <td>
-                      {item.quanSo}
-                    </td>
-
-
-                    <td>
-                      {item.hocTap}
-                    </td>
-
-
-                    <td>
-                      {item.tacPhong}
-                    </td>
-
-
-                    <td>
-                      {item.kyLuat}
-                    </td>
-
-
-                    <td>
-                      {item.noiVu}
-                    </td>
-
-
-                    <td>
-                      {item.tangGia}
-                    </td>
-
-
-                    <td>
-                      {item.vkTrangBi}
-                    </td>
-
-
-                    <td>
-                      <strong>
-                        {totalPoint(item)}
-                      </strong>
-                    </td>
-
-
-                    <td>
-                      {averagePoint(item)}
-                    </td>
-
-
-                    <td>
-
-                      <span
-                        className={
-                          rank(item) === "I"
-                            ? "badge-success"
-                            : rank(item) === "II"
-                            ? "badge-warning"
-                            : "badge-danger"
-                        }
-                      >
-
-                        {rank(item)}
-
-                      </span>
-
-                    </td>
-
-
-                    <td>
-
-                      <button
-                        className="edit-btn"
-
-                        onClick={(e) => {
-
-                          e.stopPropagation();
-
-                          onEdit(item);
-
-                        }}
-                      >
-                        Sửa
-                      </button>
-
-
-
-                      <button
-                        className="delete-btn"
-
-                        onClick={(e) => {
-
-                          e.stopPropagation();
-
-                          onDelete(item.id);
-
-                        }}
-                      >
-                        Xóa
-                      </button>
-
-                    </td>
-
-
-                  </tr>
-
-                ))
-
-              )}
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </section>
+              <td>{rank(item)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
-
 
 export default ScoreTable;

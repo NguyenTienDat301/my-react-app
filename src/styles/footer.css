@@ -1,0 +1,46 @@
+.footer {
+  position: absolute;
+  right: 40px;
+  top: 720px; /* chỉnh vị trí theo chiều cao trang */
+  width: 260px;
+  font-family: "Times New Roman", serif;
+}
+
+/* Ngày tháng */
+.footer-left {
+  width: 100%;
+  text-align: center;
+  color: #0b4fa2;
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+/* Chữ ký */
+.signature {
+  width: 100%;
+  text-align: center;
+  color: #0b4fa2;
+  font-size: 18px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* T/M TỔ THI ĐUA */
+.signature strong {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #0b4fa2;
+  margin-bottom: 5px;
+}
+
+/* Tên người ký */
+.signature br + * {
+  font-style: normal;
+}
+
+/* Dòng ký ghi rõ họ tên */
+.signature:last-child {
+  font-size: 16px;
+}

@@ -1,0 +1,82 @@
+/* ===============================
+   SCORE BOARD
+================================ */
+
+.score-board {
+  width: 100%;
+}
+
+.score-title {
+  text-align: center;
+
+  color: red;
+
+  font-size: 34px;
+
+  font-weight: bold;
+
+  margin-bottom: 20px;
+}
+
+/* ===============================
+   TABLE
+================================ */
+
+.military-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+
+.military-table th,
+.military-table td {
+  border: 2px solid #1b84d6;
+
+  text-align: center;
+
+  padding: 8px;
+
+  font-size: 15px;
+}
+
+.military-table thead th {
+  background: #bfe4ff;
+
+  color: #004ea2;
+
+  font-weight: bold;
+}
+
+.unit-name {
+  text-align: left;
+
+  padding-left: 12px;
+}
+
+/* Width */
+
+.military-table th:nth-child(1) {
+  width: 40px;
+}
+
+.military-table th:nth-child(2) {
+  width: 140px;
+}
+
+.military-table th:nth-last-child(3) {
+  width: 70px;
+}
+
+.military-table th:nth-last-child(2) {
+  width: 70px;
+}
+
+.military-table th:last-child {
+  width: 50px;
+}
+
+.military-table tbody tr {
+  height: 32px;
+} 

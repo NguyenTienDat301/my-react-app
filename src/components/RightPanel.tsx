@@ -1,12 +1,13 @@
 import React from "react";
 import type { Score } from "../types/interface";
+import "../styles/rightPanel.css";
 
 interface RightPanelProps {
   scores: Score[];
 }
 
 const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
-  // Tính tổng điểm
+
   const ranking = [...scores]
     .map((item) => ({
       ...item,
@@ -21,59 +22,81 @@ const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
     }))
     .sort((a, b) => b.total - a.total);
 
+
   return (
     <aside className="right-panel">
-      {/* Những bông hoa đẹp */}
-      <div className="box">
-        <h3>🌸 NHỮNG BÔNG HOA ĐẸP 🌸</h3>
+
+      {/* HOA ĐẸP */}
+      <div className="flower-box">
+
+        <h2>
+          NHỮNG BÔNG HOA ĐẸP
+        </h2>
+
 
         <div className="flower-section">
-          <h4>TẬP THỂ</h4>
 
-          <ul>
-            {ranking.length > 0 ? (
-              ranking.map((item, index) => (
-                <li key={item.id}>
-                  {index === 0 && "🥇"}
-                  {index === 1 && "🥈"}
-                  {index === 2 && "🥉"}
-                  {index > 2 && "🌼"}{" "}
-                  <strong>{item.unit}</strong> 
-                </li>
-              ))
-            ) : (
-              <li>Chưa có dữ liệu</li>
-            )}
-          </ul>
+          <h3>TẬP THỂ:</h3>
+
+          {ranking.slice(0,3).map((item,index)=>(
+            <div className="line-item" key={item.id}>
+              {index+1}. {item.unit}
+            </div>
+          ))}
+
         </div>
+
 
         <div className="flower-section">
-          <h4>CÁ NHÂN</h4>
 
-          <ul>
-            <li>⭐ Nguyễn Văn A</li>
-            <li>⭐ Trần Văn B</li>
-            <li>⭐ Lê Văn C</li>
-            <li>⭐ Phạm Văn D</li>
-            <li>⭐ Hoàng Văn E</li>
-          </ul>
+          <h3>CÁ NHÂN:</h3>
+
+          {ranking.slice(0,3).map((item,index)=>(
+            <div className="line-item" key={item.id}>
+              {index+1}. {item.name}
+            </div>
+          ))}
+
         </div>
+
+
       </div>
 
-      {/* Thông báo
-      <div className="box">
-        <h3>📢 THÔNG BÁO</h3>
 
-        <ul className="notice-list">
-          <li>✔ Duy trì nghiêm nền nếp chính quy.</li>
-          <li>✔ Kiểm tra nội vụ lúc 07:00.</li>
-          <li>✔ Tổng vệ sinh chiều thứ Sáu.</li>
-          <li>✔ Huấn luyện bắn súng tuần tới.</li>
-          <li>✔ Kiểm tra điều lệnh cuối tuần.</li>
-        </ul>
-      </div> */}
+      {/* CÂU HỎI */}
+      <div className="question-box">
+
+        <h2>
+          MỖI NGÀY MỘT CÂU HỎI
+        </h2>
+
+
+        <div className="question-content">
+
+          <p>
+            1. Quân đội nhân dân Việt Nam thành lập ngày nào?
+          </p>
+
+
+          <div className="answer-line">
+          </div>
+
+          <div className="answer-line">
+          </div>
+
+          <div className="answer-line">
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
     </aside>
   );
 };
+
 
 export default RightPanel;

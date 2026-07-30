@@ -1,51 +1,57 @@
 import type { CommentItem } from "../types/interface";
+import "../styles/commentTable.css";
 
 interface Props {
   comments: CommentItem[];
 }
 
 const CommentTable = ({ comments }: Props) => {
+  const strong = comments.flatMap((item) => item.strong);
+  const weak = comments.flatMap((item) => item.weak);
+
+ 
+
   return (
-    <div className="box">
-      <h3>NHẬN XÉT</h3>
+    <div className="comment-board">
+      <h2 className="comment-title">NHẬN XÉT</h2>
 
-      <table className="comment-table">
-        <thead>
-          <tr>
-            <th>Đơn vị</th>
-            <th>Điểm mạnh</th>
-            <th>Điểm yếu</th>
-          </tr>
-        </thead>
+      {/* MẠNH */}
+      <div className="comment-section">
+        <span className="label strong">ĐIỂM MẠNH</span>
 
-        <tbody>
-          {comments.map((item) => (
-            <tr key={item.id}>
-              <td>{item.unit}</td>
-
-              <td>
-                <ul>
-                  {item.strong.slice(0, 2).map((text, index) => (
-                    <li key={index}>{text}</li>
-                  ))}
-
-                  {item.strong.length > 2 && <li>...</li>}
-                </ul>
-              </td>
-
-              <td>
-                <ul>
-                  {item.weak.slice(0, 2).map((text, index) => (
-                    <li key={index}>{text}</li>
-                  ))}
-
-                  {item.weak.length > 2 && <li>...</li>}
-                </ul>
-              </td>
-            </tr>
+        <div className="comment-lines">
+          {strong.map((text, index) => (
+            <p key={index}>{text}</p>
           ))}
-        </tbody>
-      </table>
+
+          {Array.from({ length: Math.max(0, 5 - strong.length) }).map(
+            (_, index) => (
+              <p key={`s-${index}`}>&nbsp;</p>
+            )
+          )}
+        </div>
+      </div>
+
+      {/* YẾU */}
+      <div className="comment-section">
+        <span className="label weak">ĐIỂM YẾU</span>
+
+        <div className="comment-lines">
+          {weak.map((text, index) => (
+            <p key={index}>{text}</p>
+          ))}
+
+          {Array.from({ length: Math.max(0, 5 - weak.length) }).map(
+            (_, index) => (
+              <p key={`w-${index}`}>&nbsp;</p>
+            )
+          )}
+        </div>
+      </div>
+
+
+
+
     </div>
   );
 };

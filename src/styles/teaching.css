@@ -1,0 +1,33 @@
+.comment-box {
+  width: 100%;
+}
+
+
+.comment-box h3 {
+  text-align: center;
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Times New Roman", serif;
+  margin: 20px 0;
+}
+
+
+.bac-box {
+  padding: 0 35px;
+  background: transparent;
+}
+
+
+.bac-text {
+  text-align: center;
+  font-size: 18px;
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 15px;
+
+  /* tạo dòng kẻ giống mẫu */
+  border-bottom: 1px dotted #9ec5e8;
+  padding-bottom: 15px;
+}

@@ -1,0 +1,54 @@
+.right-panel{
+    width: 320px;
+}
+
+
+/* NHỮNG BÔNG HOA */
+
+.flower-box h2{
+    color:#b04a8b;
+    font-size:24px;
+    font-weight:bold;
+}
+
+
+.flower-section{
+    margin-top:20px;
+}
+
+
+.flower-section h3{
+    color:#0645ad;
+    font-size:20px;
+}
+
+
+.line-item{
+    border-bottom:1px dotted #aaa;
+    padding:8px 0;
+}
+
+
+/* CÂU HỎI */
+
+.question-box{
+    margin-top:40px;
+}
+
+
+.question-box h2{
+    color:#149447;
+    font-style:italic;
+    font-size:22px;
+}
+
+
+.question-content p{
+    line-height:1.5;
+}
+
+
+.answer-line{
+    height:25px;
+    border-bottom:1px dotted #aaa;
+}

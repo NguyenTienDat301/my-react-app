@@ -4,8 +4,14 @@
       "id": 1,
       "name": "Đại đội bộ"
     },
-    { "id": 2, "name": "Trung đội 1" },
-    { "id": 3, "name": "Trung đội 2" }
+    {
+      "id": 2,
+      "name": "Trung đội 1"
+    },
+    {
+      "id": 3,
+      "name": "Trung đội 2"
+    }
   ],
   "weeks": [
     {
@@ -72,6 +78,18 @@
       "noiVu": 2,
       "tangGia": 2,
       "vkTrangBi": 2
+    },
+    {
+      "id": 5,
+      "weekId": 3,
+      "unit": "Đại đội bộ",
+      "quanSo": 124,
+      "hocTap": 21,
+      "tacPhong": 412,
+      "kyLuat": 412,
+      "noiVu": 412,
+      "tangGia": 412,
+      "vkTrangBi": 412
     }
   ],
   "comments": [
@@ -79,28 +97,42 @@
       "id": 1,
       "weekId": 1,
       "unit": "Đại đội bộ",
-      "strong": ["Duy trì nghiêm điều lệnh", "Huấn luyện đạt kết quả cao"],
-      "weak": ["Nội vụ chưa đồng đều"]
+      "strong": [
+        "Duy trì nghiêm điều lệnh",
+        "Huấn luyện đạt kết quả cao"
+      ],
+      "weak": [
+        "Nội vụ chưa đồng đều"
+      ]
+    },
+    {
+      "id": 2,
+      "weekId": 3,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "1"
+      ],
+      "weak": []
     }
   ],
   "soldiers": [
-  {
-    "id": 1,
-    "weekId": 1,
-    "unit": "Trung đội 1",
-    "name": "Nguyễn Văn A",
-    "rank": "Binh nhất",
-    "position": "Chiến sĩ"
-  },
-  {
-    "id": 2,
-    "weekId": 1,
-    "unit": "Trung đội 1",
-    "name": "Trần Văn B",
-    "rank": "Binh nhì",
-    "position": "Chiến sĩ"
-  }
-],
+    {
+      "id": 1,
+      "weekId": 1,
+      "unit": "Trung đội 1",
+      "name": "Nguyễn Văn A",
+      "rank": "Binh nhất",
+      "position": "Chiến sĩ"
+    },
+    {
+      "id": 2,
+      "weekId": 1,
+      "unit": "Trung đội 1",
+      "name": "Trần Văn B",
+      "rank": "Binh nhì",
+      "position": "Chiến sĩ"
+    }
+  ],
   "teachings": [
     {
       "id": 1,
@@ -142,13 +174,37 @@
     }
   ],
   "flowers": {
-    "tapThe": ["Đại đội bộ", "Khẩu đội 2"],
-    "caNhan": ["Nguyễn Văn Khải", "Trần Thế Nam"]
+    "tapThe": [
+      "Đại đội bộ",
+      "Khẩu đội 2"
+    ],
+    "caNhan": [
+      "Nguyễn Văn Khải",
+      "Trần Thế Nam"
+    ]
   },
   "board": {
     "title": "CÁN BỘ, CHIẾN SĨ ĐẠI ĐỘI PK16",
     "slogan": "QUYẾT TÂM THỰC HIỆN THẮNG LỢI PHONG TRÀO THI ĐUA QUYẾT THẮNG NĂM 2026",
     "date": "24/07/2026",
     "signer": "Lê Văn Hưng"
-  }
+  },
+  "contents": [
+    {
+      "id": 1,
+      "text": "Thi đua huấn luyện giỏi"
+    },
+    {
+      "id": 2,
+      "text": "Chấp hành nghiêm kỷ luật"
+    },
+    {
+      "id": 3,
+      "text": "Xây dựng đơn vị chính quy"
+    },
+    {
+      "id": 4,
+      "text": "Đoàn kết, quyết thắng"
+    }
+  ]
 }

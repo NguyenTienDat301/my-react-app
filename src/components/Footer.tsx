@@ -1,6 +1,6 @@
 import React from "react";
 import type { Week } from "../types/interface";
-
+import "../styles/footer.css";
 interface FooterProps {
   currentWeek: Week | null;
 }
@@ -25,10 +25,10 @@ const Footer: React.FC<FooterProps> = ({ currentWeek }) => {
       <div className="signature">
         <strong>T/M TỔ THI ĐUA</strong>
         <br />
-        Thông
+        Hưng
         <br />
         {/* <br /> */}
-        Hoàng Cao Thông
+        Lê Văn Hưng
         <br />
         {/* <br /> */}
         (Ký, ghi rõ họ tên)
