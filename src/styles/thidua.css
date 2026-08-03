@@ -136,51 +136,814 @@ width:100%;
 }
 
 
-.toolbar {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-
-  width: auto;
-  background: transparent;
-
-  padding: 0;
-  box-shadow: none;
-
-  z-index: 1000;
-}
-
-
-/* Gom 2 hàng thành hộp nhỏ */
-.toolbar-top,
-.toolbar-bottom {
-  background: white;
-  padding: 12px;
-  border-radius: 12px;
-
-  box-shadow: 0 3px 15px rgba(0,0,0,0.25);
-
+/* Hàng trên */
+.toolbar-top {
   display: flex;
-  gap: 10px;
   align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 
-/* xếp nút gọn */
-.toolbar {
+/* Hàng dưới */
+.toolbar-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+
+/* khoảng cách tránh toolbar che bảng */
+.center-panel {
+  padding-bottom: 120px;
+}
+
+
+/* input ngày */
+.date-picker {
+  height: 35px;
+  padding: 5px 10px;
+}
+
+
+/* tất cả nút */
+.toolbar button {
+  height: 35px;
+  padding: 0 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+
+/* màu nút */
+.view-btn {
+  background: #3498db;
+  color: white;
+}
+
+
+.btn-primary {
+  background: #1677ff;
+  color: white;
+}
+
+
+.btn-success {
+  background: #2ecc71;
+  color: white;
+}
+
+
+.print-btn {
+  background: #555;
+  color: white;
+}
+
+
+.word-btn {
+  background: #2b579a;
+  color: white;
+}
+
+
+.excel-btn {
+  background: #217346;
+  color: white;
+}
+/* ============================================================
+   THI ĐUA — CSS cho BUTTON + FORM
+   Giữ nguyên bố cục cũ: KHÔNG set display/flex/width/margin cho
+   .toolbar, .form-row, .form-group, .modal-*  — chỉ style phần
+   hiển thị (viền, nền, chữ, hover/focus) của input/select/textarea.
+   ============================================================ */
+
+/* ============ 1. BUTTON ============ */
+.view-btn,
+.btn-primary,
+.btn-success,
+.btn-danger,
+.btn-cancel,
+.btn-submit,
+.print-btn,
+.word-btn,
+.excel-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.2;
+  color: #fff;
+  background: #2563eb;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.18s ease;
+}
+
+.view-btn:hover,
+.btn-primary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-cancel:hover,
+.btn-submit:hover,
+.print-btn:hover,
+.word-btn:hover,
+.excel-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.view-btn:active,
+.btn-primary:active,
+.btn-success:active,
+.btn-danger:active,
+.btn-cancel:active,
+.btn-submit:active,
+.print-btn:active,
+.word-btn:active,
+.excel-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+  filter: brightness(0.95);
+}
+
+.view-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-success:focus-visible,
+.btn-danger:focus-visible,
+.btn-cancel:focus-visible,
+.btn-submit:focus-visible,
+.print-btn:focus-visible,
+.word-btn:focus-visible,
+.excel-btn:focus-visible,
+.setting-btn:focus-visible,
+.close-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.view-btn:disabled,
+.btn-primary:disabled,
+.btn-success:disabled,
+.btn-danger:disabled,
+.btn-cancel:disabled,
+.btn-submit:disabled,
+.print-btn:disabled,
+.word-btn:disabled,
+.excel-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+/* Màu theo từng nút */
+.view-btn,
+.btn-primary {
+  background: #2563eb;
+}
+.view-btn:hover,
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-success,
+.excel-btn,
+.btn-submit {
+  background: #16a34a;
+}
+.btn-success:hover,
+.excel-btn:hover,
+.btn-submit:hover {
+  background: #15803d;
+}
+
+.btn-danger {
+  background: #dc2626;
+}
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.print-btn {
+  background: #6b7280;
+}
+.print-btn:hover {
+  background: #4b5563;
+}
+
+.word-btn {
+  background: #1d4ed8;
+}
+.word-btn:hover {
+  background: #1e40af;
+}
+
+.btn-cancel {
+  background: #fff;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+.btn-cancel:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+/* Nút icon: ⚙ và × */
+.setting-btn {
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  font-size: 18px;
+  line-height: 1;
+  color: #111827;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.setting-btn:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+.close-btn {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  font-size: 22px;
+  line-height: 1;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ============ 2. FORM (chỉ phần hiển thị) ============ */
+
+/* Ô input / select / textarea / chọn ngày */
+.form-input,
+.form-textarea,
+.date-picker {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111827;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.form-input:hover,
+.form-textarea:hover,
+.date-picker:hover {
+  border-color: #9ca3af;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.date-picker:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.form-input:disabled,
+.form-textarea:disabled,
+.date-picker:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Nhãn của form */
+.form-group > label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Textarea */
+.form-textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Select (dùng class .form-input) — thêm mũi tên tuỳ chỉnh */
+select.form-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236b7280'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  padding-right: 30px;
+  cursor: pointer;
+}
+
+/* Chọn ngày */
+.date-picker,
+input[type="date"].form-input {
+  cursor: pointer;
+}
+
+/* Bỏ mũi tên tăng/giảm của input number */
+.form-input[type="number"]::-webkit-outer-spin-button,
+.form-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Tiêu đề từng đơn vị trong modal */
+.unit-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+/* Trạng thái lỗi (tuỳ chọn: thêm class is-invalid khi validate) */
+.form-input.is-invalid,
+.form-textarea.is-invalid {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+/* ============================================================
+   THI ĐUA — CSS FORM + MODAL + BUTTON (bản hoàn chỉnh)
+   Dán vào CUỐI src/styles/thidua.css để ghi đè rule cũ.
+   ============================================================ */
+
+/* ================= MODAL: nổi giữa màn hình ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  overflow-y: auto;
+  animation: td-fade-in 0.18s ease;
+}
+
+.modal-content {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 88vh;
+  margin: auto;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
+  animation: td-slide-up 0.22s ease;
 }
 
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 16px 22px;
+  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+}
 
-/* Khi màn hình nhỏ */
-@media(max-width:900px){
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
 
-  .toolbar-top,
-  .toolbar-bottom{
-    flex-wrap: wrap;
-    width: 260px;
+.modal-body {
+  flex: 1 1 auto;
+  padding: 22px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 14px 22px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* ================= FORM ================= */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 160px;
+  min-width: 0;
+  margin-bottom: 16px;
+}
+
+.form-row > .form-group {
+  margin-bottom: 0;
+}
+
+.form-group > label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  letter-spacing: 0.2px;
+}
+
+.form-input,
+.form-textarea,
+.date-picker {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #d8dfe8;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.form-input:hover,
+.form-textarea:hover,
+.date-picker:hover {
+  border-color: #94a3b8;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.date-picker:focus {
+  outline: none;
+  background: #fff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+}
+
+.form-input:disabled,
+.form-textarea:disabled {
+  background: #eef2f6;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #9aa6b6;
+}
+
+.form-textarea {
+  min-height: 70px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+select.form-input {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2364748b'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+}
+
+.date-picker,
+input[type="date"].form-input {
+  cursor: pointer;
+}
+
+.form-input[type="number"]::-webkit-outer-spin-button,
+.form-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.form-input.is-invalid,
+.form-textarea.is-invalid {
+  border-color: #dc2626;
+  background: #fff5f5;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+/* ================= SECTION TỪNG ĐƠN VỊ ================= */
+.unit-section {
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.unit-section:last-child {
+  margin-bottom: 0;
+}
+
+.unit-section hr {
+  display: none;
+}
+
+.unit-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+  border-bottom: 2px solid #dbe4f5;
+}
+
+.unit-title::before {
+  content: "";
+  width: 4px;
+  height: 16px;
+  background: #2563eb;
+  border-radius: 2px;
+}
+
+/* ================= BUTTON ================= */
+.view-btn,
+.btn-primary,
+.btn-success,
+.btn-danger,
+.btn-cancel,
+.btn-submit,
+.print-btn,
+.word-btn,
+.excel-btn {
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.2;
+  color: #fff;
+  background: #2563eb;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.18s ease;
+}
+
+.view-btn:hover,
+.btn-primary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-cancel:hover,
+.btn-submit:hover,
+.print-btn:hover,
+.word-btn:hover,
+.excel-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+}
+
+.view-btn:active,
+.btn-primary:active,
+.btn-success:active,
+.btn-danger:active,
+.btn-cancel:active,
+.btn-submit:active,
+.print-btn:active,
+.word-btn:active,
+.excel-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+  filter: brightness(0.95);
+}
+
+.view-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-success:focus-visible,
+.btn-cancel:focus-visible,
+.btn-submit:focus-visible,
+.print-btn:focus-visible,
+.word-btn:focus-visible,
+.excel-btn:focus-visible,
+.setting-btn:focus-visible,
+.close-btn:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+.view-btn,
+.btn-primary {
+  background: #2563eb;
+}
+.view-btn:hover,
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-success,
+.excel-btn,
+.btn-submit {
+  background: #16a34a;
+}
+.btn-success:hover,
+.excel-btn:hover,
+.btn-submit:hover {
+  background: #15803d;
+}
+
+.btn-danger {
+  background: #dc2626;
+}
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.print-btn {
+  background: #64748b;
+}
+.print-btn:hover {
+  background: #475569;
+}
+
+.word-btn {
+  background: #1d4ed8;
+}
+.word-btn:hover {
+  background: #1e40af;
+}
+
+.btn-submit {
+  min-width: 120px;
+}
+
+.btn-cancel {
+  min-width: 96px;
+  color: #334155;
+  background: #fff;
+  border-color: #d8dfe8;
+}
+.btn-cancel:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* Nút icon ⚙ và × */
+.setting-btn {
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  font-size: 18px;
+  line-height: 1;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.setting-btn:hover {
+  color: #fff;
+  background: #2563eb;
+  border-color: #2563eb;
+  transform: rotate(45deg);
+}
+
+.close-btn {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes td-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes td-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 100%;
+    max-height: 94vh;
+    border-radius: 12px;
   }
 
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-row > .form-group {
+    margin-bottom: 0;
+  }
+
+  .modal-footer button {
+    flex: 1 1 auto;
+  }
+}
+
+/* ================= IN ẤN ================= */
+@media print {
+  .modal-overlay,
+  .setting-btn,
+  .toolbar {
+    display: none !important;
+  }
 }

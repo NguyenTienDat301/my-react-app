@@ -13,6 +13,76 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, Table, TableCell, TableRow } from "docx";
 
+const API = "http://localhost:3001";
+
+const UNIT_NAMES = ["Đại đội bộ", "Trung đội 1", "Trung đội 2"];
+const SINGLE_UNIT_OPTIONS = [...UNIT_NAMES, "Trung đội 3"];
+
+const SCORE_FIELDS = [
+  { key: "quanSo", label: "Quân số", excel: "Quân_số", word: "Quân số" },
+  { key: "hocTap", label: "Học tập", excel: "Học_tập", word: "Học tập" },
+  { key: "tacPhong", label: "Tác phong", excel: "Tác_phong", word: "Tác phong" },
+  { key: "kyLuat", label: "Kỷ luật", excel: "Kỷ_luật", word: "Kỷ luật" },
+  { key: "noiVu", label: "Nội vụ", excel: "Nội_vụ", word: "Nội vụ" },
+  { key: "tangGia", label: "Tăng gia", excel: "Tăng_gia", word: "Tăng gia" },
+  { key: "vkTrangBi", label: "VKTB", excel: "VKTB", word: "VKTB" },
+] as const;
+
+type ScoreKey = (typeof SCORE_FIELDS)[number]["key"];
+type ScoreValues = Record<ScoreKey, number>;
+type CommentValues = { strong: string; weak: string };
+type UnitForm = { scores: ScoreValues; comments: CommentValues };
+
+const EMPTY_SCORES = Object.fromEntries(
+  SCORE_FIELDS.map((f) => [f.key, 0]),
+) as ScoreValues;
+const EMPTY_COMMENTS: CommentValues = { strong: "", weak: "" };
+const EMPTY_UNIT_FORM: UnitForm = {
+  scores: EMPTY_SCORES,
+  comments: EMPTY_COMMENTS,
+};
+
+const emptyUnitsForm = () =>
+  Object.fromEntries(
+    UNIT_NAMES.map((unit) => [unit, EMPTY_UNIT_FORM]),
+  ) as Record<string, UnitForm>;
+
+const totalOf = (item: Score) =>
+  SCORE_FIELDS.reduce((sum, f) => sum + Number(item[f.key] ?? 0), 0);
+
+const hasAnyScore = (scores: ScoreValues) =>
+  SCORE_FIELDS.some((f) => Number(scores[f.key]) > 0);
+
+const toLines = (text: string) =>
+  text
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+const getJson = async <T,>(path: string, errorMessage: string): Promise<T> => {
+  const res = await fetch(`${API}${path}`);
+  if (!res.ok) throw new Error(errorMessage);
+  return res.json();
+};
+
+const postJson = async (path: string, body: unknown, errorMessage: string) => {
+  const res = await fetch(`${API}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(errorMessage);
+  return res;
+};
+
+const getNextId = async (path: "/scores" | "/comments") => {
+  const data = await getJson<{ id: number | string }[]>(
+    path,
+    "Không lấy được dữ liệu",
+  );
+  return data.reduce((max, item) => Math.max(max, Number(item.id)), 0) + 1;
+};
+
 const ThiDua: React.FC = () => {
   const [showToolbar, setShowToolbar] = useState(false);
   const [scores, setScores] = useState<Score[]>([]);
@@ -21,155 +91,45 @@ const ThiDua: React.FC = () => {
   const [comments, setComments] = useState<CommentItem[]>([]);
   const [currentWeek, setCurrentWeek] = useState<Week | null>(null);
   const [weeks, setWeeks] = useState<Week[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
-  const [newWeekDate, setNewWeekDate] = useState<string>("");
-
+  const [newWeekDate, setNewWeekDate] = useState("");
   const [showAddSingleModal, setShowAddSingleModal] = useState(false);
+  const [singleUnit, setSingleUnit] = useState(UNIT_NAMES[0]);
+  const [singleScore, setSingleScore] = useState<ScoreValues>(EMPTY_SCORES);
+  const [singleComment, setSingleComment] =
+    useState<CommentValues>(EMPTY_COMMENTS);
+  const [newScoresData, setNewScoresData] = useState(emptyUnitsForm);
 
-  const [singleUnit, setSingleUnit] = useState("Đại đội bộ");
-
-  const [singleScore, setSingleScore] = useState({
-    quanSo: 0,
-    hocTap: 0,
-    tacPhong: 0,
-    kyLuat: 0,
-    noiVu: 0,
-    tangGia: 0,
-    vkTrangBi: 0,
-  });
-
-  const [singleComment, setSingleComment] = useState({
-    strong: "",
-    weak: "",
-  });
-  // State cho 3 trung đội
-  const unitNames = ["Đại đội bộ", "Trung đội 1", "Trung đội 2"];
-
-  const defaultScoreData = {
-    quanSo: 0,
-    hocTap: 0,
-    tacPhong: 0,
-    kyLuat: 0,
-    noiVu: 0,
-    tangGia: 0,
-    vkTrangBi: 0,
-  };
-
-  const defaultCommentData = {
-    strong: "",
-    weak: "",
-  };
-
-  const [newScoresData, setNewScoresData] = useState<{
-    [key: string]: {
-      scores: typeof defaultScoreData;
-      comments: typeof defaultCommentData;
-    };
-  }>({
-    "Đại đội bộ": { scores: defaultScoreData, comments: defaultCommentData },
-    "Trung đội 1": { scores: defaultScoreData, comments: defaultCommentData },
-    "Trung đội 2": { scores: defaultScoreData, comments: defaultCommentData },
-  });
   const exportExcel = () => {
     const data = scores.map((item) => ({
       Đơn_vị: item.unit,
-
-      Quân_số: item.quanSo,
-
-      Học_tập: item.hocTap,
-
-      Tác_phong: item.tacPhong,
-
-      Kỷ_luật: item.kyLuat,
-
-      Nội_vụ: item.noiVu,
-
-      Tăng_gia: item.tangGia,
-
-      VKTB: item.vkTrangBi,
-
-      Tổng:
-        item.quanSo +
-        item.hocTap +
-        item.tacPhong +
-        item.kyLuat +
-        item.noiVu +
-        item.tangGia +
-        item.vkTrangBi,
+      ...Object.fromEntries(SCORE_FIELDS.map((f) => [f.excel, item[f.key]])),
+      Tổng: totalOf(item),
     }));
 
-    const ws = XLSX.utils.json_to_sheet(data);
-
     const wb = XLSX.utils.book_new();
-
-    XLSX.utils.book_append_sheet(wb, ws, "Thi Dua");
-
-    const buffer = XLSX.write(wb, {
-      bookType: "xlsx",
-      type: "array",
-    });
-
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), "Thi Dua");
+    const buffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
     saveAs(new Blob([buffer]), `ThiDua_${currentWeek?.date}.xlsx`);
   };
+
   const exportWord = async () => {
+    const row = (cells: string[]) =>
+      new TableRow({
+        children: cells.map(
+          (text) => new TableCell({ children: [new Paragraph(text)] }),
+        ),
+      });
+
     const table = new Table({
       rows: [
-        new TableRow({
-          children: [
-            new TableCell({ children: [new Paragraph("Đơn vị")] }),
-
-            new TableCell({ children: [new Paragraph("Quân số")] }),
-
-            new TableCell({ children: [new Paragraph("Học tập")] }),
-
-            new TableCell({ children: [new Paragraph("Tác phong")] }),
-
-            new TableCell({ children: [new Paragraph("Kỷ luật")] }),
-
-            new TableCell({ children: [new Paragraph("Nội vụ")] }),
-
-            new TableCell({ children: [new Paragraph("Tăng gia")] }),
-
-            new TableCell({ children: [new Paragraph("VKTB")] }),
-          ],
-        }),
-
-        ...scores.map(
-          (item) =>
-            new TableRow({
-              children: [
-                new TableCell({ children: [new Paragraph(item.unit)] }),
-
-                new TableCell({
-                  children: [new Paragraph(item.quanSo.toString())],
-                }),
-
-                new TableCell({
-                  children: [new Paragraph(item.hocTap.toString())],
-                }),
-
-                new TableCell({
-                  children: [new Paragraph(item.tacPhong.toString())],
-                }),
-
-                new TableCell({
-                  children: [new Paragraph(item.kyLuat.toString())],
-                }),
-
-                new TableCell({
-                  children: [new Paragraph(item.noiVu.toString())],
-                }),
-
-                new TableCell({
-                  children: [new Paragraph(item.tangGia.toString())],
-                }),
-
-                new TableCell({
-                  children: [new Paragraph(item.vkTrangBi.toString())],
-                }),
-              ],
-            }),
+        row(["Đơn vị", ...SCORE_FIELDS.map((f) => f.word)]),
+        ...scores.map((item) =>
+          row([
+            item.unit,
+            ...SCORE_FIELDS.map((f) => String(item[f.key])),
+          ]),
         ),
       ],
     });
@@ -180,52 +140,35 @@ const ThiDua: React.FC = () => {
           children: [
             new Paragraph({
               text: `BẢNG THI ĐUA ${currentWeek?.title}`,
-
               heading: "Heading1",
             }),
-
             table,
           ],
         },
       ],
     });
 
-    const blob = await Packer.toBlob(doc);
-
-    saveAs(blob, `ThiDua_${currentWeek?.date}.docx`);
+    saveAs(await Packer.toBlob(doc), `ThiDua_${currentWeek?.date}.docx`);
   };
+
   const fetchWeekData = async (week: Week) => {
     try {
       setLoading(true);
       setCurrentWeek(week);
 
-      // Lấy điểm
-      const scoreRes = await fetch(
-        `http://localhost:3001/scores?weekId=${week.id}`,
+      const scoreData = await getJson<Score[]>(
+        `/scores?weekId=${week.id}`,
+        "Không lấy được điểm",
       );
-
-      if (!scoreRes.ok) {
-        throw new Error("Không lấy được điểm");
-      }
-
-      const scoreData: Score[] = await scoreRes.json();
       setScores(scoreData);
+      if (scoreData.length > 0) setSelectedId(scoreData[0].id);
 
-      if (scoreData.length > 0) {
-        setSelectedId(scoreData[0].id);
-      }
-
-      // Lấy nhận xét
-      const commentRes = await fetch(
-        `http://localhost:3001/comments?weekId=${week.id}`,
+      setComments(
+        await getJson<CommentItem[]>(
+          `/comments?weekId=${week.id}`,
+          "Không lấy được nhận xét",
+        ),
       );
-
-      if (!commentRes.ok) {
-        throw new Error("Không lấy được nhận xét");
-      }
-
-      const commentData: CommentItem[] = await commentRes.json();
-      setComments(commentData);
     } catch (error) {
       console.error(error);
     } finally {
@@ -236,21 +179,14 @@ const ThiDua: React.FC = () => {
   useEffect(() => {
     const fetchCurrentWeek = async () => {
       try {
-        // Lấy danh sách tuần
-        const weekRes = await fetch("http://localhost:3001/weeks");
-
-        if (!weekRes.ok) {
-          throw new Error("Không lấy được tuần");
-        }
-
-        const weekList: Week[] = await weekRes.json();
+        const weekList = await getJson<Week[]>(
+          "/weeks",
+          "Không lấy được tuần",
+        );
         setWeeks(weekList);
-
         if (weekList.length === 0) return;
 
-        // Tuần mới nhất
         const latestWeek = [...weekList].sort((a, b) => b.id - a.id)[0];
-
         await fetchWeekData(latestWeek);
       } catch (error) {
         console.error(error);
@@ -260,10 +196,8 @@ const ThiDua: React.FC = () => {
     fetchCurrentWeek();
   }, []);
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedDateStr = e.target.value;
-    setSelectedDate(selectedDateStr);
-  };
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setSelectedDate(e.target.value);
 
   const handleViewClick = () => {
     if (!selectedDate) {
@@ -271,75 +205,56 @@ const ThiDua: React.FC = () => {
       return;
     }
 
-    // Tìm tuần chứa ngày được chọn
     const selectedWeek = weeks.find((week) => week.date === selectedDate);
-    if (selectedWeek) {
-      fetchWeekData(selectedWeek);
-    } else {
-      alert("Không tìm thấy dữ liệu cho ngày này!");
-    }
-  };
-  const getNextScoreId = async () => {
-    const res = await fetch("http://localhost:3001/scores");
-    const data = await res.json();
-
-    const maxId = data.reduce(
-      (max: number, item: Score) => Math.max(max, Number(item.id)),
-      0,
-    );
-
-    return maxId + 1;
+    if (selectedWeek) fetchWeekData(selectedWeek);
+    else alert("Không tìm thấy dữ liệu cho ngày này!");
   };
 
-  const getNextCommentId = async () => {
-    const res = await fetch("http://localhost:3001/comments");
-    const data = await res.json();
+  const updateUnitScore = (unit: string, key: ScoreKey, value: number) =>
+    setNewScoresData((prev) => ({
+      ...prev,
+      [unit]: {
+        ...prev[unit],
+        scores: { ...prev[unit].scores, [key]: value },
+      },
+    }));
 
-    const maxId = data.reduce(
-      (max: number, item: CommentItem) => Math.max(max, Number(item.id)),
-      0,
-    );
+  const updateUnitComment = (
+    unit: string,
+    key: keyof CommentValues,
+    value: string,
+  ) =>
+    setNewScoresData((prev) => ({
+      ...prev,
+      [unit]: {
+        ...prev[unit],
+        comments: { ...prev[unit].comments, [key]: value },
+      },
+    }));
 
-    return maxId + 1;
-  };
   const handleAddScore = async () => {
     if (!newWeekDate) {
       alert("Vui lòng chọn ngày tạo!");
       return;
     }
 
-    // Kiểm tra xem có ít nhất 1 trung đội được nhập dữ liệu
-    const hasData = unitNames.some((unit) => {
-      const unitData = newScoresData[unit];
-      return (
-        unitData.scores.quanSo > 0 ||
-        unitData.scores.hocTap > 0 ||
-        unitData.scores.tacPhong > 0 ||
-        unitData.scores.kyLuat > 0 ||
-        unitData.scores.noiVu > 0 ||
-        unitData.scores.tangGia > 0 ||
-        unitData.scores.vkTrangBi > 0
-      );
-    });
-
-    if (!hasData) {
+    if (!UNIT_NAMES.some((unit) => hasAnyScore(newScoresData[unit].scores))) {
       alert("Vui lòng nhập dữ liệu cho ít nhất 1 trung đội!");
       return;
     }
 
     try {
-      let nextScoreId = await getNextScoreId();
-      let nextCommentId = await getNextCommentId();
+      let nextScoreId = await getNextId("/scores");
+      let nextCommentId = await getNextId("/comments");
       let targetWeek = weeks.find((w) => w.date === newWeekDate);
 
       // Nếu tuần chưa tồn tại, tạo tuần mới
       if (!targetWeek) {
-        const maxWeekId = Math.max(
-          ...weeks.map((w) => Number(w.id)).filter((id) => !isNaN(id)),
-          0,
-        );
-        // const maxWeekId = Math.max(...weeks.map((w) => w.id), 0);
-        const newWeekId = maxWeekId + 1;
+        const newWeekId =
+          Math.max(
+            ...weeks.map((w) => Number(w.id)).filter((id) => !isNaN(id)),
+            0,
+          ) + 1;
 
         const newWeekToAdd = {
           id: newWeekId,
@@ -347,129 +262,43 @@ const ThiDua: React.FC = () => {
           title: `Thi đua tuần ${newWeekId}`,
         };
 
-        const weekRes = await fetch("http://localhost:3001/weeks", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newWeekToAdd),
-        });
-
-        if (!weekRes.ok) {
-          throw new Error("Không thêm được tuần mới");
-        }
-
+        await postJson("/weeks", newWeekToAdd, "Không thêm được tuần mới");
         targetWeek = newWeekToAdd as Week;
         setWeeks([...weeks, targetWeek]);
       }
 
-      // Thêm dữ liệu cho 3 trung đội
-      for (const unit of unitNames) {
-        const unitData = newScoresData[unit];
+      const weekId = Number(targetWeek.id);
 
-        // Bỏ qua nếu không có dữ liệu
-        if (
-          !unitData.scores.quanSo &&
-          !unitData.scores.hocTap &&
-          !unitData.scores.tacPhong &&
-          !unitData.scores.kyLuat &&
-          !unitData.scores.noiVu &&
-          !unitData.scores.tangGia &&
-          !unitData.scores.vkTrangBi
-        ) {
-          continue;
-        }
+      for (const unit of UNIT_NAMES) {
+        const { scores: unitScores, comments: unitComments } =
+          newScoresData[unit];
+        if (!hasAnyScore(unitScores)) continue;
 
-        // Tạo ID mới cho score
-        // const numericIds = scores
-        //   .map((s) => {
-        //     const id = typeof s.id === "string" ? parseInt(s.id) : s.id;
-        //     return isNaN(id) ? 0 : id;
-        //   });
-        // const maxScoreId = numericIds.length > 0 ? Math.max(...numericIds) : 0;
-        // const newScoreId = maxScoreId + 1;
-        const scoreToAdd = {
-          id: nextScoreId++,
-          weekId: Number(targetWeek.id),
-          unit,
-          ...unitData.scores,
-        };
+        await postJson(
+          "/scores",
+          { id: nextScoreId++, weekId, unit, ...unitScores },
+          "Không thêm được điểm mới",
+        );
 
-        // const scoreToAdd = {
-        //   id: newScoreId,
-        //   weekId: targetWeek.id,
-        //   unit: unit,
-        //   ...unitData.scores,
-        // };
-
-        // POST điểm
-        const scoreRes = await fetch("http://localhost:3001/scores", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(scoreToAdd),
-        });
-
-        if (!scoreRes.ok) {
-          throw new Error("Không thêm được điểm mới");
-        }
-
-        // POST nhận xét nếu có
-        if (unitData.comments.strong || unitData.comments.weak) {
-          const strongList = unitData.comments.strong
-            .split("\n")
-            .map((s) => s.trim())
-            .filter((s) => s);
-          const weakList = unitData.comments.weak
-            .split("\n")
-            .map((s) => s.trim())
-            .filter((s) => s);
-
-          // Tạo ID mới cho comment
-          const commentToAdd = {
-            id: nextCommentId++,
-            weekId: Number(targetWeek.id),
-            unit,
-            strong: strongList,
-            weak: weakList,
-          };
-
-          // const commentToAdd = {
-          //   id: newCommentId,
-          //   weekId: targetWeek.id,
-          //   unit: unit,
-          //   strong: strongList,
-          //   weak: weakList,
-          // };
-
-          const commentRes = await fetch("http://localhost:3001/comments", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(commentToAdd),
-          });
-
-          if (!commentRes.ok) {
-            throw new Error("Không thêm được nhận xét mới");
-          }
+        if (unitComments.strong || unitComments.weak) {
+          await postJson(
+            "/comments",
+            {
+              id: nextCommentId++,
+              weekId,
+              unit,
+              strong: toLines(unitComments.strong),
+              weak: toLines(unitComments.weak),
+            },
+            "Không thêm được nhận xét mới",
+          );
         }
       }
 
-      // Reset form
-      setNewScoresData({
-        "Đại đội bộ": {
-          scores: defaultScoreData,
-          comments: defaultCommentData,
-        },
-        "Trung đội 1": {
-          scores: defaultScoreData,
-          comments: defaultCommentData,
-        },
-        "Trung đội 2": {
-          scores: defaultScoreData,
-          comments: defaultCommentData,
-        },
-      });
+      setNewScoresData(emptyUnitsForm());
       setNewWeekDate("");
       setShowAddModal(false);
 
-      // Reload dữ liệu từ tuần mới
       await fetchWeekData(targetWeek);
       alert("Thêm dữ liệu cho 3 trung đội thành công!");
     } catch (error) {
@@ -477,6 +306,7 @@ const ThiDua: React.FC = () => {
       alert("Có lỗi xảy ra khi thêm dữ liệu!");
     }
   };
+
   const handleAddSingleUnit = async () => {
     try {
       if (!currentWeek) {
@@ -484,62 +314,35 @@ const ThiDua: React.FC = () => {
         return;
       }
 
-      const nextScoreId = await getNextScoreId();
-      const nextCommentId = await getNextCommentId();
+      const weekId = Number(currentWeek.id);
 
-      const scoreData = {
-        id: nextScoreId,
-        weekId: Number(currentWeek.id),
-        unit: singleUnit,
-        ...singleScore,
-      };
-
-      const scoreRes = await fetch("http://localhost:3001/scores", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await postJson(
+        "/scores",
+        {
+          id: await getNextId("/scores"),
+          weekId,
+          unit: singleUnit,
+          ...singleScore,
         },
-        body: JSON.stringify(scoreData),
-      });
+        "Không thêm được điểm",
+      );
 
-      if (!scoreRes.ok) {
-        throw new Error("Không thêm được điểm");
-      }
-
-      const commentData = {
-        id: nextCommentId,
-        weekId: Number(currentWeek.id),
-        unit: singleUnit,
-        strong: singleComment.strong.split("\n").filter((x) => x.trim() !== ""),
-        weak: singleComment.weak.split("\n").filter((x) => x.trim() !== ""),
-      };
-
-      await fetch("http://localhost:3001/comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await postJson(
+        "/comments",
+        {
+          id: await getNextId("/comments"),
+          weekId,
+          unit: singleUnit,
+          strong: toLines(singleComment.strong),
+          weak: toLines(singleComment.weak),
         },
-        body: JSON.stringify(commentData),
-      });
+        "Không thêm được nhận xét",
+      );
 
       alert("Đã thêm đơn vị.");
-      setSingleScore({
-        quanSo: 0,
-        hocTap: 0,
-        tacPhong: 0,
-        kyLuat: 0,
-        noiVu: 0,
-        tangGia: 0,
-        vkTrangBi: 0,
-      });
-
-      setSingleComment({
-        strong: "",
-        weak: "",
-      });
-
-      setSingleUnit("Đại đội bộ");
-
+      setSingleScore(EMPTY_SCORES);
+      setSingleComment(EMPTY_COMMENTS);
+      setSingleUnit(UNIT_NAMES[0]);
       setShowAddSingleModal(false);
 
       fetchWeekData(currentWeek);
@@ -548,108 +351,97 @@ const ThiDua: React.FC = () => {
     }
   };
 
+  const handlePrint = () => window.print();
+
+  const handleEdit = (score: Score) => {
+    console.log("Edit:", score);
+    // sau này mở modal sửa
+  };
+
+  const handleDelete = (id: number) => {
+    if (!window.confirm("Bạn có chắc muốn xóa?")) return;
+    setScores((prev) => prev.filter((item) => item.id !== id));
+  };
+
   if (loading) {
     return <h2 className="loading">Đang tải dữ liệu...</h2>;
   }
+
   const previewComments = comments.map((item) => ({
     ...item,
     strong: item.strong.slice(0, 2),
     weak: item.weak.slice(0, 2),
   }));
-  const handlePrint = () => {
-    window.print();
-  };
-  const handleEdit = (score: Score) => {
-    console.log("Edit:", score);
 
-    // sau này mở modal sửa
-  };
-
-  const handleDelete = (id: number) => {
-    const confirmDelete = window.confirm("Bạn có chắc muốn xóa?");
-
-    if (!confirmDelete) return;
-
-    setScores((prev) => prev.filter((item) => item.id !== id));
-  };
   return (
     <div className="page">
       <Header />
 
       <main className="main">
         {/* ================= CỘT TRÁI ================= */}
-
         <aside className="left-panel">
           <LeftPanel />
         </aside>
 
         {/* ================= CỘT GIỮA ================= */}
-
         <section className="center-panel">
           <div className="box">
-            <>
-  <button
-    className="setting-btn"
-    onClick={() => setShowToolbar(!showToolbar)}
-  >
-    ⚙
-  </button>
+            <button
+              className="setting-btn"
+              onClick={() => setShowToolbar(!showToolbar)}
+            >
+              ⚙
+            </button>
 
-  {showToolbar && (
-    <div className="toolbar">
-            <div className="toolbar">
-              {/* Hàng trên */}
-              <div className="toolbar-top">
-                <label htmlFor="date-picker">Chọn ngày:</label>
+            {showToolbar && (
+              <div className="toolbar">
+                {/* Hàng trên */}
+                <div className="toolbar-top">
+                  <label htmlFor="date-picker">Chọn ngày:</label>
 
-                <input
-                  id="date-picker"
-                  type="date"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  className="date-picker"
-                />
+                  <input
+                    id="date-picker"
+                    type="date"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    className="date-picker"
+                  />
 
-                <button onClick={handleViewClick} className="view-btn">
-                  Xem
-                </button>
+                  <button onClick={handleViewClick} className="view-btn">
+                    Xem
+                  </button>
 
-                <button
-                  onClick={() => setShowAddModal(true)}
-                  className="btn-primary"
-                >
-                  ➕ Thêm toàn bộ
-                </button>
+                  <button
+                    onClick={() => setShowAddModal(true)}
+                    className="btn-primary"
+                  >
+                    ➕ Thêm toàn bộ
+                  </button>
 
-                <button
-                  onClick={() => setShowAddSingleModal(true)}
-                  className="btn-success"
-                >
-                  ➕ Thêm đơn vị
-                </button>
+                  <button
+                    onClick={() => setShowAddSingleModal(true)}
+                    className="btn-success"
+                  >
+                    ➕ Thêm đơn vị
+                  </button>
+                </div>
+
+                {/* Hàng dưới */}
+                <div className="toolbar-bottom">
+                  <button className="print-btn" onClick={handlePrint}>
+                    🖨 In
+                  </button>
+
+                  <button className="word-btn" onClick={exportWord}>
+                    📄 Word
+                  </button>
+
+                  <button className="excel-btn" onClick={exportExcel}>
+                    📊 Excel
+                  </button>
+                </div>
               </div>
-
-              {/* Hàng dưới */}
-                   <div className="toolbar-bottom">
-        <button className="print-btn" onClick={handlePrint}>
-          🖨 In
-        </button>
-
-        <button className="word-btn" onClick={exportWord}>
-          📄 Word
-        </button>
-
-        <button className="excel-btn" onClick={exportExcel}>
-          📊 Excel
-        </button>
-      </div>
-
-    </div>
-  </div>
-  )}
-</>
-
-            {/* <h3>THEO DÕI THI ĐUA</h3> */}
+            )}
 
             <ScoreTable
               scores={scores}
@@ -661,28 +453,21 @@ const ThiDua: React.FC = () => {
           </div>
 
           <div className="box">
-            {/* <h3>NHẬN XÉT</h3> */}
-
             <CommentTable comments={previewComments} />
           </div>
         </section>
 
         {/* ================= CỘT PHẢI ================= */}
-
         <aside className="right-panel">
           <RightPanel scores={scores} />
         </aside>
       </main>
 
       <CommentBox />
-      {/* {currentWeek && (
-        <div className="week-title">
-          {currentWeek.title} - {currentWeek.date}
-        </div>
-      )} */}
+
       <Footer currentWeek={currentWeek} />
 
-      {/* Modal Thêm Điểm */}
+      {/* ================= Modal Thêm Điểm ================= */}
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -695,6 +480,7 @@ const ThiDua: React.FC = () => {
                 ×
               </button>
             </div>
+
             <div className="modal-body">
               <div className="form-group">
                 <label>Ngày Tạo *</label>
@@ -706,163 +492,29 @@ const ThiDua: React.FC = () => {
                 />
               </div>
 
-              {/* 3 Sections cho 3 trung đội */}
-              {unitNames.map((unit) => (
+              {UNIT_NAMES.map((unit) => (
                 <div key={unit} className="unit-section">
                   <h3 className="unit-title">{unit}</h3>
 
                   <div className="form-row">
-                    <div className="form-group">
-                      <label>Quân Số</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={newScoresData[unit].scores.quanSo}
-                        onChange={(e) =>
-                          setNewScoresData({
-                            ...newScoresData,
-                            [unit]: {
-                              ...newScoresData[unit],
-                              scores: {
-                                ...newScoresData[unit].scores,
-                                quanSo: parseFloat(e.target.value) || 0,
-                              },
-                            },
-                          })
-                        }
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Học Tập</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={newScoresData[unit].scores.hocTap}
-                        onChange={(e) =>
-                          setNewScoresData({
-                            ...newScoresData,
-                            [unit]: {
-                              ...newScoresData[unit],
-                              scores: {
-                                ...newScoresData[unit].scores,
-                                hocTap: parseFloat(e.target.value) || 0,
-                              },
-                            },
-                          })
-                        }
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Tác Phong</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={newScoresData[unit].scores.tacPhong}
-                        onChange={(e) =>
-                          setNewScoresData({
-                            ...newScoresData,
-                            [unit]: {
-                              ...newScoresData[unit],
-                              scores: {
-                                ...newScoresData[unit].scores,
-                                tacPhong: parseFloat(e.target.value) || 0,
-                              },
-                            },
-                          })
-                        }
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label>Kỷ Luật</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={newScoresData[unit].scores.kyLuat}
-                        onChange={(e) =>
-                          setNewScoresData({
-                            ...newScoresData,
-                            [unit]: {
-                              ...newScoresData[unit],
-                              scores: {
-                                ...newScoresData[unit].scores,
-                                kyLuat: parseFloat(e.target.value) || 0,
-                              },
-                            },
-                          })
-                        }
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Nội Vụ</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={newScoresData[unit].scores.noiVu}
-                        onChange={(e) =>
-                          setNewScoresData({
-                            ...newScoresData,
-                            [unit]: {
-                              ...newScoresData[unit],
-                              scores: {
-                                ...newScoresData[unit].scores,
-                                noiVu: parseFloat(e.target.value) || 0,
-                              },
-                            },
-                          })
-                        }
-                        className="form-input"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Tăng Gia</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={newScoresData[unit].scores.tangGia}
-                        onChange={(e) =>
-                          setNewScoresData({
-                            ...newScoresData,
-                            [unit]: {
-                              ...newScoresData[unit],
-                              scores: {
-                                ...newScoresData[unit].scores,
-                                tangGia: parseFloat(e.target.value) || 0,
-                              },
-                            },
-                          })
-                        }
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label>VKTB</label>
-                    <input
-                      type="number"
-                      step="0.1"
-                      value={newScoresData[unit].scores.vkTrangBi}
-                      onChange={(e) =>
-                        setNewScoresData({
-                          ...newScoresData,
-                          [unit]: {
-                            ...newScoresData[unit],
-                            scores: {
-                              ...newScoresData[unit].scores,
-                              vkTrangBi: parseFloat(e.target.value) || 0,
-                            },
-                          },
-                        })
-                      }
-                      className="form-input"
-                    />
+                    {SCORE_FIELDS.map((field) => (
+                      <div key={field.key} className="form-group">
+                        <label>{field.label}</label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={newScoresData[unit].scores[field.key]}
+                          onChange={(e) =>
+                            updateUnitScore(
+                              unit,
+                              field.key,
+                              parseFloat(e.target.value) || 0,
+                            )
+                          }
+                          className="form-input"
+                        />
+                      </div>
+                    ))}
                   </div>
 
                   <div className="form-group">
@@ -870,16 +522,7 @@ const ThiDua: React.FC = () => {
                     <textarea
                       value={newScoresData[unit].comments.strong}
                       onChange={(e) =>
-                        setNewScoresData({
-                          ...newScoresData,
-                          [unit]: {
-                            ...newScoresData[unit],
-                            comments: {
-                              ...newScoresData[unit].comments,
-                              strong: e.target.value,
-                            },
-                          },
-                        })
+                        updateUnitComment(unit, "strong", e.target.value)
                       }
                       placeholder="Ví dụ: Duy trì kỷ luật&#10;Huấn luyện tốt"
                       className="form-textarea"
@@ -892,27 +535,17 @@ const ThiDua: React.FC = () => {
                     <textarea
                       value={newScoresData[unit].comments.weak}
                       onChange={(e) =>
-                        setNewScoresData({
-                          ...newScoresData,
-                          [unit]: {
-                            ...newScoresData[unit],
-                            comments: {
-                              ...newScoresData[unit].comments,
-                              weak: e.target.value,
-                            },
-                          },
-                        })
+                        updateUnitComment(unit, "weak", e.target.value)
                       }
                       placeholder="Ví dụ: Tăng gia chưa tốt&#10;Nội vụ chưa đồng đều"
                       className="form-textarea"
                       rows={2}
                     />
                   </div>
-
-                  <hr style={{ margin: "15px 0", borderColor: "#ddd" }} />
                 </div>
               ))}
             </div>
+
             <div className="modal-footer">
               <button
                 className="btn-cancel"
@@ -927,6 +560,7 @@ const ThiDua: React.FC = () => {
           </div>
         </div>
       )}
+
       {/* ================= Modal Thêm 1 Đơn Vị ================= */}
       {showAddSingleModal && (
         <div
@@ -936,7 +570,6 @@ const ThiDua: React.FC = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Thêm Đơn Vị</h2>
-
               <button
                 className="close-btn"
                 onClick={() => setShowAddSingleModal(false)}
@@ -948,142 +581,38 @@ const ThiDua: React.FC = () => {
             <div className="modal-body">
               <div className="form-group">
                 <label>Đơn vị</label>
-
                 <select
                   className="form-input"
                   value={singleUnit}
                   onChange={(e) => setSingleUnit(e.target.value)}
                 >
-                  <option>Đại đội bộ</option>
-                  <option>Trung đội 1</option>
-                  <option>Trung đội 2</option>
-                  <option>Trung đội 3</option>
-                  {/* <option>Khẩu đội 1</option>
-                  <option>Khẩu đội 2</option>
-                  <option>Khẩu đội 3</option>
-                  <option>Khẩu đội 4</option> */}
+                  {SINGLE_UNIT_OPTIONS.map((unit) => (
+                    <option key={unit}>{unit}</option>
+                  ))}
                 </select>
               </div>
 
               <div className="form-row">
-                <div className="form-group">
-                  <label>Quân số</label>
-
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={singleScore.quanSo}
-                    onChange={(e) =>
-                      setSingleScore({
-                        ...singleScore,
-                        quanSo: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Học tập</label>
-
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={singleScore.hocTap}
-                    onChange={(e) =>
-                      setSingleScore({
-                        ...singleScore,
-                        hocTap: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Tác phong</label>
-
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={singleScore.tacPhong}
-                    onChange={(e) =>
-                      setSingleScore({
-                        ...singleScore,
-                        tacPhong: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Kỷ luật</label>
-
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={singleScore.kyLuat}
-                    onChange={(e) =>
-                      setSingleScore({
-                        ...singleScore,
-                        kyLuat: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Nội vụ</label>
-
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={singleScore.noiVu}
-                    onChange={(e) =>
-                      setSingleScore({
-                        ...singleScore,
-                        noiVu: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Tăng gia</label>
-
-                  <input
-                    type="number"
-                    className="form-input"
-                    value={singleScore.tangGia}
-                    onChange={(e) =>
-                      setSingleScore({
-                        ...singleScore,
-                        tangGia: Number(e.target.value),
-                      })
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>VKTB</label>
-
-                <input
-                  type="number"
-                  className="form-input"
-                  value={singleScore.vkTrangBi}
-                  onChange={(e) =>
-                    setSingleScore({
-                      ...singleScore,
-                      vkTrangBi: Number(e.target.value),
-                    })
-                  }
-                />
+                {SCORE_FIELDS.map((field) => (
+                  <div key={field.key} className="form-group">
+                    <label>{field.label}</label>
+                    <input
+                      type="number"
+                      className="form-input"
+                      value={singleScore[field.key]}
+                      onChange={(e) =>
+                        setSingleScore({
+                          ...singleScore,
+                          [field.key]: Number(e.target.value),
+                        })
+                      }
+                    />
+                  </div>
+                ))}
               </div>
 
               <div className="form-group">
                 <label>Điểm mạnh</label>
-
                 <textarea
                   rows={3}
                   className="form-textarea"
@@ -1099,16 +628,12 @@ const ThiDua: React.FC = () => {
 
               <div className="form-group">
                 <label>Điểm yếu</label>
-
                 <textarea
                   rows={3}
                   className="form-textarea"
                   value={singleComment.weak}
                   onChange={(e) =>
-                    setSingleComment({
-                      ...singleComment,
-                      weak: e.target.value,
-                    })
+                    setSingleComment({ ...singleComment, weak: e.target.value })
                   }
                 />
               </div>

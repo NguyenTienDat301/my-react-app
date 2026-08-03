@@ -28,6 +28,16 @@
       "id": 3,
       "date": "2026-07-30",
       "title": "Thi đua tuần 3"
+    },
+    {
+      "id": 4,
+      "date": "2026-07-22",
+      "title": "Thi đua tuần 4"
+    },
+    {
+      "id": 5,
+      "date": "2026-07-29",
+      "title": "Thi đua tuần 5"
     }
   ],
   "scores": [
@@ -90,6 +100,66 @@
       "noiVu": 412,
       "tangGia": 412,
       "vkTrangBi": 412
+    },
+    {
+      "id": 6,
+      "weekId": 4,
+      "unit": "Đại đội bộ",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10
+    },
+    {
+      "id": 7,
+      "weekId": 4,
+      "unit": "Trung đội 1",
+      "quanSo": 20,
+      "hocTap": 16,
+      "tacPhong": 13,
+      "kyLuat": 12,
+      "noiVu": 13,
+      "tangGia": 11,
+      "vkTrangBi": 11
+    },
+    {
+      "id": 8,
+      "weekId": 5,
+      "unit": "Đại đội bộ",
+      "quanSo": 10,
+      "hocTap": 11,
+      "tacPhong": 11,
+      "kyLuat": 12,
+      "noiVu": 12,
+      "tangGia": 12,
+      "vkTrangBi": 13
+    },
+    {
+      "id": 9,
+      "weekId": 5,
+      "unit": "Trung đội 1",
+      "quanSo": 4,
+      "hocTap": 24,
+      "tacPhong": 20,
+      "kyLuat": 11,
+      "noiVu": 11,
+      "tangGia": 11,
+      "vkTrangBi": 23
+    },
+    {
+      "id": 10,
+      "weekId": 5,
+      "unit": "Trung đội 2",
+      "quanSo": 17,
+      "hocTap": 18,
+      "tacPhong": 19,
+      "kyLuat": 20,
+      "noiVu": 11,
+      "tangGia": 11,
+      "vkTrangBi": 11
     }
   ],
   "comments": [
@@ -113,6 +183,61 @@
         "1"
       ],
       "weak": []
+    },
+    {
+      "id": 3,
+      "weekId": 4,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "hai"
+      ],
+      "weak": [
+        "hai"
+      ]
+    },
+    {
+      "id": 4,
+      "weekId": 4,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Giỏi"
+      ],
+      "weak": [
+        "Giỏi"
+      ]
+    },
+    {
+      "id": 5,
+      "weekId": 5,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Giỏi"
+      ],
+      "weak": [
+        "yếu"
+      ]
+    },
+    {
+      "id": 6,
+      "weekId": 5,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Yếu"
+      ],
+      "weak": [
+        "Yếu"
+      ]
+    },
+    {
+      "id": 7,
+      "weekId": 5,
+      "unit": "Trung đội 2",
+      "strong": [
+        "Yếu"
+      ],
+      "weak": [
+        "Mạnh"
+      ]
     }
   ],
   "soldiers": [

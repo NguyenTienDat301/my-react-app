@@ -3,29 +3,28 @@ import "../styles/commentTable.css";
 
 interface Props {
   comments: CommentItem[];
+  /** Số điểm tối đa hiện cho mỗi đơn vị */
+  limit?: number;
 }
 
-const CommentTable = ({ comments }: Props) => {
-  const strong = comments.flatMap((item) => item.strong);
-  const weak = comments.flatMap((item) => item.weak);
+const CommentTable = ({ comments, limit = 2 }: Props) => {
+  // Mỗi đơn vị 1 dòng: "Trung đội 1: điểm a; điểm b"
+  const renderLines = (type: "strong" | "weak") => {
+    const lines = comments
+      .map((item) => ({ unit: item.unit, list: item[type].slice(0, limit) }))
+      .filter((item) => item.list.length > 0);
 
-  const renderLines = (data: string[], key: string) => (
-    <>
-      {data.map((text, index) => (
-        <div className="comment-line" key={`${key}-${index}`}>
-          {text}
-        </div>
-      ))}
+    if (lines.length === 0) {
+      return <div className="comment-line">&nbsp;</div>;
+    }
 
-      {Array.from({ length: Math.max(0, 5 - data.length) }).map(
-        (_, index) => (
-          <div className="comment-line" key={`${key}-empty-${index}`}>
-            &nbsp;
-          </div>
-        )
-      )}
-    </>
-  );
+    return lines.map((item) => (
+      <div className="comment-line" key={`${type}-${item.unit}`}>
+        <span className="comment-unit-name">{item.unit}:</span>{" "}
+        {item.list.join("; ")}
+      </div>
+    ));
+  };
 
   return (
     <div className="comment-board">
@@ -33,21 +32,13 @@ const CommentTable = ({ comments }: Props) => {
 
       <div className="comment-row">
         <div className="label strong">ĐIỂM MẠNH</div>
-
-        <div className="comment-lines">
-          {renderLines(strong, "strong")}
-        </div>
+        <div className="comment-lines">{renderLines("strong")}</div>
       </div>
-
 
       <div className="comment-row">
         <div className="label weak">ĐIỂM YẾU</div>
-
-        <div className="comment-lines">
-          {renderLines(weak, "weak")}
-        </div>
+        <div className="comment-lines">{renderLines("weak")}</div>
       </div>
-
     </div>
   );
 };

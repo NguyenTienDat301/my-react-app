@@ -79,4 +79,29 @@
 
 .military-table tbody tr {
   height: 32px;
-} 
+} /* Thêm vào cuối src/styles/scoreTable.css */
+
+.unit-link {
+  color: #1d4ed8;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.unit-link:hover {
+  color: #b91c1c;
+  background: #eff5ff;
+}
+
+.military-table tbody tr.selected-row {
+  background: #eff6ff;
+}
+
+@media print {
+  .unit-link {
+    color: inherit;
+    text-decoration: none;
+  }
+}

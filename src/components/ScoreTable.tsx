@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import type { Score } from "../types/interface";
 import "../styles/scoreTable.css";
+
 interface ScoreTableProps {
   scores: Score[];
 
@@ -13,7 +15,13 @@ interface ScoreTableProps {
   onDelete: (id: number) => void;
 }
 
-const ScoreTable: React.FC<ScoreTableProps> = ({ scores }) => {
+const ScoreTable: React.FC<ScoreTableProps> = ({
+  scores,
+  selectedId,
+  setSelectedId,
+}) => {
+  const navigate = useNavigate();
+
   const total = (s: Score) =>
     s.quanSo +
     s.hocTap +
@@ -31,6 +39,11 @@ const ScoreTable: React.FC<ScoreTableProps> = ({ scores }) => {
     if (t >= 58) return "I";
     if (t >= 52) return "II";
     return "III";
+  };
+
+  const handleSelect = (item: Score) => {
+    setSelectedId(item.id);
+    navigate(`/weeks/${item.weekId}/unit/${item.id}`);
   };
 
   return (
@@ -66,10 +79,19 @@ const ScoreTable: React.FC<ScoreTableProps> = ({ scores }) => {
 
         <tbody>
           {scores.map((item, index) => (
-            <tr key={item.id}>
+            <tr
+              key={item.id}
+              className={item.id === selectedId ? "selected-row" : ""}
+            >
               <td>{index + 1}</td>
 
-              <td className="unit-name">{item.unit}</td>
+              <td
+                className="unit-name unit-link"
+                onClick={() => handleSelect(item)}
+                title={`Xem chi tiết ${item.unit}`}
+              >
+                {item.unit}
+              </td>
 
               <td>{item.quanSo}</td>
 

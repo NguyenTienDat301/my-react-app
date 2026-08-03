@@ -51,3 +51,8 @@
 
   border-bottom: 2px dotted #8dc7ff;
 }
+
+.comment-unit-name {
+  font-weight: 700;
+  color: #1d4ed8;
+}
