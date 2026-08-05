@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import SoldierModal from "../components/SoldierModal";
 import SoldierTable from "../components/SoldierTable";
+import SoldierDetailModal from "../components/SoldierDetailModal";
 
 import type { Score, CommentItem, Soldier } from "../types/interface";
 
@@ -69,6 +70,7 @@ const UnitDetail: React.FC = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [editingSoldier, setEditingSoldier] = useState<Soldier | null>(null);
+  const [viewingSoldier, setViewingSoldier] = useState<Soldier | null>(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -174,6 +176,38 @@ const UnitDetail: React.FC = () => {
     } catch (error) {
       console.error(error);
       alert("Không thể xóa chiến sĩ!");
+    }
+  };
+
+  /** Đưa điểm mạnh / điểm yếu của chiến sĩ lên nhận xét của đơn vị */
+  const handlePushToUnit = async (
+    soldier: Soldier,
+    type: "strong" | "weak",
+  ) => {
+    if (!comment) {
+      alert("Đơn vị chưa có mục nhận xét!");
+      return;
+    }
+
+    const newLines = soldier[type]
+      .map((line) => `${soldier.name}: ${line}`)
+      .filter((line) => !comment[type].includes(line));
+
+    if (newLines.length === 0) {
+      alert("Các ý này đã có trong nhận xét đơn vị.");
+      return;
+    }
+
+    const updated = { ...comment, [type]: [...comment[type], ...newLines] };
+
+    try {
+      await updateComment(updated);
+      setComment(updated);
+      setEditComment(updated);
+      alert("Đã đưa vào nhận xét đơn vị!");
+    } catch (error) {
+      console.error(error);
+      alert("Không thể cập nhật nhận xét đơn vị!");
     }
   };
 
@@ -383,8 +417,19 @@ const UnitDetail: React.FC = () => {
             soldiers={soldiers}
             onEdit={handleEditSoldier}
             onDelete={handleDeleteSoldier}
+            onSelect={setViewingSoldier}
           />
         </section>
+
+        <SoldierDetailModal
+          soldier={viewingSoldier}
+          onClose={() => setViewingSoldier(null)}
+          onEdit={(soldier) => {
+            setViewingSoldier(null);
+            handleEditSoldier(soldier);
+          }}
+          onPushToUnit={handlePushToUnit}
+        />
 
         <SoldierModal
           open={openModal}

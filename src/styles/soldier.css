@@ -1,0 +1,441 @@
+/* ============================================================
+   soldier.css — SoldierTable + SoldierModal
+   Tạo file src/styles/soldier.css
+   ============================================================ */
+
+/* ================= BẢNG CHIẾN SĨ ================= */
+.soldier-table-wrap {
+  overflow-x: auto;
+  padding: 0 20px 20px;
+}
+
+.soldier-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+}
+
+.soldier-table th,
+.soldier-table td {
+  padding: 9px 10px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.soldier-table thead th {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #fff;
+  background: #1d4ed8;
+  border-color: #1e40af;
+}
+
+.soldier-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.soldier-table tbody tr:hover {
+  background: #eff6ff;
+}
+
+.soldier-table .col-name {
+  text-align: left;
+  font-weight: 600;
+  min-width: 160px;
+}
+
+.soldier-table .cell-total {
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.soldier-table .col-action {
+  width: 100px;
+}
+
+.soldier-empty {
+  padding: 24px;
+  text-align: center;
+}
+
+/* Tên chiến sĩ bấm được */
+.soldier-link {
+  color: #1d4ed8;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease;
+}
+
+.soldier-link:hover {
+  color: #b91c1c;
+}
+
+/* Số lỗi (điểm yếu) */
+.error-badge {
+  display: inline-block;
+  min-width: 24px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: #dc2626;
+  border-radius: 999px;
+}
+
+/* Modal chi tiết chiến sĩ */
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.score-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.score-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.chip-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.chip-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1d4ed8;
+}
+
+.comment-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.link-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1d4ed8;
+  background: #e0eaff;
+  border: 1px solid #c7d8ff;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.link-btn:hover:not(:disabled) {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.link-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Nhãn xếp loại */
+.rank-badge {
+  display: inline-block;
+  min-width: 34px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 999px;
+}
+
+.rank-I {
+  background: #16a34a;
+}
+.rank-II {
+  background: #f59e0b;
+}
+.rank-III {
+  background: #dc2626;
+}
+
+/* Nút thao tác */
+.icon-btn {
+  padding: 4px 7px;
+  margin: 0 2px;
+  font-size: 14px;
+  line-height: 1;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.icon-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+}
+
+.icon-btn.edit:hover {
+  background: #fef3c7;
+  border-color: #fcd34d;
+}
+
+.icon-btn.delete:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+/* ================= MODAL CHIẾN SĨ ================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+  overflow-y: auto;
+  animation: sd-fade-in 0.18s ease;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 720px;
+  max-height: 88vh;
+  margin: auto;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
+  animation: sd-slide-up 0.22s ease;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.modal .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 16px 22px;
+  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+}
+
+.modal .modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal .close-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.modal .close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.modal .modal-body {
+  flex: 1 1 auto;
+  padding: 20px 22px;
+  overflow-y: auto;
+}
+
+.modal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 14px 22px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Khối điểm trong modal */
+.form-section {
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #dbe4f5;
+}
+
+.form-section-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.score-badge {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d4ed8;
+  background: #e0eaff;
+  border-radius: 999px;
+}
+
+/* Form dùng chung (nếu chưa có trong detail.css) */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  margin-bottom: 14px;
+}
+
+.form-grid .form-group {
+  margin-bottom: 0;
+}
+
+.form-group > label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #d8dfe8;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.form-input:hover,
+.form-textarea:hover {
+  border-color: #94a3b8;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+}
+
+.form-textarea {
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.form-input[type="number"]::-webkit-outer-spin-button,
+.form-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes sd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sd-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 640px) {
+  .modal {
+    max-width: 100%;
+    max-height: 94vh;
+  }
+
+  .modal .modal-actions button {
+    flex: 1 1 auto;
+  }
+}
+
+/* ================= IN ẤN ================= */
+@media print {
+  .modal-overlay,
+  .icon-btn,
+  .col-action {
+    display: none !important;
+  }
+}

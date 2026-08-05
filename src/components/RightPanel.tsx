@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import type { Score } from "../types/interface";
+import { getDayOfYear } from "../utils/dayOfYear";
 import "../styles/rightPanel.css";
 
 interface Question {
   id: number;
+  day?: number;
   content: string;
 }
 
@@ -14,7 +16,7 @@ interface RightPanelProps {
 const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
   const [question, setQuestion] = useState<Question | null>(null);
 
-  // Mỗi lần load lại trang thì lấy random 1 câu hỏi
+  // Lấy câu hỏi theo ngày trong năm (1..366)
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
@@ -24,7 +26,12 @@ const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
         const data: Question[] = await res.json();
         if (data.length === 0) return;
 
-        setQuestion(data[Math.floor(Math.random() * data.length)]);
+        const day = getDayOfYear();
+
+        setQuestion(
+          data.find((item) => item.day === day) ??
+            data[(day - 1) % data.length],
+        );
       } catch (error) {
         console.error(error);
       }

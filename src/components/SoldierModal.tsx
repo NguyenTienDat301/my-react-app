@@ -1,58 +1,37 @@
 import React, { useEffect, useState } from "react";
 
 import type { Soldier } from "../types/interface";
+import {
+  SCORE_FIELDS,
+  type ScoreKey,
+  totalScore,
+  rankOf,
+  toLines,
+} from "../constants/scoreFields";
+import "../styles/soldier.css";
 
 type SoldierForm = Omit<Soldier, "id">;
 
-
 interface SoldierModalProps {
   open: boolean;
-
   onClose: () => void;
-
-  onSave: (
-    soldier: SoldierForm | Soldier
-  ) => void;
-
+  onSave: (soldier: SoldierForm | Soldier) => void;
   weekId: number;
-
   unit: string;
-
   soldier?: Soldier | null;
 }
 
-
-
-const defaultSoldier = (
-  weekId: number,
-  unit: string
-): SoldierForm => ({
+const defaultSoldier = (weekId: number, unit: string): SoldierForm => ({
   weekId,
-
   unit,
-
   name: "",
-
-  quanSo: 10,
-
-  hocTap: 10,
-
-  tacPhong: 10,
-
-  kyLuat: 10,
-
-  noiVu: 10,
-
-  tangGia: 10,
-
-  vkTrangBi: 10,
-
+  ...(Object.fromEntries(SCORE_FIELDS.map((f) => [f.key, 10])) as Record<
+    ScoreKey,
+    number
+  >),
   strong: [],
-
   weak: [],
 });
-
-
 
 const SoldierModal: React.FC<SoldierModalProps> = ({
   open,
@@ -62,429 +41,132 @@ const SoldierModal: React.FC<SoldierModalProps> = ({
   unit,
   soldier,
 }) => {
-
-
-  const [form, setForm] = useState<SoldierForm>(
-    defaultSoldier(weekId, unit)
-  );
-
-
+  const [form, setForm] = useState<SoldierForm>(defaultSoldier(weekId, unit));
 
   useEffect(() => {
-
     if (!open) return;
 
-
-    queueMicrotask(() => {
-
-      if (soldier) {
-
-        const data: SoldierForm = {
-          weekId: soldier.weekId,
-
-          unit: soldier.unit,
-
-          name: soldier.name,
-
-          quanSo: soldier.quanSo,
-
-          hocTap: soldier.hocTap,
-
-          tacPhong: soldier.tacPhong,
-
-          kyLuat: soldier.kyLuat,
-
-          noiVu: soldier.noiVu,
-
-          tangGia: soldier.tangGia,
-
-          vkTrangBi: soldier.vkTrangBi,
-
-          strong: soldier.strong,
-
-          weak: soldier.weak,
-        };
-
-
-        setForm(data);
-
-      } else {
-
-        setForm(
-          defaultSoldier(
-            weekId,
-            unit
-          )
-        );
-
-      }
-
-    });
-
-
-  }, [
-    soldier,
-    weekId,
-    unit,
-    open
-  ]);
-
-
-
+    setForm(
+      soldier
+        ? { ...soldier, weekId: soldier.weekId, unit: soldier.unit }
+        : defaultSoldier(weekId, unit),
+    );
+  }, [soldier, weekId, unit, open]);
 
   if (!open) return null;
 
+  const setField = <K extends keyof SoldierForm>(
+    key: K,
+    value: SoldierForm[K],
+  ) => setForm((prev) => ({ ...prev, [key]: value }));
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
+    if (!form.name.trim()) {
+      alert("Vui lòng nhập tên chiến sĩ");
+      return;
+    }
 
-
-  const changeScore = (
-    key:
-      | "quanSo"
-      | "hocTap"
-      | "tacPhong"
-      | "kyLuat"
-      | "noiVu"
-      | "tangGia"
-      | "vkTrangBi",
-
-    value: number
-
-  ) => {
-
-    setForm((prev) => ({
-      ...prev,
-
-      [key]: value,
-    }));
-
+    onSave(soldier ? { ...soldier, ...form } : form);
   };
 
-
-
-
-
+  const total = totalScore(form);
 
   return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>{soldier ? "Cập nhật chiến sĩ" : "Thêm chiến sĩ"}</h2>
 
-    <div className="modal-overlay">
-
-
-      <div className="modal">
-
-
-        <h2>
-          {
-            soldier
-              ? "Cập nhật chiến sĩ"
-              : "Thêm chiến sĩ"
-          }
-        </h2>
-
-
-
-
-
-        {/* Họ tên */}
-
-        <div className="form-group">
-
-          <label>
-            Họ tên
-          </label>
-
-
-          <input
-
-            value={form.name}
-
-
-            onChange={(e) =>
-              setForm((prev) => ({
-                ...prev,
-
-                name: e.target.value,
-              }))
-            }
-
-          />
-
+          <button type="button" className="close-btn" onClick={onClose}>
+            ×
+          </button>
         </div>
 
+        <form onSubmit={handleSubmit}>
+          <div className="modal-body">
+            <div className="form-group">
+              <label htmlFor="soldier-name">Họ tên *</label>
+              <input
+                id="soldier-name"
+                className="form-input"
+                value={form.name}
+                onChange={(e) => setField("name", e.target.value)}
+                placeholder="Nhập họ tên chiến sĩ"
+                autoFocus
+              />
+            </div>
 
+            <div className="form-section">
+              <div className="form-section-header">
+                <h3>Điểm thi đua</h3>
+                <span className="score-badge">
+                  Tổng {total} · Xếp loại {rankOf(total)}
+                </span>
+              </div>
 
+              <div className="form-grid">
+                {SCORE_FIELDS.map((field) => (
+                  <div className="form-group" key={field.key}>
+                    <label htmlFor={`soldier-${field.key}`}>
+                      {field.label}
+                    </label>
+                    <input
+                      id={`soldier-${field.key}`}
+                      type="number"
+                      min={0}
+                      max={10}
+                      step="0.1"
+                      className="form-input"
+                      value={form[field.key]}
+                      onChange={(e) =>
+                        setField(field.key, Number(e.target.value))
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
 
+            <div className="form-group">
+              <label htmlFor="soldier-strong">
+                Điểm mạnh (mỗi dòng một ý)
+              </label>
+              <textarea
+                id="soldier-strong"
+                rows={4}
+                className="form-textarea"
+                value={form.strong.join("\n")}
+                onChange={(e) => setField("strong", toLines(e.target.value))}
+              />
+            </div>
 
-
-        {/* Điểm thi đua */}
-
-
-        {[
-          {
-            label: "Quân số",
-            key: "quanSo",
-          },
-
-          {
-            label: "Học tập",
-            key: "hocTap",
-          },
-
-          {
-            label: "Tác phong",
-            key: "tacPhong",
-          },
-
-          {
-            label: "Kỷ luật",
-            key: "kyLuat",
-          },
-
-          {
-            label: "Nội vụ",
-            key: "noiVu",
-          },
-
-          {
-            label: "Tăng gia",
-            key: "tangGia",
-          },
-
-          {
-            label: "VKTB",
-            key: "vkTrangBi",
-          },
-
-        ].map((item) => (
-
-
-          <div
-            className="form-group"
-            key={item.key}
-          >
-
-
-            <label>
-              {item.label}
-            </label>
-
-
-
-            <input
-
-              type="number"
-
-              min={0}
-
-              max={10}
-
-
-              value={
-                form[
-                  item.key as keyof SoldierForm
-                ] as number
-              }
-
-
-              onChange={(e) =>
-
-                changeScore(
-
-                  item.key as
-                    | "quanSo"
-                    | "hocTap"
-                    | "tacPhong"
-                    | "kyLuat"
-                    | "noiVu"
-                    | "tangGia"
-                    | "vkTrangBi",
-
-                  Number(e.target.value)
-
-                )
-
-              }
-
-            />
-
-
+            <div className="form-group">
+              <label htmlFor="soldier-weak">Điểm yếu (mỗi dòng một ý)</label>
+              <textarea
+                id="soldier-weak"
+                rows={4}
+                className="form-textarea"
+                value={form.weak.join("\n")}
+                onChange={(e) => setField("weak", toLines(e.target.value))}
+              />
+            </div>
           </div>
 
-
-        ))}
-
-
-
-
-
-
-        {/* Điểm mạnh */}
-
-        <div className="form-group">
-
-
-          <label>
-            Điểm mạnh
-          </label>
-
-
-          <textarea
-
-            rows={5}
-
-
-            value={
-              form.strong.join("\n")
-            }
-
-
-            onChange={(e) =>
-
-              setForm((prev) => ({
-
-                ...prev,
-
-
-                strong:
-                  e.target.value
-                    .split("\n")
-                    .filter(
-                      (x) =>
-                        x.trim() !== ""
-                    ),
-
-              }))
-
-            }
-
-          />
-
-
-        </div>
-
-
-
-
-
-
-        {/* Điểm yếu */}
-
-        <div className="form-group">
-
-
-          <label>
-            Điểm yếu
-          </label>
-
-
-
-          <textarea
-
-            rows={5}
-
-
-            value={
-              form.weak.join("\n")
-            }
-
-
-            onChange={(e) =>
-
-              setForm((prev) => ({
-
-                ...prev,
-
-
-                weak:
-                  e.target.value
-                    .split("\n")
-                    .filter(
-                      (x) =>
-                        x.trim() !== ""
-                    ),
-
-              }))
-
-            }
-
-          />
-
-
-        </div>
-
-
-
-
-
-
-        {/* Button */}
-
-
-        <div className="modal-actions">
-
-
-          <button
-
-            className="save-btn"
-
-
-            onClick={() => {
-
-
-              if (!form.name.trim()) {
-
-                alert(
-                  "Vui lòng nhập tên chiến sĩ"
-                );
-
-                return;
-
-              }
-
-
-              onSave(form);
-
-
-            }}
-
-          >
-
-            💾 Lưu
-
-          </button>
-
-
-
-
-
-          <button
-
-            className="cancel-btn"
-
-            onClick={onClose}
-
-          >
-
-            ❌ Hủy
-
-          </button>
-
-
-
-        </div>
-
-
-
-
+          <div className="modal-actions">
+            <button type="button" className="cancel-btn" onClick={onClose}>
+              ❌ Hủy
+            </button>
+
+            <button type="submit" className="save-btn">
+              💾 Lưu
+            </button>
+          </div>
+        </form>
       </div>
-
-
     </div>
-
   );
-
 };
-
-
 
 export default SoldierModal;

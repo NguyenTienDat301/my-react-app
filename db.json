@@ -256,6 +256,21 @@
       "name": "Trần Văn B",
       "rank": "Binh nhì",
       "position": "Chiến sĩ"
+    },
+    {
+      "weekId": 5,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "id": 3
     }
   ],
   "teachings": [
