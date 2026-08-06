@@ -31,15 +31,19 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
     s.tangGia +
     s.vkTrangBi;
 
-  const average = (s: Score) => (total(s) / 7).toFixed(2);
+  const totalFormatted = (s: Score) => total(s).toFixed(1);
 
-  const rank = (s: Score) => {
-    const t = total(s);
+  const averageValue = (s: Score) => total(s) / 7;
+  const average = (s: Score) => averageValue(s).toFixed(2);
 
-    if (t >= 58) return "I";
-    if (t >= 52) return "II";
-    return "III";
-  };
+  // Build ranking map by average (highest -> I, next -> II, ...)
+  const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  const ranked = [...scores]
+    .map((s) => ({ id: s.id, avg: averageValue(s) }))
+    .sort((a, b) => b.avg - a.avg);
+
+  const rankMap = new Map<number, string>();
+  ranked.forEach((r, idx) => rankMap.set(r.id, roman[idx] || String(idx + 1)));
 
   const handleSelect = (item: Score) => {
     setSelectedId(item.id);
@@ -107,11 +111,11 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
 
               <td>{item.vkTrangBi}</td>
 
-              <td>{total(item)}</td>
+              <td>{totalFormatted(item)}</td>
 
               <td>{average(item)}</td>
 
-              <td>{rank(item)}</td>
+              <td>{rankMap.get(item.id) ?? ""}</td>
             </tr>
           ))}
         </tbody>

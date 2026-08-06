@@ -38,6 +38,31 @@
       "id": 5,
       "date": "2026-07-29",
       "title": "Thi đua tuần 5"
+    },
+    {
+      "id": 6,
+      "date": "2026-08-07",
+      "title": "Thi đua tuần 32"
+    },
+    {
+      "id": 7,
+      "date": "2026-08-14",
+      "title": "Thi đua tuần 33"
+    },
+    {
+      "id": 8,
+      "date": "2026-08-21",
+      "title": "Thi đua tuần 34"
+    },
+    {
+      "id": 9,
+      "date": "2026-08-03",
+      "title": "Thi đua tuần 9"
+    },
+    {
+      "id": 10,
+      "date": "2026-08-04",
+      "title": "Thi đua tuần 10"
     }
   ],
   "scores": [
@@ -160,6 +185,186 @@
       "noiVu": 11,
       "tangGia": 11,
       "vkTrangBi": 11
+    },
+    {
+      "id": 11,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.9,
+      "hocTap": 9,
+      "tacPhong": 8.8,
+      "kyLuat": 9,
+      "noiVu": 8.7,
+      "tangGia": 8.9,
+      "vkTrangBi": 9
+    },
+    {
+      "id": 12,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "quanSo": 8.4,
+      "hocTap": 8.6,
+      "tacPhong": 8.5,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.6
+    },
+    {
+      "id": 13,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "quanSo": 8.2,
+      "hocTap": 8.3,
+      "tacPhong": 8.4,
+      "kyLuat": 8.4,
+      "noiVu": 8.3,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.4
+    },
+    {
+      "id": 14,
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "quanSo": 8,
+      "hocTap": 8.2,
+      "tacPhong": 8.1,
+      "kyLuat": 8,
+      "noiVu": 8.1,
+      "tangGia": 8.2,
+      "vkTrangBi": 8.1
+    },
+    {
+      "id": 15,
+      "weekId": 7,
+      "unit": "Trung đội 1",
+      "quanSo": 7.8,
+      "hocTap": 7.9,
+      "tacPhong": 7.9,
+      "kyLuat": 8,
+      "noiVu": 7.8,
+      "tangGia": 7.9,
+      "vkTrangBi": 8
+    },
+    {
+      "id": 16,
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "quanSo": 7.5,
+      "hocTap": 7.6,
+      "tacPhong": 7.6,
+      "kyLuat": 7.5,
+      "noiVu": 7.4,
+      "tangGia": 7.7,
+      "vkTrangBi": 7.6
+    },
+    {
+      "id": 17,
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "quanSo": 7.1,
+      "hocTap": 7.2,
+      "tacPhong": 7,
+      "kyLuat": 7.1,
+      "noiVu": 7,
+      "tangGia": 7.2,
+      "vkTrangBi": 7.1
+    },
+    {
+      "id": 18,
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "quanSo": 6.9,
+      "hocTap": 7,
+      "tacPhong": 6.8,
+      "kyLuat": 6.9,
+      "noiVu": 7,
+      "tangGia": 6.9,
+      "vkTrangBi": 6.8
+    },
+    {
+      "id": 19,
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "quanSo": 6.4,
+      "hocTap": 6.5,
+      "tacPhong": 6.6,
+      "kyLuat": 6.5,
+      "noiVu": 6.4,
+      "tangGia": 6.5,
+      "vkTrangBi": 6.4
+    },
+    {
+      "id": 20,
+      "weekId": 9,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 21,
+      "weekId": 9,
+      "unit": "Trung đội 1",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.3,
+      "kyLuat": 8.5,
+      "noiVu": 7.9,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 22,
+      "weekId": 9,
+      "unit": "Trung đội 2",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.9,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 23,
+      "weekId": 10,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 24,
+      "weekId": 10,
+      "unit": "Trung đội 1",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.9,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 25,
+      "weekId": 10,
+      "unit": "Trung đội 2",
+      "quanSo": 8.5,
+      "hocTap": 8.3,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.8,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
     }
   ],
   "comments": [
@@ -239,6 +444,190 @@
       ],
       "weak": [
         "Mạnh"
+      ]
+    },
+    {
+      "id": 8,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Cán bộ gương mẫu",
+        "Huấn luyện nhịp nhàng"
+      ],
+      "weak": [
+        "Nội vụ cần đồng bộ hơn",
+        "Một số sĩ quan chưa đều"
+      ]
+    },
+    {
+      "id": 9,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Đội hình nhanh nhẹn",
+        "Tiếp cận nhiệm vụ tốt"
+      ],
+      "weak": [
+        "Chưa đều tư thế",
+        "Cần rèn luyện phát biểu"
+      ]
+    },
+    {
+      "id": 10,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "strong": [
+        "Bám sát kế hoạch",
+        "Giữ vững an toàn"
+      ],
+      "weak": [
+        "Phối hợp súng máy còn lúng túng",
+        "Đồng phục chưa nghiêm"
+      ]
+    },
+    {
+      "id": 11,
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Giữ vững giờ giấc",
+        "Nhiệm vụ tuần tốt"
+      ],
+      "weak": [
+        "Phòng dịch cần chú ý hơn",
+        "Bàn làm việc chưa ngăn nắp"
+      ]
+    },
+    {
+      "id": 12,
+      "weekId": 7,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Tinh thần sẵn sàng cao",
+        "Chạy điều lệnh đều"
+      ],
+      "weak": [
+        "VKTB chưa nhuần nhuyễn",
+        "Cần tăng thể lực"
+      ]
+    },
+    {
+      "id": 13,
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "strong": [
+        "Vệ sinh kíp tốt",
+        "Bảo quản trang bị cẩn thận"
+      ],
+      "weak": [
+        "Bộc phá yếu",
+        "Thi đua chưa đều"
+      ]
+    },
+    {
+      "id": 14,
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Ổn định nội bộ",
+        "Hoạt động văn hóa tích cực"
+      ],
+      "weak": [
+        "Nhiệm vụ cơ bản chậm",
+        "Tác phong vẫn cần nâng cao"
+      ]
+    },
+    {
+      "id": 15,
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Phục vụ đội hình nghiêm",
+        "Cá nhân hóa nhiệm vụ tốt"
+      ],
+      "weak": [
+        "Sai số làm bài còn nhiều",
+        "Cần khắc phục tâm lý"
+      ]
+    },
+    {
+      "id": 16,
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "strong": [
+        "Sinh hoạt nghiêm túc",
+        "Đáo bàn gác đúng giờ"
+      ],
+      "weak": [
+        "Kiểm tra vũ khí chưa chặt",
+        "Một vài cá nhân buông thả"
+      ]
+    },
+    {
+      "id": 17,
+      "weekId": 9,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Nội vụ vệ sinh cơ bản gọn sạch thống nhất",
+        "Canh gác bảo đảm an toàn",
+        "Sinh hoạt tổ 3 người đảm bảo tốt",
+        "Lễ tiết tác phong bảo dảm"
+      ],
+      "weak": [
+        "Khu vực hành lang sau bẩn"
+      ]
+    },
+    {
+      "id": 18,
+      "weekId": 9,
+      "unit": "Trung đội 1",
+      "strong": [],
+      "weak": [
+        "Hàng chăn cong",
+        "Dây phơi quần áo lộn xộn"
+      ]
+    },
+    {
+      "id": 19,
+      "weekId": 9,
+      "unit": "Trung đội 2",
+      "strong": [],
+      "weak": [
+        "Khu vực nước uống bẩn",
+        "Thùng rác chưa đổ"
+      ]
+    },
+    {
+      "id": 20,
+      "weekId": 10,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Quân số đảm bảo tốt",
+        "Tích cực thể dục sáng",
+        "Lễ tiết tác phong bảo đảm",
+        "Sinh hoạt tổ 3 người bảo đảm"
+      ],
+      "weak": [
+        "Khu vực cầu thang còn bẩn"
+      ]
+    },
+    {
+      "id": 21,
+      "weekId": 10,
+      "unit": "Trung đội 1",
+      "strong": [],
+      "weak": [
+        "Rãnhnướcsaunhàcònbẩn"
+      ]
+    },
+    {
+      "id": 22,
+      "weekId": 10,
+      "unit": "Trung đội 2",
+      "strong": [],
+      "weak": [
+        "Nhà tắm còn bẩn",
+        "Khu vực sau giếng còn bẩn"
       ]
     }
   ],
@@ -335,6 +724,618 @@
       ],
       "note": "ầ",
       "id": 5
+    },
+    {
+      "id": 6,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Văn B",
+      "quanSo": 9,
+      "hocTap": 9,
+      "tacPhong": 9,
+      "kyLuat": 9,
+      "noiVu": 9,
+      "tangGia": 9,
+      "vkTrangBi": 9,
+      "strong": [
+        "Ghi nhớ quy trình tốt"
+      ],
+      "weak": [
+        "Cần nâng cao đồng đều nội vụ"
+      ],
+      "note": "Tham gia đầy đủ buổi học"
+    },
+    {
+      "id": 7,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "name": "Lê Thị C",
+      "quanSo": 9,
+      "hocTap": 8.8,
+      "tacPhong": 8.9,
+      "kyLuat": 9,
+      "noiVu": 8.7,
+      "tangGia": 8.8,
+      "vkTrangBi": 9,
+      "strong": [
+        "Chịu khó trong huấn luyện"
+      ],
+      "weak": [
+        "Cần mài dũa tác phong"
+      ],
+      "note": "Tham gia tốt phong trào"
+    },
+    {
+      "id": 8,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "name": "Phạm Văn D",
+      "quanSo": 8.9,
+      "hocTap": 9,
+      "tacPhong": 8.7,
+      "kyLuat": 9,
+      "noiVu": 8.8,
+      "tangGia": 8.9,
+      "vkTrangBi": 8.8,
+      "strong": [
+        "Thực hiện mệnh lệnh nhanh"
+      ],
+      "weak": [
+        "Chưa nhất quán trong nội vụ"
+      ],
+      "note": "Hoạt động trách nhiệm"
+    },
+    {
+      "id": 9,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "name": "Trần Đức E",
+      "quanSo": 8.7,
+      "hocTap": 8.6,
+      "tacPhong": 8.8,
+      "kyLuat": 8.6,
+      "noiVu": 8.7,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.6,
+      "strong": [
+        "Luôn chủ động khi công việc"
+      ],
+      "weak": [
+        "Cần cải thiện phát biểu"
+      ],
+      "note": "Đã góp ý tốt trong sinh hoạt"
+    },
+    {
+      "id": 10,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "name": "Hoàng Thị F",
+      "quanSo": 8.6,
+      "hocTap": 8.7,
+      "tacPhong": 8.5,
+      "kyLuat": 8.6,
+      "noiVu": 8.6,
+      "tangGia": 8.7,
+      "vkTrangBi": 8.5,
+      "strong": [
+        "Đã cải thiện bài tập tốt"
+      ],
+      "weak": [
+        "Tình thần cần ổn định hơn"
+      ],
+      "note": "Làm bài nghiêm túc"
+    },
+    {
+      "id": 11,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "name": "Bùi Văn G",
+      "quanSo": 8.8,
+      "hocTap": 8.5,
+      "tacPhong": 8.6,
+      "kyLuat": 8.7,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5,
+      "strong": [
+        "Giữ vững kỷ luật khi luyện tập"
+      ],
+      "weak": [
+        "Cần nâng cao kỹ năng bộc phá"
+      ],
+      "note": "Chăm chỉ và đúng giờ"
+    },
+    {
+      "id": 12,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "name": "Vũ Hồng H",
+      "quanSo": 8.3,
+      "hocTap": 8.4,
+      "tacPhong": 8.5,
+      "kyLuat": 8.4,
+      "noiVu": 8.3,
+      "tangGia": 8.6,
+      "vkTrangBi": 8.4,
+      "strong": [
+        "Thực hiện bài tập đúng yêu cầu"
+      ],
+      "weak": [
+        "Tác phong chưa đều"
+      ],
+      "note": "Tích cực tham gia đoàn kết"
+    },
+    {
+      "id": 13,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "name": "Đặng Minh I",
+      "quanSo": 8.4,
+      "hocTap": 8.3,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.6,
+      "vkTrangBi": 8.5,
+      "strong": [
+        "Giữ vững kỹ thuật cơ bản"
+      ],
+      "weak": [
+        "Cần phối hợp nhanh hơn"
+      ],
+      "note": "Luôn sẵn sàng nhiệm vụ"
+    },
+    {
+      "id": 14,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "name": "Phan Thị K",
+      "quanSo": 8.5,
+      "hocTap": 8.2,
+      "tacPhong": 8.3,
+      "kyLuat": 8.4,
+      "noiVu": 8.3,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.4,
+      "strong": [
+        "Giữ trang phục gọn gàng"
+      ],
+      "weak": [
+        "Còn chậm khi triển khai đội hình"
+      ],
+      "note": "Làm tốt nhiệm vụ hàng ngày"
+    },
+    {
+      "id": 15,
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "name": "Lê Văn L",
+      "quanSo": 8.1,
+      "hocTap": 8.2,
+      "tacPhong": 8,
+      "kyLuat": 8.1,
+      "noiVu": 8.1,
+      "tangGia": 8.2,
+      "vkTrangBi": 8.1,
+      "strong": [
+        "Luôn đúng giờ kiểm tra"
+      ],
+      "weak": [
+        "Nội vụ chưa thật ngăn nắp"
+      ],
+      "note": "Giữ vững kỷ luật buổi sáng"
+    },
+    {
+      "id": 16,
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Thị M",
+      "quanSo": 8,
+      "hocTap": 8.1,
+      "tacPhong": 8.2,
+      "kyLuat": 8,
+      "noiVu": 8.1,
+      "tangGia": 8.2,
+      "vkTrangBi": 8,
+      "strong": [
+        "Tiết kiệm và bảo quản tốt vật tư"
+      ],
+      "weak": [
+        "Cần nâng cao ý thức tự quản"
+      ],
+      "note": "Tham gia tốt sinh hoạt đội"
+    },
+    {
+      "id": 17,
+      "weekId": 7,
+      "unit": "Đại đội bộ",
+      "name": "Trần Văn N",
+      "quanSo": 7.9,
+      "hocTap": 8,
+      "tacPhong": 8.1,
+      "kyLuat": 8,
+      "noiVu": 7.9,
+      "tangGia": 8,
+      "vkTrangBi": 8.1,
+      "strong": [
+        "Nắm chắc quy định chung"
+      ],
+      "weak": [
+        "Chưa mạnh trong công tác hỗ trợ"
+      ],
+      "note": "Luôn ghi nhận ý kiến lãnh đạo"
+    },
+    {
+      "id": 18,
+      "weekId": 7,
+      "unit": "Trung đội 1",
+      "name": "Phạm Minh O",
+      "quanSo": 7.7,
+      "hocTap": 7.9,
+      "tacPhong": 7.8,
+      "kyLuat": 8,
+      "noiVu": 7.8,
+      "tangGia": 7.9,
+      "vkTrangBi": 7.9,
+      "strong": [
+        "Nhiệt tình trong buổi học"
+      ],
+      "weak": [
+        "Cần sâu sát hơn khi thực hành"
+      ],
+      "note": "Sẵn sàng tham gia huấn luyện"
+    },
+    {
+      "id": 19,
+      "weekId": 7,
+      "unit": "Trung đội 1",
+      "name": "Hoàng Văn P",
+      "quanSo": 7.9,
+      "hocTap": 7.8,
+      "tacPhong": 7.9,
+      "kyLuat": 7.9,
+      "noiVu": 7.8,
+      "tangGia": 7.8,
+      "vkTrangBi": 8,
+      "strong": [
+        "Giữ nghiêm giờ giấc sinh hoạt"
+      ],
+      "weak": [
+        "Cần cải thiện phản xạ chiến thuật"
+      ],
+      "note": "Thực hiện tốt nhiệm vụ giao"
+    },
+    {
+      "id": 20,
+      "weekId": 7,
+      "unit": "Trung đội 1",
+      "name": "Nguyễn Thị Q",
+      "quanSo": 7.8,
+      "hocTap": 7.9,
+      "tacPhong": 7.8,
+      "kyLuat": 7.9,
+      "noiVu": 7.7,
+      "tangGia": 7.9,
+      "vkTrangBi": 7.8,
+      "strong": [
+        "Làm tốt công tác hậu cần"
+      ],
+      "weak": [
+        "Cần thêm kiên trì trong luyện tập"
+      ],
+      "note": "Tham gia đầy đủ buổi họp đội"
+    },
+    {
+      "id": 21,
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "name": "Bùi Hồng R",
+      "quanSo": 7.6,
+      "hocTap": 7.6,
+      "tacPhong": 7.7,
+      "kyLuat": 7.5,
+      "noiVu": 7.4,
+      "tangGia": 7.7,
+      "vkTrangBi": 7.6,
+      "strong": [
+        "Luôn giữ sạch khu vực"
+      ],
+      "weak": [
+        "Cần khắc phục kỹ thuật cơ bản"
+      ],
+      "note": "Hoàn thành nhiệm vụ nhỏ tốt"
+    },
+    {
+      "id": 22,
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "name": "Vũ Thị S",
+      "quanSo": 7.5,
+      "hocTap": 7.7,
+      "tacPhong": 7.5,
+      "kyLuat": 7.6,
+      "noiVu": 7.5,
+      "tangGia": 7.6,
+      "vkTrangBi": 7.5,
+      "strong": [
+        "Hỗ trợ đồng đội nhanh nhẹn"
+      ],
+      "weak": [
+        "Cần tăng cường thể lực"
+      ],
+      "note": "Chăm chỉ và vui vẻ"
+    },
+    {
+      "id": 23,
+      "weekId": 7,
+      "unit": "Trung đội 2",
+      "name": "Đặng Văn T",
+      "quanSo": 7.4,
+      "hocTap": 7.5,
+      "tacPhong": 7.6,
+      "kyLuat": 7.5,
+      "noiVu": 7.4,
+      "tangGia": 7.5,
+      "vkTrangBi": 7.6,
+      "strong": [
+        "Thực hiện tuần tra đúng giờ"
+      ],
+      "weak": [
+        "Cần luyện phản xạ nhanh hơn"
+      ],
+      "note": "Tuân thủ tốt mệnh lệnh"
+    },
+    {
+      "id": 24,
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "name": "Phan Văn U",
+      "quanSo": 7,
+      "hocTap": 7.1,
+      "tacPhong": 7,
+      "kyLuat": 7.1,
+      "noiVu": 7,
+      "tangGia": 7.1,
+      "vkTrangBi": 7,
+      "strong": [
+        "Giữ ổn định công tác nội vụ"
+      ],
+      "weak": [
+        "Cần khẩn trương hơn khi làm việc"
+      ],
+      "note": "Hoàn thành nhiệm vụ cơ bản"
+    },
+    {
+      "id": 25,
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "name": "Lê Thị V",
+      "quanSo": 7.2,
+      "hocTap": 7,
+      "tacPhong": 7.1,
+      "kyLuat": 7,
+      "noiVu": 7.1,
+      "tangGia": 7.2,
+      "vkTrangBi": 7.1,
+      "strong": [
+        "Tham gia nhiệt tình các buổi học"
+      ],
+      "weak": [
+        "Cần nâng cao tinh thần đồng đội"
+      ],
+      "note": "Tham gia đầy đủ đơn vị tổ chức"
+    },
+    {
+      "id": 26,
+      "weekId": 8,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Đức W",
+      "quanSo": 7.1,
+      "hocTap": 7.3,
+      "tacPhong": 7,
+      "kyLuat": 7.2,
+      "noiVu": 7,
+      "tangGia": 7.1,
+      "vkTrangBi": 7.2,
+      "strong": [
+        "Thực hiện đúng nội quy buổi họp"
+      ],
+      "weak": [
+        "Cần nâng cao sự chu đáo"
+      ],
+      "note": "Làm việc đều tay"
+    },
+    {
+      "id": 27,
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "name": "Trần Thị X",
+      "quanSo": 6.8,
+      "hocTap": 7,
+      "tacPhong": 6.9,
+      "kyLuat": 6.9,
+      "noiVu": 7,
+      "tangGia": 6.9,
+      "vkTrangBi": 6.8,
+      "strong": [
+        "Giữ nề nếp sinh hoạt trong tổ"
+      ],
+      "weak": [
+        "Phải tăng cường rèn luyện thể lực"
+      ],
+      "note": "Nhiệt tình và chủ động"
+    },
+    {
+      "id": 28,
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "name": "Hoàng Minh Y",
+      "quanSo": 6.9,
+      "hocTap": 7.1,
+      "tacPhong": 6.8,
+      "kyLuat": 6.9,
+      "noiVu": 7,
+      "tangGia": 6.9,
+      "vkTrangBi": 6.8,
+      "strong": [
+        "Biết chia sẻ công việc với đồng đội"
+      ],
+      "weak": [
+        "Thiếu tính sáng tạo trong làm nhiệm vụ"
+      ],
+      "note": "Tuân thủ quy định chung"
+    },
+    {
+      "id": 29,
+      "weekId": 8,
+      "unit": "Trung đội 1",
+      "name": "Bùi Văn Z",
+      "quanSo": 6.8,
+      "hocTap": 6.9,
+      "tacPhong": 6.8,
+      "kyLuat": 6.9,
+      "noiVu": 7.1,
+      "tangGia": 6.9,
+      "vkTrangBi": 6.8,
+      "strong": [
+        "Giữ gìn kỷ luật buổi học"
+      ],
+      "weak": [
+        "Cần cải thiện tốc độ xử lý tình huống"
+      ],
+      "note": "Nhiều nỗ lực nhưng còn cần cố gắng"
+    },
+    {
+      "id": 30,
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "name": "Vũ Văn AA",
+      "quanSo": 6.5,
+      "hocTap": 6.4,
+      "tacPhong": 6.6,
+      "kyLuat": 6.5,
+      "noiVu": 6.4,
+      "tangGia": 6.5,
+      "vkTrangBi": 6.4,
+      "strong": [
+        "Đảm bảo trực gác đúng giờ"
+      ],
+      "weak": [
+        "Cần tăng cường kỷ luật cá nhân"
+      ],
+      "note": "Đang ổn định dần"
+    },
+    {
+      "id": 31,
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "name": "Đặng Thị AB",
+      "quanSo": 6.4,
+      "hocTap": 6.5,
+      "tacPhong": 6.5,
+      "kyLuat": 6.4,
+      "noiVu": 6.5,
+      "tangGia": 6.6,
+      "vkTrangBi": 6.5,
+      "strong": [
+        "Luôn khích lệ đồng đội"
+      ],
+      "weak": [
+        "Chưa đủ sự tự tin khi trình bày"
+      ],
+      "note": "Hoạt động đều hàng ngày"
+    },
+    {
+      "id": 32,
+      "weekId": 8,
+      "unit": "Trung đội 2",
+      "name": "Phạm Minh AC",
+      "quanSo": 6.6,
+      "hocTap": 6.5,
+      "tacPhong": 6.4,
+      "kyLuat": 6.5,
+      "noiVu": 6.5,
+      "tangGia": 6.4,
+      "vkTrangBi": 6.5,
+      "strong": [
+        "Thực hiện đúng giờ giấc"
+      ],
+      "weak": [
+        "Cần rèn luyện thêm kỹ năng tác chiến"
+      ],
+      "note": "Đang cố gắng cải thiện"
+    },
+    {
+      "weekId": 9,
+      "unit": "Đại đội bộ",
+      "name": "Lê Quốc Huy",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Dép sai"
+      ],
+      "note": "",
+      "id": 33
+    },
+    {
+      "weekId": 9,
+      "unit": "Trung đội 1",
+      "name": "Đặng Văn Vinh",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Chăn xấu"
+      ],
+      "note": "",
+      "id": 34
+    },
+    {
+      "weekId": 9,
+      "unit": "Trung đội 2",
+      "name": "Lê Bình An",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Cóc balo hở"
+      ],
+      "note": "",
+      "id": 35
+    },
+    {
+      "weekId": 9,
+      "unit": "Trung đội 2",
+      "name": "Đào Xuân Thái",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Phản bẩn"
+      ],
+      "note": "",
+      "id": 36
     }
   ],
   "teachings": [

@@ -11,7 +11,7 @@ const Footer: React.FC<FooterProps> = ({ currentWeek }) => {
 
     return `Ngày ${d.getDate()} tháng ${d.getMonth() + 1} năm ${d.getFullYear()}`;
   };
-
+  
   return (
     <footer className="footer">
       <div className="footer-left">

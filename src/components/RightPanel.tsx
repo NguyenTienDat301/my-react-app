@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import type { Score } from "../types/interface";
+import type { Score, Week } from "../types/interface";
 import { getDayOfYear } from "../utils/dayOfYear";
+import Footer from "../components/Footer";
 import "../styles/rightPanel.css";
 
 interface Question {
@@ -11,9 +12,10 @@ interface Question {
 
 interface RightPanelProps {
   scores: Score[];
+  currentWeek: Week | null;
 }
 
-const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
+const RightPanel: React.FC<RightPanelProps> = ({ scores, currentWeek }) => {
   const [question, setQuestion] = useState<Question | null>(null);
 
   // Lấy câu hỏi theo ngày trong năm (1..366)
@@ -93,6 +95,8 @@ const RightPanel: React.FC<RightPanelProps> = ({ scores }) => {
           <div className="answer-line" />
         </div>
       </div>
+
+      <Footer currentWeek={currentWeek} />
     </aside>
   );
 };

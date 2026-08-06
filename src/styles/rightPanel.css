@@ -33,6 +33,7 @@
 
 .question-box{
     margin-top:40px;
+    margin-bottom:18px;
 }
 
 
@@ -40,6 +41,10 @@
     color:#149447;
     font-style:italic;
     font-size:22px;
+}
+
+.right-panel > .footer {
+    margin-top: 20px;
 }
 
 

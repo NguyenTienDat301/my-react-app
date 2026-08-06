@@ -6,7 +6,7 @@ import ScoreTable from "../components/ScoreTable";
 import CommentTable from "../components/CommentTable";
 import RightPanel from "../components/RightPanel";
 import CommentBox from "../components/Teaching";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import type { CommentItem, Score, Week, Soldier } from "../types/interface";
 
 import "../styles/thidua.css";
@@ -479,14 +479,10 @@ const ThiDua: React.FC = () => {
         </section>
 
         {/* ================= CỘT PHẢI ================= */}
-        <aside className="right-panel">
-          <RightPanel scores={scores} />
-        </aside>
+        <RightPanel scores={scores} currentWeek={currentWeek} />
       </main>
 
       <CommentBox />
-
-      <Footer currentWeek={currentWeek} />
 
       {/* ================= Modal Thêm Điểm ================= */}
       {showAddModal && (

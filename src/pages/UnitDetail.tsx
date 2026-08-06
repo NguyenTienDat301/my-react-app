@@ -52,7 +52,9 @@ const rankOf = (total: number) => {
   return "III";
 };
 
-const toLines = (text: string) => text.split("\n").map((line) => line.trim());
+
+// Preserve user input (spaces/newlines) while editing; normalize (trim+filter) on save
+const toLines = (text: string) => text.split("\n");
 
 const normalizeLines = (lines: string[]) =>
   lines.map((line) => line.trim()).filter(Boolean);
