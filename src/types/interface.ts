@@ -7,7 +7,7 @@ export interface Week {
 export interface Score {
   id: number;
   weekId: number;
-  name :string;
+  name: string;
   unit: string;
 
   quanSo: number;
@@ -30,10 +30,20 @@ export interface CommentItem {
 
 export interface Soldier {
   id: number;
-
   weekId: number;
-
   unit: string;
-
   name: string;
+
+  quanSo: number;
+  hocTap: number;
+  tacPhong: number;
+  kyLuat: number;
+  noiVu: number;
+  tangGia: number;
+  vkTrangBi: number;
+
+  strong: string[];
+  weak: string[];
+
+  note: string;
 }

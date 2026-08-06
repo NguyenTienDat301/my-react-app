@@ -42,7 +42,9 @@ const SCORE_FIELDS = [
 type ScoreKey = (typeof SCORE_FIELDS)[number]["key"];
 
 const totalOf = (s: Score | null) =>
-  s ? SCORE_FIELDS.reduce((sum, f) => sum + Number(s[f.key] ?? 0), 0) : 0;
+  s
+    ? SCORE_FIELDS.reduce((sum, field) => sum + Number(s[field.key] ?? 0), 0)
+    : 0;
 
 const rankOf = (total: number) => {
   if (total >= 58) return "I";
@@ -50,11 +52,10 @@ const rankOf = (total: number) => {
   return "III";
 };
 
-const toLines = (text: string) =>
-  text
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
+const toLines = (text: string) => text.split("\n").map((line) => line.trim());
+
+const normalizeLines = (lines: string[]) =>
+  lines.map((line) => line.trim()).filter(Boolean);
 
 const UnitDetail: React.FC = () => {
   const { weekId, scoreId: scoreIdParam } = useParams();
@@ -70,41 +71,47 @@ const UnitDetail: React.FC = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [editingSoldier, setEditingSoldier] = useState<Soldier | null>(null);
+
   const [viewingSoldier, setViewingSoldier] = useState<Soldier | null>(null);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
-  // ================= Load dữ liệu =================
+  // ================= LOAD DỮ LIỆU =================
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!scoreIdParam) {
-          setError("Không tìm thấy ID đơn vị");
+          setError("Không tìm thấy đơn vị");
           return;
         }
 
         const scoreId = Number(scoreIdParam);
 
         if (Number.isNaN(scoreId)) {
-          setError("ID đơn vị không hợp lệ");
+          setError("ID không hợp lệ");
           return;
         }
 
         setLoading(true);
 
         const scoreData = await getScoreById(scoreId);
+
         setScore(scoreData);
         setEditScore(scoreData);
 
         const commentData = await getComment(scoreData.weekId, scoreData.unit);
+
         setComment(commentData);
         setEditComment(commentData);
 
-        setSoldiers(await getSoldiers(scoreData.weekId, scoreData.unit));
+        const soldierData = await getSoldiers(scoreData.weekId, scoreData.unit);
+
+        setSoldiers(soldierData);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Có lỗi xảy ra.");
+        setError(err instanceof Error ? err.message : "Có lỗi xảy ra");
       } finally {
         setLoading(false);
       }
@@ -112,17 +119,24 @@ const UnitDetail: React.FC = () => {
 
     fetchData();
   }, [scoreIdParam]);
+  // ================= LƯU ĐIỂM =================
 
-  // ================= Lưu điểm =================
   const handleSave = async () => {
     if (!editScore || !editComment) return;
 
+    const normalizedComment = {
+      ...editComment,
+      strong: normalizeLines(editComment.strong),
+      weak: normalizeLines(editComment.weak),
+    };
+
     try {
       await updateScore(editScore);
-      await updateComment(editComment);
+      await updateComment(normalizedComment);
 
       setScore(editScore);
-      setComment(editComment);
+      setComment(normalizedComment);
+      setEditComment(normalizedComment);
       setIsEditing(false);
 
       alert("Cập nhật thành công!");
@@ -138,14 +152,21 @@ const UnitDetail: React.FC = () => {
     setIsEditing(false);
   };
 
-  // ================= Xóa đơn vị =================
+  // ================= XÓA ĐƠN VỊ =================
+
   const handleDelete = async () => {
     if (!score) return;
-    if (!window.confirm(`Bạn có chắc muốn xóa "${score.unit}" không?`)) return;
+
+    if (!window.confirm(`Bạn có chắc muốn xóa "${score.unit}" không?`)) {
+      return;
+    }
 
     try {
       await deleteScore(score.id);
-      if (comment) await deleteComment(comment.id);
+
+      if (comment) {
+        await deleteComment(comment.id);
+      }
 
       alert("Đã xóa đơn vị!");
       navigate("/");
@@ -155,7 +176,8 @@ const UnitDetail: React.FC = () => {
     }
   };
 
-  // ================= Chiến sĩ =================
+  // ================= CHIẾN SĨ =================
+
   const handleAddSoldier = () => {
     setEditingSoldier(null);
     setOpenModal(true);
@@ -166,60 +188,38 @@ const UnitDetail: React.FC = () => {
     setOpenModal(true);
   };
 
-  const handleDeleteSoldier = async (id: number) => {
-    if (!window.confirm("Bạn có chắc muốn xóa chiến sĩ này?")) return;
+  /**
+   * Lưu trực tiếp trên bảng
+   */
+  // const handleSaveRow = async (soldier: Soldier) => {
+  //   try {
+  //     const updated = await updateSoldier(soldier);
 
-    try {
-      await deleteSoldier(id);
-      setSoldiers((prev) => prev.filter((item) => item.id !== id));
-      alert("Đã xóa chiến sĩ!");
-    } catch (error) {
-      console.error(error);
-      alert("Không thể xóa chiến sĩ!");
-    }
-  };
+  //     setSoldiers((prev) =>
+  //       prev.map((item) => (item.id === updated.id ? updated : item)),
+  //     );
 
-  /** Đưa điểm mạnh / điểm yếu của chiến sĩ lên nhận xét của đơn vị */
-  const handlePushToUnit = async (
-    soldier: Soldier,
-    type: "strong" | "weak",
-  ) => {
-    if (!comment) {
-      alert("Đơn vị chưa có mục nhận xét!");
-      return;
-    }
+  //     alert("Đã lưu chiến sĩ!");
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Không thể lưu chiến sĩ!");
+  //   }
+  // };
 
-    const newLines = soldier[type]
-      .map((line) => `${soldier.name}: ${line}`)
-      .filter((line) => !comment[type].includes(line));
-
-    if (newLines.length === 0) {
-      alert("Các ý này đã có trong nhận xét đơn vị.");
-      return;
-    }
-
-    const updated = { ...comment, [type]: [...comment[type], ...newLines] };
-
-    try {
-      await updateComment(updated);
-      setComment(updated);
-      setEditComment(updated);
-      alert("Đã đưa vào nhận xét đơn vị!");
-    } catch (error) {
-      console.error(error);
-      alert("Không thể cập nhật nhận xét đơn vị!");
-    }
-  };
-
+  /**
+   * Lưu từ popup
+   */
   const handleSaveSoldier = async (soldier: Soldier | Omit<Soldier, "id">) => {
     try {
       if ("id" in soldier) {
         const updated = await updateSoldier(soldier);
+
         setSoldiers((prev) =>
           prev.map((item) => (item.id === updated.id ? updated : item)),
         );
       } else {
         const created = await addSoldier(soldier);
+
         setSoldiers((prev) => [...prev, created]);
       }
 
@@ -231,22 +231,82 @@ const UnitDetail: React.FC = () => {
     }
   };
 
-  if (loading) return <h2 className="detail-state">Đang tải...</h2>;
-  if (error) return <h2 className="detail-state detail-error">{error}</h2>;
+  const handleDeleteSoldier = async (id: number) => {
+    if (!window.confirm("Bạn có chắc muốn xóa chiến sĩ này?")) {
+      return;
+    }
+
+    try {
+      await deleteSoldier(id);
+
+      setSoldiers((prev) => prev.filter((item) => item.id !== id));
+
+      alert("Đã xóa chiến sĩ!");
+    } catch (error) {
+      console.error(error);
+      alert("Không thể xóa chiến sĩ!");
+    }
+  };
+
+  // ================= ĐẨY NHẬN XÉT =================
+
+  const handlePushToUnit = async (
+    soldier: Soldier,
+    type: "strong" | "weak",
+  ) => {
+    if (!comment) return;
+
+    const newLines = soldier[type]
+      .map((line) => `${soldier.name}: ${line}`)
+      .filter((line) => !comment[type].includes(line));
+
+    if (newLines.length === 0) {
+      alert("Các ý này đã có trong nhận xét.");
+      return;
+    }
+
+    const updated = {
+      ...comment,
+      [type]: [...comment[type], ...newLines],
+    };
+
+    try {
+      await updateComment(updated);
+
+      setComment(updated);
+      setEditComment(updated);
+
+      alert("Đã cập nhật nhận xét!");
+    } catch (error) {
+      console.error(error);
+      alert("Không thể cập nhật nhận xét!");
+    }
+  };
+
+  if (loading) {
+    return <h2 className="detail-state">Đang tải...</h2>;
+  }
+
+  if (error) {
+    return <h2 className="detail-state detail-error">{error}</h2>;
+  }
 
   const current = isEditing ? editScore : score;
-  const total = totalOf(current);
-  const average = (total / SCORE_FIELDS.length).toFixed(2);
 
+  const total = totalOf(current);
+
+  const average = (total / SCORE_FIELDS.length).toFixed(2);
   return (
     <>
       <Header />
 
       <div className="detail-page">
-        {/* ================= Tiêu đề ================= */}
+        {/* ================= TIÊU ĐỀ ================= */}
+
         <div className="detail-header">
           <div>
             <h1 className="detail-title">CHI TIẾT THI ĐUA</h1>
+
             <p className="detail-subtitle">
               Tuần {weekId} · <strong>{score?.unit}</strong>
             </p>
@@ -257,30 +317,36 @@ const UnitDetail: React.FC = () => {
           </button>
         </div>
 
-        {/* ================= Tổng quan ================= */}
+        {/* ================= THỐNG KÊ ================= */}
+
         <div className="stat-grid">
           <div className="stat-card">
             <span className="stat-label">Tổng điểm</span>
+
             <span className="stat-value">{total}</span>
           </div>
 
           <div className="stat-card">
             <span className="stat-label">Trung bình</span>
+
             <span className="stat-value">{average}</span>
           </div>
 
           <div className="stat-card">
             <span className="stat-label">Xếp loại</span>
+
             <span className="stat-value">{rankOf(total)}</span>
           </div>
 
           <div className="stat-card">
             <span className="stat-label">Chiến sĩ</span>
+
             <span className="stat-value">{soldiers.length}</span>
           </div>
         </div>
 
-        {/* ================= Form điểm ================= */}
+        {/* ================= ĐIỂM THI ĐUA ================= */}
+
         <section className="detail-card">
           <div className="card-header">
             <h2>Điểm thành phần</h2>
@@ -315,7 +381,7 @@ const UnitDetail: React.FC = () => {
 
           <div className="form-grid">
             {SCORE_FIELDS.map((field) => (
-              <div className="form-group" key={field.key}>
+              <div key={field.key} className="form-group">
                 <label htmlFor={field.key}>{field.label}</label>
 
                 {isEditing ? (
@@ -339,8 +405,8 @@ const UnitDetail: React.FC = () => {
             ))}
           </div>
         </section>
+        {/* ================= NHẬN XÉT ================= */}
 
-        {/* ================= Nhận xét ================= */}
         <section className="detail-card">
           <div className="card-header">
             <h2>Nhận xét</h2>
@@ -403,7 +469,8 @@ const UnitDetail: React.FC = () => {
           </div>
         </section>
 
-        {/* ================= Danh sách chiến sĩ ================= */}
+        {/* ================= DANH SÁCH CHIẾN SĨ ================= */}
+
         <section className="detail-card">
           <div className="card-header">
             <h2>Danh sách chiến sĩ</h2>
@@ -432,6 +499,7 @@ const UnitDetail: React.FC = () => {
         />
 
         <SoldierModal
+          key={`${openModal}-${score?.weekId ?? 0}-${score?.unit ?? ""}-${editingSoldier?.id ?? "new"}`}
           open={openModal}
           onClose={() => {
             setOpenModal(false);

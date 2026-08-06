@@ -7,7 +7,8 @@ import CommentTable from "../components/CommentTable";
 import RightPanel from "../components/RightPanel";
 import CommentBox from "../components/Teaching";
 import Footer from "../components/Footer";
-import type { CommentItem, Score, Week } from "../types/interface";
+import type { CommentItem, Score, Week, Soldier } from "../types/interface";
+
 import "../styles/thidua.css";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
@@ -21,7 +22,12 @@ const SINGLE_UNIT_OPTIONS = [...UNIT_NAMES, "Trung đội 3"];
 const SCORE_FIELDS = [
   { key: "quanSo", label: "Quân số", excel: "Quân_số", word: "Quân số" },
   { key: "hocTap", label: "Học tập", excel: "Học_tập", word: "Học tập" },
-  { key: "tacPhong", label: "Tác phong", excel: "Tác_phong", word: "Tác phong" },
+  {
+    key: "tacPhong",
+    label: "Tác phong",
+    excel: "Tác_phong",
+    word: "Tác phong",
+  },
   { key: "kyLuat", label: "Kỷ luật", excel: "Kỷ_luật", word: "Kỷ luật" },
   { key: "noiVu", label: "Nội vụ", excel: "Nội_vụ", word: "Nội vụ" },
   { key: "tangGia", label: "Tăng gia", excel: "Tăng_gia", word: "Tăng gia" },
@@ -84,6 +90,8 @@ const getNextId = async (path: "/scores" | "/comments") => {
 };
 
 const ThiDua: React.FC = () => {
+ 
+  const [soldiers, setSoldiers] = useState<Soldier[]>([]);
   const [showToolbar, setShowToolbar] = useState(false);
   const [scores, setScores] = useState<Score[]>([]);
   const [loading, setLoading] = useState(true);
@@ -126,10 +134,7 @@ const ThiDua: React.FC = () => {
       rows: [
         row(["Đơn vị", ...SCORE_FIELDS.map((f) => f.word)]),
         ...scores.map((item) =>
-          row([
-            item.unit,
-            ...SCORE_FIELDS.map((f) => String(item[f.key])),
-          ]),
+          row([item.unit, ...SCORE_FIELDS.map((f) => String(item[f.key]))]),
         ),
       ],
     });
@@ -163,12 +168,19 @@ const ThiDua: React.FC = () => {
       setScores(scoreData);
       if (scoreData.length > 0) setSelectedId(scoreData[0].id);
 
-      setComments(
-        await getJson<CommentItem[]>(
-          `/comments?weekId=${week.id}`,
-          "Không lấy được nhận xét",
-        ),
+      const commentData = await getJson<CommentItem[]>(
+        `/comments?weekId=${week.id}`,
+        "Không lấy được nhận xét",
       );
+
+      setComments(commentData);
+
+      const soldierData = await getJson<Soldier[]>(
+        `/soldiers?weekId=${week.id}`,
+        "Không lấy được chiến sĩ",
+      );
+
+      setSoldiers(soldierData);
     } catch (error) {
       console.error(error);
     } finally {
@@ -179,10 +191,7 @@ const ThiDua: React.FC = () => {
   useEffect(() => {
     const fetchCurrentWeek = async () => {
       try {
-        const weekList = await getJson<Week[]>(
-          "/weeks",
-          "Không lấy được tuần",
-        );
+        const weekList = await getJson<Week[]>("/weeks", "Không lấy được tuần");
         setWeeks(weekList);
         if (weekList.length === 0) return;
 
@@ -367,11 +376,23 @@ const ThiDua: React.FC = () => {
     return <h2 className="loading">Đang tải dữ liệu...</h2>;
   }
 
-  const previewComments = comments.map((item) => ({
-    ...item,
-    strong: item.strong.slice(0, 2),
-    weak: item.weak.slice(0, 2),
-  }));
+  const previewComments: CommentItem[] = comments.map((comment) => {
+    const weakSoldiers = soldiers
+      .filter((s) => s.unit === comment.unit && s.weak.length > 0)
+      .slice(0, 2);
+
+    const weakEntries = weakSoldiers.map((soldier) =>
+      `${soldier.name}: ${soldier.weak[0].trim()}`,
+    );
+
+    const fallbackWeak = comment.weak[0] ? [comment.weak[0]] : [];
+
+    return {
+      ...comment,
+      strong: comment.strong.slice(0, 2),
+      weak: weakEntries.length > 0 ? weakEntries : fallbackWeak,
+    };
+  });
 
   return (
     <div className="page">

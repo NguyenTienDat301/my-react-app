@@ -214,7 +214,9 @@
         "Giỏi"
       ],
       "weak": [
-        "yếu"
+        "yếu",
+        "Nguyễn Tiến Đạt: Saveầfafafafafâfd",
+        "Nguyễn Tiến Đạt: zdvefdssvFaaâfafa/fà/"
       ]
     },
     {
@@ -247,15 +249,17 @@
       "unit": "Trung đội 1",
       "name": "Nguyễn Văn A",
       "rank": "Binh nhất",
-      "position": "Chiến sĩ"
-    },
-    {
-      "id": 2,
-      "weekId": 1,
-      "unit": "Trung đội 1",
-      "name": "Trần Văn B",
-      "rank": "Binh nhì",
-      "position": "Chiến sĩ"
+      "position": "Chiến sĩ",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": ""
     },
     {
       "weekId": 5,
@@ -269,8 +273,68 @@
       "tangGia": 10,
       "vkTrangBi": 10,
       "strong": [],
-      "weak": [],
-      "id": 3
+      "weak": [
+        "hạn chế",
+        "là",
+        "gì"
+      ],
+      "id": 2,
+      "note": ""
+    },
+    {
+      "weekId": 5,
+      "unit": "Trung đội 1",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "âaaaaaầzf/Sf/f",
+        ""
+      ],
+      "id": 3,
+      "note": ""
+    },
+    {
+      "weekId": 5,
+      "unit": "Trung đội 2",
+      "name": "Tiến",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "HFakf"
+      ],
+      "note": "alfjalf\nấ",
+      "id": 4
+    },
+    {
+      "weekId": 5,
+      "unit": "Trung đội 2",
+      "name": "dấ",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "âf"
+      ],
+      "note": "ầ",
+      "id": 5
     }
   ],
   "teachings": [

@@ -1,169 +1,170 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import type { Soldier } from "../types/interface";
-import {
-  SCORE_FIELDS,
-  type ScoreKey,
-  totalScore,
-  rankOf,
-  toLines,
-} from "../constants/scoreFields";
 import "../styles/soldier.css";
-
-type SoldierForm = Omit<Soldier, "id">;
 
 interface SoldierModalProps {
   open: boolean;
   onClose: () => void;
-  onSave: (soldier: SoldierForm | Soldier) => void;
+  onSave: (soldier: Soldier | Omit<Soldier, "id">) => void | Promise<void>;
+  soldier: Soldier | null;
   weekId: number;
   unit: string;
-  soldier?: Soldier | null;
 }
 
-const defaultSoldier = (weekId: number, unit: string): SoldierForm => ({
-  weekId,
-  unit,
+const emptySoldier: Omit<Soldier, "id"> = {
+  weekId: 0,
+  unit: "",
   name: "",
-  ...(Object.fromEntries(SCORE_FIELDS.map((f) => [f.key, 10])) as Record<
-    ScoreKey,
-    number
-  >),
+
+  quanSo: 10,
+  hocTap: 10,
+  tacPhong: 10,
+  kyLuat: 10,
+  noiVu: 10,
+  tangGia: 10,
+  vkTrangBi: 10,
+
   strong: [],
   weak: [],
-});
+  note: "",
+};
+
+const toLines = (text: string) => text.split("\n");
+
+const normalizeLines = (lines: string[]) =>
+  lines.map((line) => line.trim()).filter(Boolean);
 
 const SoldierModal: React.FC<SoldierModalProps> = ({
   open,
   onClose,
   onSave,
+  soldier,
   weekId,
   unit,
-  soldier,
 }) => {
-  const [form, setForm] = useState<SoldierForm>(defaultSoldier(weekId, unit));
-
-  useEffect(() => {
-    if (!open) return;
-
-    setForm(
-      soldier
-        ? { ...soldier, weekId: soldier.weekId, unit: soldier.unit }
-        : defaultSoldier(weekId, unit),
-    );
-  }, [soldier, weekId, unit, open]);
+  const [form, setForm] = useState<Omit<Soldier, "id">>(() =>
+    soldier
+      ? {
+          ...soldier,
+        }
+      : {
+          ...emptySoldier,
+          weekId,
+          unit,
+        },
+  );
 
   if (!open) return null;
 
-  const setField = <K extends keyof SoldierForm>(
-    key: K,
-    value: SoldierForm[K],
-  ) => setForm((prev) => ({ ...prev, [key]: value }));
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSave = async () => {
     if (!form.name.trim()) {
-      alert("Vui lòng nhập tên chiến sĩ");
+      alert("Nhập tên chiến sĩ");
       return;
     }
 
-    onSave(soldier ? { ...soldier, ...form } : form);
+    const normalizedForm = {
+      ...form,
+      weekId: form.weekId || weekId,
+      unit: form.unit || unit,
+      weak: normalizeLines(form.weak),
+    };
+
+    if (soldier) {
+      await onSave({
+        ...soldier,
+        ...normalizedForm,
+      });
+    } else {
+      await onSave(normalizedForm);
+    }
+
+    onClose();
   };
 
-  const total = totalScore(form);
-
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>{soldier ? "Cập nhật chiến sĩ" : "Thêm chiến sĩ"}</h2>
+    <div className="modal-overlay">
+      <div className="modal">
 
-          <button type="button" className="close-btn" onClick={onClose}>
+        <div className="modal-header">
+          <h2>{soldier ? "Sửa chiến sĩ" : "Thêm chiến sĩ"}</h2>
+
+          <button
+            className="close-btn"
+            onClick={onClose}
+          >
             ×
           </button>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="modal-body">
-            <div className="form-group">
-              <label htmlFor="soldier-name">Họ tên *</label>
-              <input
-                id="soldier-name"
-                className="form-input"
-                value={form.name}
-                onChange={(e) => setField("name", e.target.value)}
-                placeholder="Nhập họ tên chiến sĩ"
-                autoFocus
-              />
-            </div>
+        <div className="modal-body">
 
-            <div className="form-section">
-              <div className="form-section-header">
-                <h3>Điểm thi đua</h3>
-                <span className="score-badge">
-                  Tổng {total} · Xếp loại {rankOf(total)}
-                </span>
-              </div>
+          <div className="form-group">
+            <label>Họ tên</label>
 
-              <div className="form-grid">
-                {SCORE_FIELDS.map((field) => (
-                  <div className="form-group" key={field.key}>
-                    <label htmlFor={`soldier-${field.key}`}>
-                      {field.label}
-                    </label>
-                    <input
-                      id={`soldier-${field.key}`}
-                      type="number"
-                      min={0}
-                      max={10}
-                      step="0.1"
-                      className="form-input"
-                      value={form[field.key]}
-                      onChange={(e) =>
-                        setField(field.key, Number(e.target.value))
-                      }
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="soldier-strong">
-                Điểm mạnh (mỗi dòng một ý)
-              </label>
-              <textarea
-                id="soldier-strong"
-                rows={4}
-                className="form-textarea"
-                value={form.strong.join("\n")}
-                onChange={(e) => setField("strong", toLines(e.target.value))}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="soldier-weak">Điểm yếu (mỗi dòng một ý)</label>
-              <textarea
-                id="soldier-weak"
-                rows={4}
-                className="form-textarea"
-                value={form.weak.join("\n")}
-                onChange={(e) => setField("weak", toLines(e.target.value))}
-              />
-            </div>
+            <input
+              className="form-input"
+              value={form.name}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  name: e.target.value,
+                })
+              }
+            />
           </div>
 
-          <div className="modal-actions">
-            <button type="button" className="cancel-btn" onClick={onClose}>
-              ❌ Hủy
-            </button>
+          <div className="form-group">
+            <label>Điểm yếu (mỗi dòng một lỗi)</label>
 
-            <button type="submit" className="save-btn">
-              💾 Lưu
-            </button>
+            <textarea
+              rows={8}
+              className="form-textarea"
+              value={form.weak.join("\n")}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  weak: toLines(e.target.value),
+                })
+              }
+            />
           </div>
-        </form>
+
+          <div className="form-group">
+            <label>Ghi chú</label>
+
+            <textarea
+              rows={4}
+              className="form-textarea"
+              value={form.note}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  note: e.target.value,
+                })
+              }
+            />
+          </div>
+
+        </div>
+
+        <div className="modal-actions">
+
+          <button
+            className="cancel-btn"
+            onClick={onClose}
+          >
+            Hủy
+          </button>
+
+          <button
+            className="save-btn"
+            onClick={handleSave}
+          >
+            Lưu
+          </button>
+
+        </div>
+
       </div>
     </div>
   );

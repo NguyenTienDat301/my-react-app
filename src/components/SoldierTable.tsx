@@ -1,19 +1,11 @@
 import React from "react";
-
 import type { Soldier } from "../types/interface";
-import {
-  SCORE_FIELDS,
-  totalScore,
-  averageScore,
-  rankOf,
-} from "../constants/scoreFields";
 import "../styles/soldier.css";
 
 interface SoldierTableProps {
   soldiers: Soldier[];
   onEdit: (soldier: Soldier) => void;
   onDelete: (id: number) => void;
-  /** Click vào tên chiến sĩ để xem chi tiết mạnh/yếu */
   onSelect?: (soldier: Soldier) => void;
 }
 
@@ -24,7 +16,11 @@ const SoldierTable: React.FC<SoldierTableProps> = ({
   onSelect,
 }) => {
   if (soldiers.length === 0) {
-    return <p className="empty-text soldier-empty">Chưa có chiến sĩ nào</p>;
+    return (
+      <p className="empty-text soldier-empty">
+        Chưa có chiến sĩ nào
+      </p>
+    );
   }
 
   return (
@@ -32,81 +28,72 @@ const SoldierTable: React.FC<SoldierTableProps> = ({
       <table className="soldier-table">
         <thead>
           <tr>
-            <th>TT</th>
-            <th className="col-name">HỌ TÊN</th>
-
-            {SCORE_FIELDS.map((field) => (
-              <th key={field.key} title={field.label}>
-                {field.short}
-              </th>
-            ))}
-
-            <th>TỔNG</th>
-            <th>TB</th>
-            <th>XL</th>
-            <th>LỖI</th>
-            <th className="col-action">THAO TÁC</th>
+            <th style={{ width: 60 }}>TT</th>
+            <th>Họ và tên</th>
+            <th>Hạn chế</th>
+            <th>Ghi chú</th>
+            <th style={{ width: 120 }}>Thao tác</th>
           </tr>
         </thead>
 
         <tbody>
-          {soldiers.map((item, index) => {
-            const total = totalScore(item);
+          {soldiers.map((item, index) => (
+            <tr key={item.id}>
+              <td>{index + 1}</td>
 
-            return (
-              <tr key={item.id}>
-                <td>{index + 1}</td>
+              <td
+                className="soldier-link"
+                onClick={() => onSelect?.(item)}
+                title="Xem chi tiết"
+              >
+                {item.name}
+              </td>
 
-                <td
-                  className="col-name soldier-link"
-                  onClick={() => onSelect?.(item)}
-                  title={`Xem chi tiết ${item.name}`}
+              <td className="col-weak">
+                {item.weak.length === 0 ? (
+                  <span className="empty-text">—</span>
+                ) : (
+                  <>
+                    <ul className="weak-list">
+                      {item.weak.slice(0, 2).map((weak, i) => (
+                        <li key={i}>{weak}</li>
+                      ))}
+                    </ul>
+
+                    {item.weak.length > 2 && (
+                      <div className="more-text">
+                        +{item.weak.length - 2} hạn chế...
+                      </div>
+                    )}
+                  </>
+                )}
+              </td>
+
+              <td className="col-note">
+                {item.note?.trim() ? item.note : "—"}
+              </td>
+
+              <td className="col-action">
+                <button
+                  type="button"
+                  className="icon-btn edit"
+                  onClick={() => onEdit(item)}
+                  title="Sửa"
                 >
-                  {item.name}
-                </td>
+                  ✏️
+                </button>
 
-                {SCORE_FIELDS.map((field) => (
-                  <td key={field.key}>{item[field.key]}</td>
-                ))}
-
-                <td className="cell-total">{total}</td>
-                <td>{averageScore(item)}</td>
-                <td>
-                  <span className={`rank-badge rank-${rankOf(total)}`}>
-                    {rankOf(total)}
-                  </span>
-                </td>
-
-                <td>
-                  {item.weak.length > 0 ? (
-                    <span className="error-badge">{item.weak.length}</span>
-                  ) : (
-                    "-"
-                  )}
-                </td>
-
-                <td className="col-action">
-                  <button
-                    type="button"
-                    className="icon-btn edit"
-                    title="Sửa"
-                    onClick={() => onEdit(item)}
-                  >
-                    ✏️
-                  </button>
-
-                  <button
-                    type="button"
-                    className="icon-btn delete"
-                    title="Xóa"
-                    onClick={() => onDelete(item.id)}
-                  >
-                    🗑️
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+                <button
+                  type="button"
+                  className="icon-btn delete"
+                  onClick={() => onDelete(item.id)}
+                  title="Xóa"
+                >
+                  🗑️
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

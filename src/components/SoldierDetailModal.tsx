@@ -1,20 +1,13 @@
 import React from "react";
 
 import type { Soldier } from "../types/interface";
-import {
-  SCORE_FIELDS,
-  totalScore,
-  averageScore,
-  rankOf,
-} from "../constants/scoreFields";
 import "../styles/soldier.css";
 
 interface SoldierDetailModalProps {
   soldier: Soldier | null;
   onClose: () => void;
   onEdit: (soldier: Soldier) => void;
-  /** Đẩy điểm mạnh / điểm yếu của chiến sĩ lên nhận xét của đơn vị */
-  onPushToUnit: (soldier: Soldier, type: "strong" | "weak") => void;
+  onPushToUnit: (soldier: Soldier, type: "weak") => void;
 }
 
 const SoldierDetailModal: React.FC<SoldierDetailModalProps> = ({
@@ -25,87 +18,63 @@ const SoldierDetailModal: React.FC<SoldierDetailModalProps> = ({
 }) => {
   if (!soldier) return null;
 
-  const total = totalScore(soldier);
-
-  const renderList = (type: "strong" | "weak") => {
-    const list = soldier[type];
-    const title = type === "strong" ? "Điểm mạnh" : "Điểm yếu";
-
-    return (
-      <div className="comment-card">
-        <div className="comment-card-header">
-          <h3 className={`comment-heading ${type}`}>{title}</h3>
-
-          <button
-            type="button"
-            className="link-btn"
-            disabled={list.length === 0}
-            onClick={() => onPushToUnit(soldier, type)}
-            title={`Đưa ${title.toLowerCase()} này vào nhận xét đơn vị`}
-          >
-            ⬆ Đưa vào nhận xét đơn vị
-          </button>
-        </div>
-
-        {list.length > 0 ? (
-          <ul>
-            {list.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        ) : (
-          <p className="empty-text">Không có</p>
-        )}
-      </div>
-    );
-  };
-
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div className="modal soldier-detail-modal" onClick={(event) => event.stopPropagation()}>
         <div className="modal-header">
-          <h2>{soldier.name}</h2>
-
-          <button type="button" className="close-btn" onClick={onClose}>
+          <div>
+            <h2>{soldier.name}</h2>
+            <p className="modal-subtitle">{soldier.unit}</p>
+          </div>
+          <button className="close-btn" type="button" onClick={onClose}>
             ×
           </button>
         </div>
 
         <div className="modal-body">
-          <div className="stat-row">
-            <span className="score-badge">Tổng {total}</span>
-            <span className="score-badge">TB {averageScore(soldier)}</span>
-            <span className={`rank-badge rank-${rankOf(total)}`}>
-              Xếp loại {rankOf(total)}
-            </span>
-          </div>
-
-          <div className="score-chips">
-            {SCORE_FIELDS.map((field) => (
-              <div className="score-chip" key={field.key}>
-                <span className="chip-label">{field.label}</span>
-                <span className="chip-value">{soldier[field.key]}</span>
+          <div className="detail-summary">
+            <div className="detail-card weak">
+              <div className="detail-card-header">
+                <h3 className="detail-card-title">Hạn chế</h3>
+                <button
+                  type="button"
+                  className="link-btn"
+                  disabled={soldier.weak.length === 0}
+                  onClick={() => onPushToUnit(soldier, "weak")}
+                  title="Đưa hạn chế này vào nhận xét đơn vị"
+                >
+                  ⬆ Đưa vào nhận xét đơn vị
+                </button>
               </div>
-            ))}
-          </div>
 
-          <div className="comment-section">
-            {renderList("strong")}
-            {renderList("weak")}
+              {soldier.weak.length > 0 ? (
+                <ul className="detail-bullet">
+                  {soldier.weak.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="empty-text">Không có hạn chế</p>
+              )}
+            </div>
+
+            <div className="detail-note-card">
+              <div className="detail-card-header">
+                <h3 className="detail-card-title">Ghi chú</h3>
+              </div>
+              <p className="detail-note">
+                {soldier.note?.trim() || "Không có ghi chú"}
+              </p>
+            </div>
           </div>
         </div>
 
         <div className="modal-actions">
-          <button type="button" className="cancel-btn" onClick={onClose}>
+          <button className="cancel-btn" type="button" onClick={onClose}>
             Đóng
           </button>
-
-          <button
-            type="button"
-            className="edit-btn"
-            onClick={() => onEdit(soldier)}
-          >
-            ✏️ Sửa
+          <button className="save-btn" type="button" onClick={() => onEdit(soldier)}>
+            Sửa
           </button>
         </div>
       </div>
@@ -114,3 +83,5 @@ const SoldierDetailModal: React.FC<SoldierDetailModalProps> = ({
 };
 
 export default SoldierDetailModal;
+
+

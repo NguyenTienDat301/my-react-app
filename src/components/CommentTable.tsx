@@ -18,12 +18,22 @@ const CommentTable = ({ comments, limit = 2 }: Props) => {
       return <div className="comment-line">&nbsp;</div>;
     }
 
-    return lines.map((item) => (
-      <div className="comment-line" key={`${type}-${item.unit}`}>
-        <span className="comment-unit-name">{item.unit}:</span>{" "}
-        {item.list.join("; ")}
-      </div>
-    ));
+    return lines.flatMap((item) =>
+      item.list.map((text, index) => (
+        <div
+          className={`comment-line ${index > 0 ? "comment-line-indent" : ""}`}
+          key={`${type}-${item.unit}-${index}`}
+        >
+          <div
+            className={`comment-unit-name ${index > 0 ? "comment-unit-placeholder" : ""}`}
+          >
+            {index === 0 ? `${item.unit}:` : ""}
+          </div>
+
+          <div className="comment-text">{text}</div>
+        </div>
+      )),
+    );
   };
 
   return (
