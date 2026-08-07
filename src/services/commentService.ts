@@ -44,6 +44,23 @@ export const updateComment = async (
 };
 
 /**
+ * Thêm nhận xét mới
+ */
+export const addComment = async (
+  comment: Omit<CommentItem, "id">,
+): Promise<CommentItem> => {
+  const res = await fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(comment),
+  });
+
+  if (!res.ok) throw new Error("Không thể thêm nhận xét");
+
+  return res.json();
+};
+
+/**
  * Xóa nhận xét
  */
 export const deleteComment = async (id: number) => {

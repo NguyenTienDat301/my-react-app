@@ -31,7 +31,6 @@ const Footer: React.FC<FooterProps> = ({ currentWeek }) => {
         Lê Văn Hưng
         <br />
         {/* <br /> */}
-        (Ký, ghi rõ họ tên)
       </div>
     </footer>
   );

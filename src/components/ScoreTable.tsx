@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import type { Score } from "../types/interface";
+import type { Score, Week } from "../types/interface";
 import "../styles/scoreTable.css";
 
 interface ScoreTableProps {
@@ -13,12 +13,14 @@ interface ScoreTableProps {
   onEdit: (score: Score) => void;
 
   onDelete: (id: number) => void;
+  currentWeek: Week | null;
 }
 
 const ScoreTable: React.FC<ScoreTableProps> = ({
   scores,
   selectedId,
   setSelectedId,
+  currentWeek,
 }) => {
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
   const totalFormatted = (s: Score) => total(s).toFixed(1);
 
   const averageValue = (s: Score) => total(s) / 7;
-  const average = (s: Score) => averageValue(s).toFixed(2);
+  const average = (s: Score) => averageValue(s).toFixed(1);
 
   // Build ranking map by average (highest -> I, next -> II, ...)
   const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
@@ -47,7 +49,11 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
 
   const handleSelect = (item: Score) => {
     setSelectedId(item.id);
-    navigate(`/weeks/${item.weekId}/unit/${item.id}`);
+    navigate(`/weeks/${item.weekId}/unit/${item.id}`, {
+  state: {
+    selectedWeekId: currentWeek?.id,
+  },
+});
   };
 
   return (
@@ -65,7 +71,7 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
 
             <th rowSpan={2}>TỔNG</th>
 
-            <th rowSpan={2}>TB</th>
+            <th rowSpan={2}>Điểm BQ</th>
 
             <th rowSpan={2}>XL</th>
           </tr>
@@ -74,9 +80,9 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
             <th>QS</th>
             <th>HT</th>
             <th>TP</th>
-            <th>KL</th>
-            <th>NV</th>
-            <th>TG</th>
+            <th>RLKL</th>
+            <th>NVVS</th>
+            <th>TGSX</th>
             <th>VKTB</th>
           </tr>
         </thead>
@@ -97,19 +103,19 @@ const ScoreTable: React.FC<ScoreTableProps> = ({
                 {item.unit}
               </td>
 
-              <td>{item.quanSo}</td>
+              <td>{item.quanSo.toFixed(1)}</td>
 
-              <td>{item.hocTap}</td>
+              <td>{item.hocTap.toFixed(1)}</td>
 
-              <td>{item.tacPhong}</td>
+              <td>{item.tacPhong.toFixed(1)}</td>
 
-              <td>{item.kyLuat}</td>
+              <td>{item.kyLuat.toFixed(1)}</td>
 
-              <td>{item.noiVu}</td>
+              <td>{item.noiVu.toFixed(1)}</td>
 
-              <td>{item.tangGia}</td>
+              <td>{item.tangGia.toFixed(1)}</td>
 
-              <td>{item.vkTrangBi}</td>
+              <td>{item.vkTrangBi.toFixed(1)}</td>
 
               <td>{totalFormatted(item)}</td>
 

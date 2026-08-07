@@ -57,3 +57,18 @@
     height:25px;
     border-bottom:1px dotted #aaa;
 }
+
+/* nút quản lý chiến sĩ trong RightPanel */
+.manage-questions-btn {
+    height: 35px;
+    padding: 0 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    background: #efefef;
+    color: #222;
+}
+
+.manage-questions-btn:hover{
+    background: #e0e0e0;
+}

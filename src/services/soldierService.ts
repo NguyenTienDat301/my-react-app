@@ -1,6 +1,7 @@
 import type { Soldier } from "../types/interface";
 
 const API = "http://localhost:3001/soldiers";
+const MASTER_API = "http://localhost:3001/masterSoldiers";
 
 /**
  * Lấy toàn bộ chiến sĩ của 1 đại đội theo tuần
@@ -17,7 +18,34 @@ export const getSoldiers = async (
     throw new Error("Không lấy được danh sách chiến sĩ");
   }
 
-  return res.json();
+  const data: Soldier[] = await res.json();
+
+  // If there are per-week soldiers, return them.
+  if (data && data.length > 0) return data;
+
+  // Otherwise, fall back to masterSoldiers for this unit and synthesize default per-week entries.
+  const mres = await fetch(`${MASTER_API}?unit=${encodeURIComponent(unit)}`);
+  if (!mres.ok) return [];
+
+  const masters: Array<{ id: number; unit: string; name: string }> = await mres.json();
+
+  // Map master entries into Soldier objects with a negative id (indicates not persisted for this week).
+  return masters.map((m, idx) => ({
+    id: -(m.id),
+    weekId,
+    unit: m.unit,
+    name: m.name,
+    quanSo: 10,
+    hocTap: 10,
+    tacPhong: 10,
+    kyLuat: 10,
+    noiVu: 10,
+    tangGia: 10,
+    vkTrangBi: 10,
+    strong: [],
+    weak: [],
+    note: "",
+  }));
 };
 
 /**

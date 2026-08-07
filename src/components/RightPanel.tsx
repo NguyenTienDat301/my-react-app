@@ -13,6 +13,7 @@ interface Question {
 interface RightPanelProps {
   scores: Score[];
   currentWeek: Week | null;
+  onOpenSoldierManager?: () => void;
 }
 
 const RightPanel: React.FC<RightPanelProps> = ({ scores, currentWeek }) => {
@@ -75,11 +76,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ scores, currentWeek }) => {
         <div className="flower-section">
           <h3>CÁ NHÂN:</h3>
 
-          {ranking.slice(0, 3).map((item, index) => (
-            <div className="line-item" key={item.id}>
-              {index + 1}. {item.name}
-            </div>
-          ))}
+          <div className="line-item">1. Nguyễn Tiến Đạt</div>
+          <div className="line-item">2. Lê Văn Núi</div>
+          <div className="line-item">3. Lê Trọng An</div>
         </div>
       </div>
 
@@ -93,6 +92,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ scores, currentWeek }) => {
           <div className="answer-line" />
           <div className="answer-line" />
           <div className="answer-line" />
+          <div style={{ marginTop: 8 }}>
+           
+          </div>
         </div>
       </div>
 

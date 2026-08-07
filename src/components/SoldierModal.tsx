@@ -29,10 +29,13 @@ const emptySoldier: Omit<Soldier, "id"> = {
   note: "",
 };
 
-const toLines = (text: string) => text.split("\n");
+const toLines = (text: string) => text.split("\n").map((line) => line.replace(/\r$/, ""));
 
-const normalizeLines = (lines: string[]) =>
-  lines.map((line) => line.trim()).filter(Boolean);
+const normalizeLines = (lines?: string[]) =>
+  (lines ?? [])
+    .map((line) => line?.replace(/\r$/, ""))
+    .filter((line): line is string => line !== undefined && line !== null)
+    .filter((line) => line.trim() !== "");
 
 const SoldierModal: React.FC<SoldierModalProps> = ({
   open,

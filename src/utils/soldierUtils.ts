@@ -19,7 +19,7 @@ export const totalPoint = (soldier: Soldier): number => {
  * Điểm trung bình
  */
 export const averagePoint = (soldier: Soldier): string => {
-  return (totalPoint(soldier) / 7).toFixed(2);
+  return (totalPoint(soldier) / 7).toFixed(1);
 };
 
 /**

@@ -13,6 +13,102 @@
       "name": "Trung đội 2"
     }
   ],
+  "masterSoldiers": [
+    {
+      "id": 1002,
+      "unit": "Trung đội 1",
+      "name": "Phạm Thành Long",
+      "rank": "Binh nhì",
+      "position": "Chiến sĩ"
+    },
+    {
+      "id": 1003,
+      "unit": "Trung đội 1",
+      "name": "Đặng Văn Vinh",
+      "rank": "Binh nhất",
+      "position": "Chiến sĩ"
+    },
+    {
+      "id": 1004,
+      "unit": "Trung đội 2",
+      "name": "Phạm Văn D",
+      "rank": "Binh nhất",
+      "position": "Chiến sĩ"
+    },
+    {
+      "id": 1005,
+      "unit": "Trung đội 2",
+      "name": "Hoàng Thị E",
+      "rank": "Binh nhì",
+      "position": "Chiến sĩ"
+    },
+    {
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 1006
+    },
+    {
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "name": "Lê Quốc Huy",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 1007
+    },
+    {
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "name": "Phạm Đình Khải",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 1008
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "content": "Theo Luật Nghĩa vụ quân sự, công dân đủ bao nhiêu tuổi phải đăng ký nghĩa vụ quân sự lần đầu?"
+    },
+    {
+      "id": 2,
+      "content": "Theo Luật Nghĩa vụ quân sự, thời hạn phục vụ tại ngũ trong thời bình là bao nhiêu tháng?"
+    },
+    {
+      "id": 3,
+      "content": "Theo Điều lệnh Quản lý bộ đội, quân nhân phải thực hiện mấy chế độ trong ngày?"
+    },
+    {
+      "id": 4,
+      "content": "Ngày thành lập Quân đội nhân dân Việt Nam là ngày nào?"
+    }
+  ],
   "weeks": [
     {
       "id": 1,
@@ -63,6 +159,16 @@
       "id": 10,
       "date": "2026-08-04",
       "title": "Thi đua tuần 10"
+    },
+    {
+      "id": 11,
+      "date": "2026-08-05",
+      "title": "Thi đua tuần 11"
+    },
+    {
+      "id": 12,
+      "date": "2026-08-06",
+      "title": "Thi đua tuần 12"
     }
   ],
   "scores": [
@@ -185,42 +291,6 @@
       "noiVu": 11,
       "tangGia": 11,
       "vkTrangBi": 11
-    },
-    {
-      "id": 11,
-      "weekId": 6,
-      "unit": "Đại đội bộ",
-      "quanSo": 8.9,
-      "hocTap": 9,
-      "tacPhong": 8.8,
-      "kyLuat": 9,
-      "noiVu": 8.7,
-      "tangGia": 8.9,
-      "vkTrangBi": 9
-    },
-    {
-      "id": 12,
-      "weekId": 6,
-      "unit": "Trung đội 1",
-      "quanSo": 8.4,
-      "hocTap": 8.6,
-      "tacPhong": 8.5,
-      "kyLuat": 8.5,
-      "noiVu": 8.4,
-      "tangGia": 8.5,
-      "vkTrangBi": 8.6
-    },
-    {
-      "id": 13,
-      "weekId": 6,
-      "unit": "Trung đội 2",
-      "quanSo": 8.2,
-      "hocTap": 8.3,
-      "tacPhong": 8.4,
-      "kyLuat": 8.4,
-      "noiVu": 8.3,
-      "tangGia": 8.5,
-      "vkTrangBi": 8.4
     },
     {
       "id": 14,
@@ -365,6 +435,114 @@
       "noiVu": 7.8,
       "tangGia": 8.5,
       "vkTrangBi": 8.5
+    },
+    {
+      "id": 27,
+      "weekId": 11,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 28,
+      "weekId": 11,
+      "unit": "Trung đội 1",
+      "quanSo": 8.5,
+      "hocTap": 8.3,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.7,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 29,
+      "weekId": 11,
+      "unit": "Trung đội 2",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.9,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 30,
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.5,
+      "hocTap": 8.3,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 31,
+      "weekId": 12,
+      "unit": "Trung đội 1",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.9,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 32,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.4,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 33,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "quanSo": 8.5,
+      "hocTap": 8.3,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.3,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 34,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "quanSo": 8.5,
+      "hocTap": 8.4,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 8.2,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
+    },
+    {
+      "id": 35,
+      "weekId": 12,
+      "unit": "Trung đội 2",
+      "quanSo": 8.5,
+      "hocTap": 8.2,
+      "tacPhong": 8.4,
+      "kyLuat": 8.5,
+      "noiVu": 7.7,
+      "tangGia": 8.5,
+      "vkTrangBi": 8.5
     }
   ],
   "comments": [
@@ -444,45 +622,6 @@
       ],
       "weak": [
         "Mạnh"
-      ]
-    },
-    {
-      "id": 8,
-      "weekId": 6,
-      "unit": "Đại đội bộ",
-      "strong": [
-        "Cán bộ gương mẫu",
-        "Huấn luyện nhịp nhàng"
-      ],
-      "weak": [
-        "Nội vụ cần đồng bộ hơn",
-        "Một số sĩ quan chưa đều"
-      ]
-    },
-    {
-      "id": 9,
-      "weekId": 6,
-      "unit": "Trung đội 1",
-      "strong": [
-        "Đội hình nhanh nhẹn",
-        "Tiếp cận nhiệm vụ tốt"
-      ],
-      "weak": [
-        "Chưa đều tư thế",
-        "Cần rèn luyện phát biểu"
-      ]
-    },
-    {
-      "id": 10,
-      "weekId": 6,
-      "unit": "Trung đội 2",
-      "strong": [
-        "Bám sát kế hoạch",
-        "Giữ vững an toàn"
-      ],
-      "weak": [
-        "Phối hợp súng máy còn lúng túng",
-        "Đồng phục chưa nghiêm"
       ]
     },
     {
@@ -628,6 +767,135 @@
       "weak": [
         "Nhà tắm còn bẩn",
         "Khu vực sau giếng còn bẩn"
+      ]
+    },
+    {
+      "strong": [],
+      "weak": [
+        "Khu vực vệ sinh cán bộ còn bẩn"
+      ],
+      "id": 23
+    },
+    {
+      "strong": [],
+      "weak": [
+        "Khu vực vệ sinh cán bộ còn bẩn"
+      ],
+      "id": 24
+    },
+    {
+      "id": 25,
+      "weekId": 11,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Lễ tiết tác phong bảo đảm",
+        "Canh gác bảo đảm an toàn",
+        "Kho tàng vật chất sạch sẽ",
+        "Tích cực tăng gia sản xuất"
+      ],
+      "weak": [
+        "Nhà vệ sinh cán bộ còn bẩn"
+      ]
+    },
+    {
+      "id": 26,
+      "weekId": 11,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Lễ tiết tác phong bảo đảm",
+        "Canh gác bảo đảm an toàn",
+        "Kho tàng vật chất sạch sẽ",
+        "Tích cực tăng gia sản xuất"
+      ],
+      "weak": [
+        "Khu vực vệ sinh chưa bảo đảm"
+      ]
+    },
+    {
+      "id": 27,
+      "weekId": 11,
+      "unit": "Trung đội 2",
+      "strong": [
+        "Lễ tiết tác phong bảo đảm",
+        "Canh gác bảo đảm an toàn",
+        "Kho tàng vật chất sạch sẽ",
+        "Tích cực tăng gia sản xuất"
+      ],
+      "weak": [
+        "Trực cơm bẩn"
+      ]
+    },
+    {
+      "id": 28,
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Canh gác bảo đảm an toàn",
+        "Chấp hành nghiêm chế độ trong ngày",
+        "Tập thể cá nhân có sự học hỏi",
+        "Tích cực thể dục sáng"
+      ],
+      "weak": [
+        "Nhà chưa lau"
+      ]
+    },
+    {
+      "id": 29,
+      "weekId": 12,
+      "unit": "Trung đội 1",
+      "strong": [],
+      "weak": [
+        "Khu vực vệ sinh còn bẩn "
+      ]
+    },
+    {
+      "id": 30,
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "strong": [
+        "Chấp hành kỷ luật tốt",
+        "Tích cực tăng gia sản xuất",
+        "Nội vụ vệ sinh cơ bản bảo đảm"
+      ],
+      "weak": [
+        "Khu vực hành lang còn bẩn"
+      ]
+    },
+    {
+      "id": 31,
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "strong": [
+        "Chấp hành kỷ luật tốt",
+        "Tích cực tăng gia sản xuất",
+        "Nội vụ vệ sinh cơ bản bảo đảm"
+      ],
+      "weak": [
+        "Nhà tắm còn bẩn",
+        "Thùng rác còn chưa đổ"
+      ]
+    },
+    {
+      "id": 32,
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "strong": [
+        "Chấp hành kỷ luật tốt",
+        "Tích cực tăng gia sản xuất",
+        "Nội vụ vệ sinh cơ bản bảo đảm"
+      ],
+      "weak": [
+        "Nhà còn bẩn"
+      ]
+    },
+    {
+      "id": 33,
+      "weekId": 12,
+      "unit": "Trung đội 2",
+      "strong": [],
+      "weak": [
+        "Khu vực nước uống còn bẩn",
+        "Dây phơi lộn xộn"
       ]
     }
   ],
@@ -1336,6 +1604,335 @@
       ],
       "note": "",
       "id": 36
+    },
+    {
+      "weekId": 10,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Phản bẩn"
+      ],
+      "note": "",
+      "id": 37
+    },
+    {
+      "weekId": 11,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Áo sai"
+      ],
+      "note": "",
+      "id": 38
+    },
+    {
+      "weekId": 11,
+      "unit": "Trung đội 1",
+      "name": "Dũng",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Balo xấu"
+      ],
+      "note": "",
+      "id": 39
+    },
+    {
+      "weekId": 11,
+      "unit": "Trung đội 2",
+      "name": "Luyện",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Dép sai"
+      ],
+      "note": "",
+      "id": 40
+    },
+    {
+      "weekId": 11,
+      "unit": "Trung đội 2",
+      "name": "Hà Thanh Quý ",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Chăn xấu"
+      ],
+      "note": "",
+      "id": 41
+    },
+    {
+      "weekId": 11,
+      "unit": "Trung đội 1",
+      "name": "Long ",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Chăn xấu"
+      ],
+      "note": "",
+      "id": 42
+    },
+    {
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Chăn xấu"
+      ],
+      "note": "",
+      "id": 43
+    },
+    {
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "name": "Lê Quốc Huy",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Phản bẩn"
+      ],
+      "note": "",
+      "id": 44
+    },
+    {
+      "weekId": 12,
+      "unit": "Đại đội bộ",
+      "name": "Phạm Đình Khải",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Áo sai"
+      ],
+      "note": "",
+      "id": 45
+    },
+    {
+      "weekId": 12,
+      "unit": "Trung đội 1",
+      "name": "Phạm Thành Long",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Chăn xấu"
+      ],
+      "note": "",
+      "id": 46
+    },
+    {
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "name": "Nguyễn Tiến Đạt",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 47
+    },
+    {
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "name": "Lê Quốc Huy",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 48
+    },
+    {
+      "weekId": 6,
+      "unit": "Đại đội bộ",
+      "name": "Phạm Đình Khải",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 49
+    },
+    {
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "name": "Phạm Thành Long",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 50
+    },
+    {
+      "weekId": 6,
+      "unit": "Trung đội 1",
+      "name": "Đặng Văn Vinh",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 51
+    },
+    {
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "name": "Phạm Văn D",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 52
+    },
+    {
+      "weekId": 6,
+      "unit": "Trung đội 2",
+      "name": "Hoàng Thị E",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [],
+      "note": "",
+      "id": 53
+    },
+    {
+      "weekId": 12,
+      "unit": "Trung đội 2",
+      "name": "Nguyễn Tiến Minh",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Áo sai"
+      ],
+      "note": "",
+      "id": 54
+    },
+    {
+      "weekId": 12,
+      "unit": "Trung đội 2",
+      "name": "Đỗ Trần Minh Chiến",
+      "quanSo": 10,
+      "hocTap": 10,
+      "tacPhong": 10,
+      "kyLuat": 10,
+      "noiVu": 10,
+      "tangGia": 10,
+      "vkTrangBi": 10,
+      "strong": [],
+      "weak": [
+        "Dép sai",
+        "Chăn xấu"
+      ],
+      "note": "",
+      "id": 55
     }
   ],
   "teachings": [
@@ -1358,24 +1955,6 @@
     {
       "id": 5,
       "content": "Cần, kiệm, liêm, chính, chí công vô tư."
-    }
-  ],
-  "questions": [
-    {
-      "id": 1,
-      "content": "Theo Luật Nghĩa vụ quân sự, công dân đủ bao nhiêu tuổi phải đăng ký nghĩa vụ quân sự lần đầu?"
-    },
-    {
-      "id": 2,
-      "content": "Theo Luật Nghĩa vụ quân sự, thời hạn phục vụ tại ngũ trong thời bình là bao nhiêu tháng?"
-    },
-    {
-      "id": 3,
-      "content": "Theo Điều lệnh Quản lý bộ đội, quân nhân phải thực hiện mấy chế độ trong ngày?"
-    },
-    {
-      "id": 4,
-      "content": "Ngày thành lập Quân đội nhân dân Việt Nam là ngày nào?"
     }
   ],
   "flowers": {

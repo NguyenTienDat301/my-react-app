@@ -7,6 +7,8 @@ interface SoldierTableProps {
   onEdit: (soldier: Soldier) => void;
   onDelete: (id: number) => void;
   onSelect?: (soldier: Soldier) => void;
+  // when true, render Hạn chế and Ghi chú columns (used by UnitDetail)
+  showExtras?: boolean;
 }
 
 const SoldierTable: React.FC<SoldierTableProps> = ({
@@ -14,6 +16,7 @@ const SoldierTable: React.FC<SoldierTableProps> = ({
   onEdit,
   onDelete,
   onSelect,
+  showExtras = false,
 }) => {
   if (soldiers.length === 0) {
     return (
@@ -30,8 +33,8 @@ const SoldierTable: React.FC<SoldierTableProps> = ({
           <tr>
             <th style={{ width: 60 }}>TT</th>
             <th>Họ và tên</th>
-            <th>Hạn chế</th>
-            <th>Ghi chú</th>
+            {showExtras && <th>Hạn chế</th>}
+            {showExtras && <th>Ghi chú</th>}
             <th style={{ width: 120 }}>Thao tác</th>
           </tr>
         </thead>
@@ -49,29 +52,33 @@ const SoldierTable: React.FC<SoldierTableProps> = ({
                 {item.name}
               </td>
 
-              <td className="col-weak">
-                {item.weak.length === 0 ? (
-                  <span className="empty-text">—</span>
-                ) : (
-                  <>
-                    <ul className="weak-list">
-                      {item.weak.slice(0, 2).map((weak, i) => (
-                        <li key={i}>{weak}</li>
-                      ))}
-                    </ul>
+              {showExtras && (
+                <td className="col-weak">
+                  {item.weak.length === 0 ? (
+                    <span className="empty-text">—</span>
+                  ) : (
+                    <>
+                      <ul className="weak-list">
+                        {item.weak.slice(0, 2).map((weak, i) => (
+                          <li key={i}>{weak}</li>
+                        ))}
+                      </ul>
 
-                    {item.weak.length > 2 && (
-                      <div className="more-text">
-                        +{item.weak.length - 2} hạn chế...
-                      </div>
-                    )}
-                  </>
-                )}
-              </td>
+                      {item.weak.length > 2 && (
+                        <div className="more-text">
+                          +{item.weak.length - 2} hạn chế...
+                        </div>
+                      )}
+                    </>
+                  )}
+                </td>
+              )}
 
-              <td className="col-note">
-                {item.note?.trim() ? item.note : "—"}
-              </td>
+              {showExtras && (
+                <td className="col-note">
+                  {item.note?.trim() ? item.note : "—"}
+                </td>
+              )}
 
               <td className="col-action">
                 <button
